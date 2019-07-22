@@ -9,6 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        //
+        return view('exam_controller.dashboard');
     }
 }

@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'name' => 'Md. Dept Office',
             'username' => 'dept-0ffice',
-            'email' => 'dept-0ffice@gmail.com',
+            'email' => 'dept-office@gmail.com',
             'password' => bcrypt(12345678),
         ]);
 
