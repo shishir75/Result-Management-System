@@ -27,6 +27,7 @@ Route::group(['as'=>'register.','prefix' => 'register', 'namespace' => 'Register
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('dept', 'DeptController');
     Route::resource('hall', 'HallController');
+    Route::resource('session', 'SessionController');
 
 });
 
