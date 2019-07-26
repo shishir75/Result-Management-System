@@ -14,9 +14,9 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'role_id' => 1,
-            'name' => 'Md. VC Office',
-            'username' => 'vc-office',
-            'email' => 'vc-office@gmail.com',
+            'name' => 'Md. Register',
+            'username' => 'register',
+            'email' => 'register@gmail.com',
             'password' => bcrypt(12345678),
         ]);
 
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'role_id' => 3,
             'name' => 'Md. Dept Office',
-            'username' => 'dept-0ffice',
+            'username' => 'dept-office',
             'email' => 'dept-office@gmail.com',
             'password' => bcrypt(12345678),
         ]);

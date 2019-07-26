@@ -13,8 +13,8 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-            'name' => 'VC Office',
-            'slug' => 'vc-office',
+            'name' => 'Register',
+            'slug' => 'register',
         ]);
 
         DB::table('roles')->insert([

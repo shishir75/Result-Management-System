@@ -2,27 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/dept_office/dashboard.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/exam_controller/dashboard.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/student/dashboard.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/teacher/dashboard.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/vc_office/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Exam_Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Exam_Controller/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Student/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Student/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teacher/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teacher/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VC_Office/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VC_Office/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/DeptOfficeMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/DeptOfficeMiddleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/ExamControllerMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/ExamControllerMiddleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/StudentMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/StudentMiddleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/TeacherMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/TeacherMiddleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VcOfficeMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VcOfficeMiddleware.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/database/seeds/UsersTableSeeder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="27" column="49" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="49" />
+            <state relative-caret-position="540">
+              <caret line="18" column="44" lean-forward="true" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
               <folding>
                 <element signature="e#7#38#0#PHP" expanded="true" />
               </folding>
@@ -184,9 +164,9 @@
       <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
-    <option name="y" value="30" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-9" />
+    <option name="y" value="21" />
     <option name="width" value="1938" />
     <option name="height" value="1068" />
   </component>
@@ -233,6 +213,12 @@
               <item name="ju_rms" type="b2602c69:ProjectViewProjectNode" />
               <item name="ju_rms" type="462c0819:PsiDirectoryNode" />
               <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ju_rms" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ju_rms" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ju_rms" type="b2602c69:ProjectViewProjectNode" />
@@ -304,18 +290,21 @@
       <option name="presentableId" value="Default" />
       <updated>1563739461019</updated>
       <workItem from="1563739464325" duration="540000" />
-      <workItem from="1563810771179" duration="8975000" />
+      <workItem from="1563810771179" duration="9494000" />
+      <workItem from="1563863880894" duration="100000" />
+      <workItem from="1564069072978" duration="1217000" />
+      <workItem from="1564162187292" duration="2078000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9515000" />
+    <option name="totallyTimeSpent" value="13429000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21321961" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2196162" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -354,20 +343,6 @@
           <folding>
             <element signature="e#33#71#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_22_161008_create_roles_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="19" column="36" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -634,10 +609,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/UsersTableSeeder.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_22_161008_create_roles_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="27" column="49" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="49" />
+          <caret line="22" column="39" lean-forward="true" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/UsersTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="18" column="44" lean-forward="true" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
           <folding>
             <element signature="e#7#38#0#PHP" expanded="true" />
           </folding>
