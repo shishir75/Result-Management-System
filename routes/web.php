@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['as'=>'register.','prefix' => 'register', 'namespace' => 'Register', 'middleware' => ['auth', 'register'] ], function (){
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::resource('dept', 'DeptController');
 
 });
 

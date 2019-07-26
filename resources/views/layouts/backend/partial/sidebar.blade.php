@@ -23,39 +23,49 @@
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
 					 with font-awesome or any other icon font library -->
-				<li class="nav-item has-treeview">
-					<a href="" class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">
-						<i class="nav-icon fa fa-dashboard"></i>
-						<p>
-							Dashboard
-						</p>
-					</a>
-				</li>
-				<li class="nav-item has-treeview {{ Request::is('admin/slider*') ? 'menu-open' : '' }}">
-					<a href="#" class="nav-link {{ Request::is('admin/slider*') ? 'active' : '' }}">
-						<i class="nav-icon fa fa-pie-chart"></i>
-						<p>
-							Slider
-							<i class="right fa fa-angle-left"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="" class="nav-link {{ Request::is('admin/slider/create') ? 'active' : '' }}">
-								<i class="fa fa-circle-o nav-icon"></i>
-								<p>Add Slider</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="" class="nav-link {{ Request::is('admin/slider') ? 'active' : '' }}">
-								<i class="fa fa-circle-o nav-icon"></i>
-								<p>All Sliders</p>
-							</a>
-						</li>
-					</ul>
-				</li>
+				@if(Request::is('register*')))
+					<li class="nav-item has-treeview">
+						<a href="{{ route('register.dashboard') }}" class="nav-link {{ Request::is('register/dashboard') ? 'active' : '' }}">
+							<i class="nav-icon fa fa-dashboard"></i>
+							<p>
+								Dashboard
+							</p>
+						</a>
+					</li>
+					<li class="nav-item has-treeview {{ Request::is('register/dept*') ? 'menu-open' : '' }}">
+						<a href="#" class="nav-link {{ Request::is('register/dept*') ? 'active' : '' }}">
+							<i class="nav-icon fa fa-pie-chart"></i>
+							<p>
+								Departments
+								<i class="right fa fa-angle-left"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="{{ route('register.dept.create') }}" class="nav-link {{ Request::is('register/dept/create') ? 'active' : '' }}">
+									<i class="fa fa-circle-o nav-icon"></i>
+									<p>Add Department</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ route('register.dept.index') }}" class="nav-link {{ Request::is('register/dept') ? 'active' : '' }}">
+									<i class="fa fa-circle-o nav-icon"></i>
+									<p>All Depts</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+				@elseif(Request::is('exam-controller*')))
 
 
+				@elseif(Request::is('dept-office*')))
+
+				@elseif(Request::is('teacher*')))
+
+				@elseif(Request::is('student*')))
+
+				@endif
 
 				<li class="nav-header">MENU</li>
 
