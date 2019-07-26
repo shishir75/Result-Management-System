@@ -37,7 +37,7 @@ class ResetPasswordController extends Controller
     {
         if (Auth::check() && Auth::user()->role->id == 1)
         {
-            $this->redirectTo = route('vc_office.dashboard');
+            $this->redirectTo = route('register.dashboard');
 
         } elseif (Auth::check() && Auth::user()->role->id == 2)
         {

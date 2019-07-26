@@ -21,8 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// VC Office Route Group
-Route::group(['as'=>'vc_office.','prefix' => 'vc-office', 'namespace' => 'VC_Office', 'middleware' => ['auth', 'vcOffice'] ], function (){
+// Register Route Group
+Route::group(['as'=>'register.','prefix' => 'register', 'namespace' => 'Register', 'middleware' => ['auth', 'register'] ], function (){
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 

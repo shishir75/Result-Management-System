@@ -6,7 +6,7 @@ use App\Http\Middleware\DeptOfficeMiddleware;
 use App\Http\Middleware\ExamControllerMiddleware;
 use App\Http\Middleware\StudentMiddleware;
 use App\Http\Middleware\TeacherMiddleware;
-use App\Http\Middleware\VcOfficeMiddleware;
+use App\Http\Middleware\RegisterMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,7 +65,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'vcOffice' => VcOfficeMiddleware::class,
+        'register' => RegisterMiddleware::class,
         'examController' => ExamControllerMiddleware::class,
         'deptOffice' => DeptOfficeMiddleware::class,
         'teacher' => TeacherMiddleware::class,

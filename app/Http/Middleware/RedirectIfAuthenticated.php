@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check() && Auth::user()->role->id == 1) {
 
-            return redirect()->route('vc_office.dashboard');
+            return redirect()->route('register.dashboard');
 
         } elseif (Auth::guard($guard)->check() && Auth::user()->role->id == 2)
         {

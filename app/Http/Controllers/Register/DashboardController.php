@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\VC_Office;
+namespace App\Http\Controllers\Register;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,6 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('vc_office.dashboard');
+        return view('register.dashboard');
     }
 }
