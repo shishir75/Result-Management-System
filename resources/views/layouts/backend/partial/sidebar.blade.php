@@ -104,6 +104,30 @@
 					</ul>
 				</li>
 
+				<li class="nav-item has-treeview {{ Request::is('register/semester*') ? 'menu-open' : '' }}">
+					<a href="#" class="nav-link {{ Request::is('register/semester*') ? 'active' : '' }}">
+						<i class="nav-icon fa fa-pie-chart"></i>
+						<p>
+							Year/Semester
+							<i class="right fa fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('register.semester.create') }}" class="nav-link {{ Request::is('register/semester/create') ? 'active' : '' }}">
+								<i class="fa fa-circle-o nav-icon"></i>
+								<p>Add Year/Semester</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('register.semester.index') }}" class="nav-link {{ Request::is('register/semester') ? 'active' : '' }}">
+								<i class="fa fa-circle-o nav-icon"></i>
+								<p>All Year/Semester</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+
 				@elseif(Request::is('exam-controller*')))
 
 

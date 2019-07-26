@@ -28,6 +28,7 @@ Route::group(['as'=>'register.','prefix' => 'register', 'namespace' => 'Register
     Route::resource('dept', 'DeptController');
     Route::resource('hall', 'HallController');
     Route::resource('session', 'SessionController');
+    Route::resource('semester', 'SemesterController');
 
 });
 
