@@ -71,6 +71,8 @@ class RegisterController extends Controller
         if ($role_id == 3)
         {
             $check_dept = Dept::where('name', $name)->count();
+            $duplicate_check = User::where('name', $name)->count();
+
             if ($check_dept == 0)
             {
                 session()->flash('error', 'You are not authorised to register! Please contact Register Office.');
@@ -78,24 +80,31 @@ class RegisterController extends Controller
 
             } elseif ($check_dept == 1)
             {
-                $user = new User();
-                $user->role_id = $role_id;
-                $user->name = $name;
-                $user->email = $request->input('email');
-                $user->password = Hash::make($request->input('password'));
-                $user->save();
+                if ($duplicate_check == 0)
+                {
+                    $user = new User();
+                    $user->role_id = $role_id;
+                    $user->name = $name;
+                    $user->email = $request->input('email');
+                    $user->password = Hash::make($request->input('password'));
+                    $user->save();
 
-                session()->flash('success', 'You have successfully registered!!');
-                return redirect()->route('login');
+                    session()->flash('success', 'You have successfully registered!!');
+                    return redirect()->route('login');
+
+                } else {
+                    session()->flash('error', 'You are already registered! Please try to login!!');
+                    return redirect()->back();
+                }
 
             } else {
-                session()->flash('error', 'You are already registered! Please try to login!!');
+                session()->flash('error', 'Department Error!!');
                 return redirect()->back();
             }
 
         } else
         {
-            session()->flash('error', 'Error!!');
+            session()->flash('error', 'Role Error!!');
             return redirect()->back();
         }
     }
