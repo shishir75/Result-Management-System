@@ -17,7 +17,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('register', 'CustomAuth\RegisterController@showRegistrationForm')->name('register')->middleware('web');
+Route::post('register', 'CustomAuth\RegisterController@register')->middleware('web');
+
+Route::get('login', 'CustomAuth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'CustomAuth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
