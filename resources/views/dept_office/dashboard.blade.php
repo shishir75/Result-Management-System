@@ -7,7 +7,7 @@
 @endpush
 
 @section('content')
-    hi
+
 @endsection
 
 

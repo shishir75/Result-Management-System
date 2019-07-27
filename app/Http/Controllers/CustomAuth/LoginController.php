@@ -10,35 +10,6 @@ use Illuminate\Support\Facades\Validator;
 class LoginController extends Controller
 {
 
-    protected $redirectTo;
-
-    public function __construct()
-    {
-        if (Auth::check() && Auth::user()->role->id == 1)
-        {
-            $this->redirectTo = route('register.dashboard');
-
-        } elseif (Auth::check() && Auth::user()->role->id == 2)
-        {
-            $this->redirectTo = route('exam_controller.dashboard');
-
-        } elseif (Auth::check() && Auth::user()->role->id == 3)
-        {
-            $this->redirectTo = route('dept_office.dashboard');
-
-        } elseif (Auth::check() && Auth::user()->role->id == 4)
-        {
-            $this->redirectTo = route('teacher.dashboard');
-
-        } else
-        {
-            $this->redirectTo = route('student.dashboard');
-
-        }
-
-        $this->middleware('guest');
-    }
-
     public function showLoginForm()
     {
         return view('auth.login');
@@ -60,7 +31,27 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
         {
-            return redirect()->$this->redirectTo;
+            if (Auth::check() && Auth::user()->role->id == 1)
+            {
+                return redirect()->route('register.dashboard');
+
+            } elseif (Auth::check() && Auth::user()->role->id == 2)
+            {
+                return redirect()->route('exam_controller.dashboard');
+
+            } elseif (Auth::check() && Auth::user()->role->id == 3)
+            {
+                return redirect()->route('dept_office.dashboard');
+
+            } elseif (Auth::check() && Auth::user()->role->id == 4)
+            {
+                return redirect()->route('teacher.dashboard');
+
+            } else
+            {
+                return redirect()->route('student.dashboard');
+
+            }
 
         } else {
 
