@@ -58,6 +58,7 @@ Route::group(['as'=>'exam_controller.','prefix' => 'exam-controller', 'namespace
 Route::group(['as'=>'dept_office.','prefix' => 'dept-office', 'namespace' => 'Dept_Office', 'middleware' => ['auth', 'deptOffice'] ], function (){
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::resource('teacher', 'TeacherController');
 
 });
 

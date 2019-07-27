@@ -157,6 +157,33 @@
 
 				@elseif(Request::is('dept-office*')))
 
+					<li class="nav-item has-treeview {{ Request::is('dept-office/teacher*') ? 'menu-open' : '' }}">
+						<a href="#" class="nav-link {{ Request::is('dept-office/teacher*') ? 'active' : '' }}">
+							<i class="nav-icon fa fa-pie-chart"></i>
+							<p>
+								Teacher
+								<i class="right fa fa-angle-left"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="{{ route('dept_office.teacher.create') }}" class="nav-link {{ Request::is('dept-office/teacher/create') ? 'active' : '' }}">
+									<i class="fa fa-circle-o nav-icon"></i>
+									<p>Add Teacher</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ route('dept_office.teacher.index') }}" class="nav-link {{ Request::is('dept-office/teacher') ? 'active' : '' }}">
+									<i class="fa fa-circle-o nav-icon"></i>
+									<p>All Teachers</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+
+
+
 				@elseif(Request::is('teacher*')))
 
 				@elseif(Request::is('student*')))
