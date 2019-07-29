@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Update Designation')
+@section('title', 'Update Teacher')
 
 @push('css')
 
@@ -17,7 +17,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('register.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Update Designation</li>
+                            <li class="breadcrumb-item active">Update Teacher</li>
                         </ol>
                     </div>
                 </div>
@@ -33,20 +33,50 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Update Designation</h3>
+                                <h3 class="card-title">Update Teacher</h3>
                             </div>
                             <!-- /.card-header -->
 
                             <!-- form start -->
-                            <form role="form" action="{{ route('register.designation.update',$designation->id ) }}" method="post">
+                            <form role="form" action="{{ route('dept_office.teacher.update',$teacher->id ) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
                                     <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="name">Teacher Name</label>
+                                                <input type="text" class="form-control" id="name" name="name" value="{{ $teacher->name }}" placeholder="Enter Teacher Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Teacher Designation</label>
+                                                <select name="designation_id" class="form-control" required>
+                                                    <option value="" selected disabled>Select Designation</option>
+                                                    @foreach($designations as $designation)
+                                                        <option value="{{ $designation->id }}" {{ $teacher->designation->id == $designation->id ? 'selected' : '' }} >{{ $designation->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Teacher Image</label>
+                                                <input type="file" class="form-control" name="image" placeholder="Enter Teacher Image">
+                                            </div>
+                                            <img width="40" height="35" src="{{ asset('storage/teacher/'. $teacher->image) }}" alt="{{ $teacher->image }}">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Research Interest</label>
+                                                <input type="text" class="form-control" name="research" value="{{ $teacher->research }}" placeholder="Enter Teacher Research Interest">
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Designation Name</label>
-                                                <input type="text" class="form-control" name="name" value="{{ $designation->name }}" placeholder="Enter Designation Name">
+                                                <label>Teacher About</label>
+                                                <input type="text" class="form-control" name="about" value="{{ $teacher->about }}" placeholder="Enter Teacher About">
                                             </div>
                                         </div>
                                     </div>
@@ -55,7 +85,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-md-right">Update Designation</button>
+                                    <button type="submit" class="btn btn-primary float-md-right">Update Teacher</button>
                                 </div>
                             </form>
                         </div>

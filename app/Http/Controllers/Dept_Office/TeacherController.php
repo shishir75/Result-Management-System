@@ -121,7 +121,8 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        $designations = Designation::all();
+        return view('dept_office.teacher.edit', compact('teacher', 'designations'));
     }
 
     /**
@@ -133,7 +134,56 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        //
+        $inputs = $request->except('_token');
+        $rules = [
+            'name' => 'required | min:5',
+            'designation_id' => 'required | int',
+            'image' => 'nullable',
+            'research' => 'nullable',
+            'about' => 'nullable',
+        ];
+        $validator = Validator::make($inputs, $rules);
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $image = $request->file('image');
+        $slug = Str::slug($request->input('name'));
+
+        if (isset($image))
+        {
+            $currentDate = Carbon::now()->toDateString();
+            $imageName = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+
+            if (!Storage::disk('public')->exists('teacher'))
+            {
+                Storage::disk('public')->makeDirectory('teacher');
+            }
+
+            // delete old photo
+            if (Storage::disk('public')->exists('teacher/'.$teacher->image))
+            {
+                Storage::disk('public')->delete('teacher/'.$teacher->image);
+            }
+
+            $postImage = Image::make($image)->resize(350, 320)->stream();
+            Storage::disk('public')->put('teacher/'.$imageName, $postImage);
+
+        } else
+        {
+            $imageName = $teacher->image;
+        }
+
+        $teacher->name = $request->input('name');
+        $teacher->designation_id = $request->input('designation_id');
+        $teacher->image = $imageName;
+        $teacher->research = $request->input('research');
+        $teacher->about = $request->input('about');
+        $teacher->save();
+
+        Toastr::success('Teacher updated Successfully', 'Success!!!');
+        return redirect()->route('dept_office.teacher.index');
     }
 
     /**
@@ -144,6 +194,14 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        // delete old photo
+        if (Storage::disk('public')->exists('teacher/'.$teacher->image))
+        {
+            Storage::disk('public')->delete('teacher/'.$teacher->image);
+        }
+        $teacher->delete();
+
+        Toastr::success('Teacher deleted Successfully', 'Success!!!');
+        return redirect()->route('dept_office.teacher.index');
     }
 }
