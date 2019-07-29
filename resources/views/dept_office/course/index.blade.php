@@ -71,7 +71,14 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $course->course_code }}</td>
                                             <td>{{ $course->course_title }}</td>
-                                            <td>{{ $course->semester->name }}</td>
+                                            <td>
+                                                @if($dept->is_semester == 1)
+                                                    {{ $course->semester->name }}
+                                                @else
+                                                    {{ $course->year->name }}
+                                                @endif
+                                            </td>
+
                                             <td>{{ number_format($course->credit_hour, 1) }}</td>
                                             <td>
                                                 @if($course->is_lab == true)

@@ -16,7 +16,7 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('dept_id');
-            $table->unsignedBigInteger('semester_id');
+            $table->integer('year_semester_id');
             $table->string('course_code');
             $table->string('course_title');
             $table->float('credit_hour');
@@ -25,7 +25,6 @@ class CreateCoursesTable extends Migration
             $table->boolean('is_lab')->default(0);
             $table->timestamps();
             $table->foreign('dept_id')->references('id')->on('depts')->onDelete('cascade');
-            $table->foreign('semester_id')->references('id')->on('semesters')->onDelete('cascade');
         });
     }
 

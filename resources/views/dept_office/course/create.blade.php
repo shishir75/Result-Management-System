@@ -54,17 +54,31 @@
                                                 <input type="text" class="form-control" id="name" name="course_code" value="{{ old('course_code') }}" placeholder="Enter Course Code" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Year / Semester</label>
-                                                <select name="semester_id" class="form-control" required>
-                                                    <option value="" selected disabled>Select Year / Semester</option>
-                                                    @foreach($semesters as $semester)
-                                                        <option value="{{ $semester->id }}">{{ $semester->name }}</option>
-                                                    @endforeach
-                                                </select>
+                                        @if($dept->is_semester == 1)
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Semester</label>
+                                                    <select name="year_semester_id" class="form-control" required>
+                                                        <option value="" selected disabled>Select Semester</option>
+                                                        @foreach($semesters as $semester)
+                                                            <option value="{{ $semester->id }}">{{ $semester->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @else
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Year</label>
+                                                    <select name="year_semester_id" class="form-control" required>
+                                                        <option value="" selected disabled>Select Year</option>
+                                                        @foreach($years as $year)
+                                                            <option value="{{ $year->id }}">{{ $year->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Credit Hour</label>

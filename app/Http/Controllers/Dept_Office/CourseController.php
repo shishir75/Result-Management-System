@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dept_Office;
 use App\Models\Course;
 use App\Models\Dept;
 use App\Models\Semester;
+use App\Models\Year;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,10 +22,10 @@ class CourseController extends Controller
     public function index()
     {
         $dept_name = Auth::user()->name;
-        $dept = Dept::select('id')->where('name', $dept_name)->first();
-        $courses = Course::with('semester')->where('dept_id', $dept->id)->orderBy('course_code')->get();
+        $dept = Dept::select('id', 'is_semester')->where('name', $dept_name)->first();
+        $courses = Course::with('semester', 'year')->where('dept_id', $dept->id)->orderBy('course_code')->get();
 
-        return view('dept_office.course.index', compact('courses', 'dept_name'));
+        return view('dept_office.course.index', compact('courses', 'dept_name', 'dept'));
     }
 
     /**
@@ -35,7 +36,12 @@ class CourseController extends Controller
     public function create()
     {
         $semesters = Semester::all();
-        return view('dept_office.course.create', compact('semesters'));
+        $years = Year::all();
+
+        $dept_name = Auth::user()->name;
+        $dept = Dept::select('is_semester')->where('name', $dept_name)->first();
+
+        return view('dept_office.course.create', compact('semesters', 'years', 'dept'));
     }
 
     /**
@@ -50,7 +56,7 @@ class CourseController extends Controller
         $rules = [
           'course_title' => 'required',
           'course_code' => 'required',
-          'semester_id' => 'required | integer',
+          'year_semester_id' => 'required | integer',
           'credit_hour' => 'required | numeric',
           'incourse_marks' => 'required | integer',
           'final_marks' => 'required | integer',
@@ -68,7 +74,7 @@ class CourseController extends Controller
         $course = new Course();
         $course->course_title = $request->input('course_title');
         $course->course_code = $request->input('course_code');
-        $course->semester_id = $request->input('semester_id');
+        $course->year_semester_id = $request->input('year_semester_id');
         $course->credit_hour = $request->input('credit_hour');
         $course->incourse_marks = $request->input('incourse_marks');
         $course->final_marks = $request->input('final_marks');
@@ -121,7 +127,7 @@ class CourseController extends Controller
         $rules = [
             'course_title' => 'required',
             'course_code' => 'required',
-            'semester_id' => 'required | integer',
+            'year_semester_id' => 'required | integer',
             'credit_hour' => 'required | numeric',
             'incourse_marks' => 'required | integer',
             'final_marks' => 'required | integer',
@@ -135,7 +141,7 @@ class CourseController extends Controller
 
         $course->course_title = $request->input('course_title');
         $course->course_code = $request->input('course_code');
-        $course->semester_id = $request->input('semester_id');
+        $course->year_semester_id = $request->input('year_semester_id');
         $course->credit_hour = $request->input('credit_hour');
         $course->incourse_marks = $request->input('incourse_marks');
         $course->final_marks = $request->input('final_marks');

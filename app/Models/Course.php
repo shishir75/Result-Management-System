@@ -8,6 +8,11 @@ class Course extends Model
 {
     public function semester()
     {
-        return $this->belongsTo(Semester::class);
+        return $this->belongsTo('App\Models\Semester', 'year_semester_id');
+    }
+
+    public function year()
+    {
+        return $this->belongsTo('App\Models\Year', 'year_semester_id');
     }
 }
