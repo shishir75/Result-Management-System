@@ -14,7 +14,18 @@
 				<img src="{{ asset('assets/backend/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
 			</div>
 			<div class="info">
-				<a href="#" class="d-block">{{ Auth::user()->name }}</a>
+				<a href="#" class="d-block">
+					@php
+						use App\Models\Dept;
+                        $dept = Dept::where('name', Auth::user()->name)->first();
+					@endphp
+
+					@if(Auth::user()->role->id == 3)
+						{{ $dept->short_name }}
+					@else
+						{{ Auth::user()->name }}
+					@endif
+				</a>
 			</div>
 		</div>
 
