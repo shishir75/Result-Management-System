@@ -42,12 +42,26 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Department Name</label>
                                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Enter Department Name">
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Department Short Name</label>
+                                                <input type="text" class="form-control" name="short_name" value="{{ old('short_name') }}" placeholder="Enter Department Short Name">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-auto my-1">
+                                            <div class="custom-control custom-checkbox mr-sm-2">
+                                                <input type="checkbox" name="is_semester" class="custom-control-input" id="customControlAutosizing">
+                                                <label class="custom-control-label" for="customControlAutosizing">It's a Semester Based Dept</label>
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>

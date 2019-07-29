@@ -17,6 +17,8 @@ class CreateDeptsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->string('short_name', 20)->unique();
+            $table->boolean('is_semester')->default(0);
             $table->timestamps();
         });
     }

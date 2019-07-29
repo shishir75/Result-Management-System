@@ -42,7 +42,8 @@ class DeptController extends Controller
     {
         $inputs = $request->except('_token');
         $rules = [
-            'name' => 'required | unique:depts'
+            'name' => 'required | unique:depts',
+            'short_name' => 'required | unique:depts',
         ];
         $validator = Validator::make($inputs, $rules);
         if ($validator->fails())
@@ -53,6 +54,13 @@ class DeptController extends Controller
         $dept = new Dept();
         $dept->name = $request->input('name');
         $dept->slug = Str::slug($request->input('name'));
+        $dept->short_name = $request->input('short_name');
+        if ($request->input('is_semester'))
+        {
+            $dept->is_semester = 1;
+        } else {
+            $dept->is_semester = 0;
+        }
         $dept->save();
 
         Toastr::success('Department created successfully', 'Success!');
@@ -92,7 +100,8 @@ class DeptController extends Controller
     {
         $inputs = $request->except('_token');
         $rules = [
-            'name' => 'required'
+            'name' => 'required',
+            'short_name' => 'required',
         ];
         $validator = Validator::make($inputs, $rules);
         if ($validator->fails())
@@ -102,6 +111,13 @@ class DeptController extends Controller
 
         $dept->name = $request->input('name');
         $dept->slug = Str::slug($request->input('name'));
+        $dept->short_name = $request->input('short_name');
+        if ($request->input('is_semester'))
+        {
+            $dept->is_semester = 1;
+        } else {
+            $dept->is_semester = 0;
+        }
         $dept->save();
 
         Toastr::success('Department updated successfully', 'Success!');
