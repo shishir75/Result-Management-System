@@ -20,8 +20,10 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with('semester')->orderBy('course_code')->get();
         $dept_name = Auth::user()->name;
+        $dept = Dept::select('id')->where('name', $dept_name)->first();
+        $courses = Course::with('semester')->where('dept_id', $dept->id)->orderBy('course_code')->get();
+
         return view('dept_office.course.index', compact('courses', 'dept_name'));
     }
 
