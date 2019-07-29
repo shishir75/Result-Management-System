@@ -59,6 +59,7 @@ Route::group(['as'=>'dept_office.','prefix' => 'dept-office', 'namespace' => 'De
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('teacher', 'TeacherController');
+    Route::resource('course', 'CourseController');
 
 });
 

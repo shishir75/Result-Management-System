@@ -181,6 +181,30 @@
 						</ul>
 					</li>
 
+				<li class="nav-item has-treeview {{ Request::is('dept-office/course*') ? 'menu-open' : '' }}">
+					<a href="#" class="nav-link {{ Request::is('dept-office/course*') ? 'active' : '' }}">
+						<i class="nav-icon fa fa-pie-chart"></i>
+						<p>
+							Courses
+							<i class="right fa fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('dept_office.course.create') }}" class="nav-link {{ Request::is('dept-office/course/create') ? 'active' : '' }}">
+								<i class="fa fa-circle-o nav-icon"></i>
+								<p>Add Course</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('dept_office.course.index') }}" class="nav-link {{ Request::is('dept-office/course') ? 'active' : '' }}">
+								<i class="fa fa-circle-o nav-icon"></i>
+								<p>All Courses</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+
 
 
 
