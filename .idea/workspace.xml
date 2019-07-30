@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dept_office/student/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dept_office/student/edit.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,25 +16,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="22" column="87" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="87" />
+            <state relative-caret-position="564">
+              <caret line="26" column="136" selection-start-line="26" selection-start-column="136" selection-end-line="26" selection-end-column="136" />
               <folding>
                 <element signature="e#52#83#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="26" column="89" selection-start-line="26" selection-start-column="89" selection-end-line="26" selection-end-column="89" />
-              <folding>
-                <element signature="e#52#72#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -54,7 +43,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Register/SemesterController.php" />
         <option value="$PROJECT_DIR$/resources/views/register/semester/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/register/semester/edit.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_07_26_214138_create_designations_table.php" />
@@ -102,9 +90,10 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_07_31_021329_create_students_table.php" />
         <option value="$PROJECT_DIR$/app/Imports/StudentsImport.php" />
         <option value="$PROJECT_DIR$/app/Models/Student.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php" />
         <option value="$PROJECT_DIR$/resources/views/dept_office/student/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php" />
+        <option value="$PROJECT_DIR$/resources/views/dept_office/student/edit.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php" />
       </list>
     </option>
   </component>
@@ -347,18 +336,18 @@
       <workItem from="1564210680386" duration="13686000" />
       <workItem from="1564330897037" duration="2512000" />
       <workItem from="1564421254389" duration="14987000" />
-      <workItem from="1564503858762" duration="11192000" />
+      <workItem from="1564503858762" duration="13918000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67088000" />
+    <option name="totallyTimeSpent" value="69814000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-10" y="30" width="1938" height="1068" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21618743" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13951011" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -711,9 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/dept_office/student/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_31_021329_create_students_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -756,22 +742,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="22" column="87" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="87" />
+        <state relative-caret-position="330">
+          <caret line="119" column="49" lean-forward="true" selection-start-line="119" selection-start-column="49" selection-end-line="119" selection-end-column="49" />
           <folding>
-            <element signature="e#52#83#0#PHP" expanded="true" />
+            <element signature="e#52#72#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/dept_office/student/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="26" column="89" selection-start-line="26" selection-start-column="89" selection-end-line="26" selection-end-column="89" />
+        <state relative-caret-position="1920">
+          <caret line="100" column="142" selection-start-line="100" selection-start-column="142" selection-end-line="100" selection-end-column="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="26" column="136" selection-start-line="26" selection-start-column="136" selection-end-line="26" selection-end-column="136" />
           <folding>
-            <element signature="e#52#72#0#PHP" expanded="true" />
+            <element signature="e#52#83#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

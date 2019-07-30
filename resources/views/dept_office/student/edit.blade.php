@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Update Teacher')
+@section('title', 'Update Student')
 
 @push('css')
 
@@ -17,7 +17,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('register.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Update Teacher</li>
+                            <li class="breadcrumb-item active">Update Student</li>
                         </ol>
                     </div>
                 </div>
@@ -33,59 +33,82 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Update Teacher</h3>
+                                <h3 class="card-title">Update Student</h3>
                             </div>
                             <!-- /.card-header -->
 
                             <!-- form start -->
-                            <form role="form" action="{{ route('dept_office.teacher.update',$teacher->id ) }}" method="post" enctype="multipart/form-data">
+                            <form role="form" action="{{ route('dept_office.student.update',$student->id ) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="name">Teacher Name</label>
-                                                <input type="text" class="form-control" id="name" name="name" value="{{ $teacher->name }}" placeholder="Enter Teacher Name" required>
+                                                <label for="name">Student Name</label>
+                                                <input type="text" class="form-control" id="name" name="name" value="{{ $student->name }}" placeholder="Enter Teacher Name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Teacher Designation</label>
-                                                <select name="designation_id" class="form-control" required>
-                                                    <option value="" selected disabled>Select Designation</option>
-                                                    @foreach($designations as $designation)
-                                                        <option value="{{ $designation->id }}" {{ $teacher->designation->id == $designation->id ? 'selected' : '' }} >{{ $designation->name }}</option>
+                                                <label for="name">Session</label>
+                                                <select name="session" class="form-control" required>
+                                                    <option value="" disabled>Select Session</option>
+                                                    @foreach($sessions as $session)
+                                                        <option value="{{ $session->name }}" {{ $student->session == $session->name ? 'selected' : '' }}>{{ $session->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Teacher Image</label>
-                                                <input type="file" class="form-control" name="image" placeholder="Enter Teacher Image">
+                                                <label for="class_roll">Class Roll</label>
+                                                <input type="text" class="form-control" id="class_roll" name="class_roll" value="{{ $student->class_roll }}" placeholder="Enter Class Roll" required>
                                             </div>
-                                            <img width="40" height="35" src="{{ asset('storage/teacher/'. $teacher->image) }}" alt="{{ $teacher->image }}">
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Research Interest</label>
-                                                <input type="text" class="form-control" name="research" value="{{ $teacher->research }}" placeholder="Enter Teacher Research Interest">
+                                                <label for="reg_no">Reg No</label>
+                                                <input type="text" class="form-control" id="reg_no" name="reg_no" value="{{ $student->reg_no }}" placeholder="Enter Reg No" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Teacher About</label>
-                                                <input type="text" class="form-control" name="about" value="{{ $teacher->about }}" placeholder="Enter Teacher About">
+                                                <label for="exam_roll">Exam Roll</label>
+                                                <input type="text" class="form-control" id="exam_roll" name="exam_roll" value="{{ $student->exam_roll }}" placeholder="Enter Exam Roll" required>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="hall">Hall Name</label>
+                                                <select name="hall" class="form-control" required>
+                                                    <option value="" disabled>Select Hall</option>
+                                                    @foreach($halls as $hall)
+                                                        <option value="{{ $hall->name }}" {{ $student->hall == $hall->name ? 'selected' : '' }}>{{ $hall->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="father_name">Father's Name</label>
+                                                <input type="text" class="form-control" id="father_name" name="father_name" value="{{ $student->father_name }}" placeholder="Enter Father's Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="mother_name">Mother's Name</label>
+                                                <input type="text" class="form-control" id="mother_name" name="mother_name" value="{{ $student->mother_name }}" placeholder="Enter Mother's Name" required>
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-md-right">Update Teacher</button>
+                                    <button type="submit" class="btn btn-primary float-md-right">Update Student</button>
                                 </div>
                             </form>
                         </div>
