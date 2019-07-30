@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/dept_office/yearHead/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dept_office/yearHead/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dept_office/yearHead/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dept_office/yearHead/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend/partial/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend/partial/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,20 +15,7 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
-              <caret line="170" column="60" selection-start-line="170" selection-start-column="60" selection-end-line="170" selection-end-column="60" />
-              <folding>
-                <element signature="e#52#72#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -193,6 +175,10 @@
       <path value="$PROJECT_DIR$/vendor/intervention/image" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
       <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
@@ -252,6 +238,11 @@
             <path>
               <item name="ju_rms" type="b2602c69:ProjectViewProjectNode" />
               <item name="ju_rms" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ju_rms" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ju_rms" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -266,14 +257,6 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="dept_office" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ju_rms" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ju_rms" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="dept_office" type="462c0819:PsiDirectoryNode" />
-              <item name="yearHead" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ju_rms" type="b2602c69:ProjectViewProjectNode" />
@@ -338,16 +321,15 @@
       <workItem from="1564210680386" duration="13686000" />
       <workItem from="1564330897037" duration="2512000" />
       <workItem from="1564421254389" duration="14987000" />
-      <workItem from="1564503858762" duration="6326000" />
+      <workItem from="1564503858762" duration="6931000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62222000" />
+    <option name="totallyTimeSpent" value="62827000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21321961" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -758,8 +740,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="170" column="60" selection-start-line="170" selection-start-column="60" selection-end-line="170" selection-end-column="60" />
+        <state relative-caret-position="366">
+          <caret line="160" selection-start-line="160" selection-end-line="160" />
           <folding>
             <element signature="e#52#72#0#PHP" expanded="true" />
           </folding>
