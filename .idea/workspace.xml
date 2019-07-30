@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/dept_office/student/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dept_office/student/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dept_office/student/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dept_office/student/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend/partial/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend/partial/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="13" />
+            <state relative-caret-position="570">
+              <caret line="22" column="87" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="87" />
               <folding>
                 <element signature="e#52#83#0#PHP" expanded="true" />
               </folding>
@@ -34,10 +28,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/dept_office/student/index.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="38" column="50" lean-forward="true" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+            <state relative-caret-position="690">
+              <caret line="26" column="89" selection-start-line="26" selection-start-column="89" selection-end-line="26" selection-end-column="89" />
+              <folding>
+                <element signature="e#52#72#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,7 +96,6 @@
         <option value="$PROJECT_DIR$/app/Models/YearHead.php" />
         <option value="$PROJECT_DIR$/resources/views/dept_office/yearHead/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/dept_office/yearHead/edit.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/backend/partial/sidebar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/dept_office/student/create.blade.php" />
@@ -108,6 +104,7 @@
         <option value="$PROJECT_DIR$/app/Models/Student.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php" />
         <option value="$PROJECT_DIR$/resources/views/dept_office/student/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php" />
       </list>
     </option>
   </component>
@@ -259,12 +256,6 @@
             <path>
               <item name="ju_rms" type="b2602c69:ProjectViewProjectNode" />
               <item name="ju_rms" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ju_rms" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ju_rms" type="462c0819:PsiDirectoryNode" />
               <item name="database" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -356,12 +347,12 @@
       <workItem from="1564210680386" duration="13686000" />
       <workItem from="1564330897037" duration="2512000" />
       <workItem from="1564421254389" duration="14987000" />
-      <workItem from="1564503858762" duration="10947000" />
+      <workItem from="1564503858762" duration="11192000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66843000" />
+    <option name="totallyTimeSpent" value="67088000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-10" y="30" width="1938" height="1068" extended-state="0" />
@@ -701,16 +692,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="160" selection-start-line="160" selection-end-line="160" />
-          <folding>
-            <element signature="e#52#72#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/excel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4884" />
@@ -768,20 +749,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/dept_office/student/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="31" column="40" lean-forward="true" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="13" />
+        <state relative-caret-position="570">
+          <caret line="22" column="87" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="87" />
           <folding>
             <element signature="e#52#83#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/dept_office/student/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/YearHeadController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="38" column="50" lean-forward="true" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+        <state relative-caret-position="690">
+          <caret line="26" column="89" selection-start-line="26" selection-start-column="89" selection-end-line="26" selection-end-column="89" />
+          <folding>
+            <element signature="e#52#72#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

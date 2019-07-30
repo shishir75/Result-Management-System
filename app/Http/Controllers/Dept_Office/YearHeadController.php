@@ -22,8 +22,9 @@ class YearHeadController extends Controller
      */
     public function index()
     {
-        $heads = YearHead::with('session', 'year', 'teacher')->latest()->get();
         $dept_name = Auth::user()->name;
+        $dept = Dept::select('id', 'name')->where('name', $dept_name)->first();
+        $heads = YearHead::with('session', 'year', 'teacher')->where('dept_id', $dept->id)->latest()->get();
         return view('dept_office.yearHead.index', compact('heads', 'dept_name'));
     }
 
