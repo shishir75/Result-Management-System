@@ -168,7 +168,31 @@
 						</ul>
 					</li>
 
-				<li class="nav-item has-treeview {{ Request::is('dept-office/course*') ? 'menu-open' : '' }}">
+					<li class="nav-item has-treeview {{ Request::is('dept-office/year-head*') ? 'menu-open' : '' }}">
+						<a href="#" class="nav-link {{ Request::is('dept-office/year-head*') ? 'active' : '' }}">
+							<i class="nav-icon fa fa-pie-chart"></i>
+							<p>
+								Year Head
+								<i class="right fa fa-angle-left"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="{{ route('dept_office.year-head.create') }}" class="nav-link {{ Request::is('dept-office/year-head/create') ? 'active' : '' }}">
+									<i class="fa fa-circle-o nav-icon"></i>
+									<p>Add Year Head</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ route('dept_office.year-head.index') }}" class="nav-link {{ Request::is('dept-office/year-head') ? 'active' : '' }}">
+									<i class="fa fa-circle-o nav-icon"></i>
+									<p>All Year Heads</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					<li class="nav-item has-treeview {{ Request::is('dept-office/course*') ? 'menu-open' : '' }}">
 					<a href="#" class="nav-link {{ Request::is('dept-office/course*') ? 'active' : '' }}">
 						<i class="nav-icon fa fa-pie-chart"></i>
 						<p>

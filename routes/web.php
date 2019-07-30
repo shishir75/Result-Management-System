@@ -31,7 +31,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 //Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 // Register Route Group
 Route::group(['as'=>'register.','prefix' => 'register', 'namespace' => 'Register', 'middleware' => ['auth', 'register'] ], function (){
@@ -59,6 +59,7 @@ Route::group(['as'=>'dept_office.','prefix' => 'dept-office', 'namespace' => 'De
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('teacher', 'TeacherController');
     Route::resource('course', 'CourseController');
+    Route::resource('year-head', 'YearHeadController');
 
 });
 
