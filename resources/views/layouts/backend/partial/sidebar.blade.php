@@ -265,13 +265,20 @@
 				</li>
 
 
+			@elseif(Request::is('teacher*')))
 
+				<li class="nav-item has-treeview">
+					<a href="{{ route('teacher.course.index') }}" class="nav-link {{ Request::is('teacher/course') ? 'active' : '' }}">
+						<i class="nav-icon fa fa-dashboard"></i>
+						<p>
+							Courses
+						</p>
+					</a>
+				</li>
 
-				@elseif(Request::is('teacher*')))
+			@elseif(Request::is('student*')))
 
-				@elseif(Request::is('student*')))
-
-				@endif
+			@endif
 
 				<li class="nav-header">MENU</li>
 

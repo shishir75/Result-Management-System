@@ -70,6 +70,7 @@ Route::group(['as'=>'dept_office.','prefix' => 'dept-office', 'namespace' => 'De
 Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 'middleware' => ['auth', 'teacher'] ], function (){
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::resource('course', 'CourseController');
 
 });
 

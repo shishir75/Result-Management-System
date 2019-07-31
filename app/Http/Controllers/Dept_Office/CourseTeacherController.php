@@ -115,9 +115,9 @@ class CourseTeacherController extends Controller
      * @param  \App\Models\CourseTeacher  $courseTeacher
      * @return \Illuminate\Http\Response
      */
-    public function edit(CourseTeacher $courseTeacher)
+    public function edit($id)
     {
-       // return $courseTeacher->session;
+        $courseTeacher = CourseTeacher::findOrfail($id);
 
         $sessions = Session::latest()->get();
         $dept = Dept::where('name', Auth::user()->name)->first();
@@ -135,7 +135,7 @@ class CourseTeacherController extends Controller
      * @param  \App\Models\CourseTeacher  $courseTeacher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CourseTeacher $courseTeacher)
+    public function update(Request $request, $id)
     {
         $inputs = $request->except('_token');
         $rules = [
@@ -150,6 +150,8 @@ class CourseTeacherController extends Controller
         {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
+        $courseTeacher = CourseTeacher::findOrfail($id);
 
         $dept = Dept::where('name', Auth::user()->name)->first();
 
