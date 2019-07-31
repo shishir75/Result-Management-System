@@ -25,4 +25,14 @@ class CourseTeacher extends Model
     {
         return $this->belongsTo(Teacher::class)->withDefault();
     }
+
+    public function year()
+    {
+        return $this->belongsTo(Year::class)->withDefault();
+    }
+
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class)->withDefault();
+    }
 }

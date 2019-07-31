@@ -9,9 +9,11 @@ use App\Models\Semester;
 use App\Models\Session;
 use App\Models\Teacher;
 use App\Models\Year;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CourseTeacherController extends Controller
 {
@@ -22,9 +24,9 @@ class CourseTeacherController extends Controller
      */
     public function index()
     {
-        $dept = Dept::select('id')->where('name', Auth::user()->name)->first();
+        $dept = Dept::where('name', Auth::user()->name)->first();
         $courses = CourseTeacher::with('dept', 'session', 'course', 'teacher')->where('dept_id', $dept->id)->get();
-        return view('dept_office.courseTeacher.index', compact('courses'));
+        return view('dept_office.courseTeacher.index', compact('courses', 'dept'));
     }
 
     /**
@@ -51,7 +53,51 @@ class CourseTeacherController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $inputs = $request->except('_token');
+        $rules = [
+          'session_id' => 'required',
+          'code' => 'required',
+          'course_id' => 'required | integer',
+          'teacher_id' => 'required | integer',
+        ];
+
+        $validator = Validator::make($inputs, $rules);
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $dept = Dept::where('name', Auth::user()->name)->first();
+
+        $dept_id = $dept->id;
+        $session_id = $request->input('session_id');
+        $code = $request->input('code');
+        $course_id = $request->input('course_id');
+        $teacher_id = $request->input('teacher_id');
+
+        $check = CourseTeacher::where('dept_id', $dept_id)->where('session_id', $session_id)->where('code', $code)->where('course_id', $course_id)->count();
+
+        if ($check == 0)
+        {
+            $course_teacher = new CourseTeacher();
+            $course_teacher->dept_id = $dept_id;
+            $course_teacher->session_id = $session_id;
+            $course_teacher->code = $code;
+            $course_teacher->course_id = $course_id;
+            $course_teacher->teacher_id = $teacher_id;
+            $course_teacher->save();
+
+            Toastr::success('Course Teacher assign successfully', 'Success');
+            return redirect()->route('dept_office.course-teacher.index');
+
+
+        } else {
+            Toastr::error('Course Teacher already assigned!', 'Error');
+            return redirect()->back();
+        }
+
+
+
     }
 
     /**

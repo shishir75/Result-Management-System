@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Year Heads')
+@section('title', 'Course Teachers')
 
 @push('css')
     <!-- DataTables -->
@@ -18,7 +18,7 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('register.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Year Heads</li>
+                            <li class="breadcrumb-item active">Course Teachers</li>
                         </ol>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ strtoupper('Year Heads list of '.$dept_name ) }}</h3>
+                                <h3 class="card-title">{{ strtoupper('Course Teachers list of '.$dept->name ) }}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -43,7 +43,10 @@
                                     <tr>
                                         <th>Serial</th>
                                         <th>Session</th>
-                                        <th>Year</th>
+                                        <th>
+                                            {{ $dept->is_semester == 1 ? 'Semester' : 'Year' }}
+                                        </th>
+                                        <th>Course Name</th>
                                         <th>Teacher Name</th>
                                         <th>Actions</th>
                                     </tr>
@@ -52,26 +55,30 @@
                                     <tr>
                                         <th>Serial</th>
                                         <th>Session</th>
-                                        <th>Year</th>
+                                        <th>
+                                            {{ $dept->is_semester == 1 ? 'Semester' : 'Year' }}
+                                        </th>
+                                        <th>Course Name</th>
                                         <th>Teacher Name</th>
                                         <th>Actions</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($heads as $key => $head)
+                                    @foreach($courses as $key => $course)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $head->session->name }}</td>
-                                            <td>{{ $head->year->name }}</td>
-                                            <td>{{ $head->teacher->name }}</td>
+                                            <td>{{ $course->session->name }}</td>
+                                            <td>{{ $course->code  }}</td>
+                                            <td>{{ $course->course->course_code .' - '. $course->course->course_title }}</td>
+                                            <td>{{ $course->teacher->name }}</td>
                                             <td>
-                                                <a href="{{ route('dept_office.year-head.edit', $head->id) }}" class="btn btn-info">
+                                                <a href="{{ route('dept_office.course-teacher.edit', $course->id) }}" class="btn btn-info">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
-                                                <button class="btn btn-danger" type="button" onclick="deleteItem({{ $head->id }})">
+                                                <button class="btn btn-danger" type="button" onclick="deleteItem({{ $course->id }})">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
-                                                <form id="delete-form-{{ $head->id }}" action="{{ route('dept_office.year-head.destroy', $head->id) }}" method="post"
+                                                <form id="delete-form-{{ $course->id }}" action="{{ route('dept_office.course-teacher.destroy', $course->id) }}" method="post"
                                                       style="display:none;">
                                                     @csrf
                                                     @method('DELETE')
