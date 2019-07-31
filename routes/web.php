@@ -61,6 +61,7 @@ Route::group(['as'=>'dept_office.','prefix' => 'dept-office', 'namespace' => 'De
     Route::resource('course', 'CourseController');
     Route::resource('year-head', 'YearHeadController');
     Route::resource('student', 'StudentController');
+    Route::resource('course-teacher', 'CourseTeacherController');
 
 });
 

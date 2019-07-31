@@ -216,6 +216,30 @@
 					</ul>
 				</li>
 
+				<li class="nav-item has-treeview {{ Request::is('dept-office/course-teacher*') ? 'menu-open' : '' }}">
+					<a href="#" class="nav-link {{ Request::is('dept-office/course-teacher*') ? 'active' : '' }}">
+						<i class="nav-icon fa fa-pie-chart"></i>
+						<p>
+							Course Teacher
+							<i class="right fa fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('dept_office.course-teacher.create') }}" class="nav-link {{ Request::is('dept-office/course-teacher/create') ? 'active' : '' }}">
+								<i class="fa fa-circle-o nav-icon"></i>
+								<p>Add Course Teacher</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('dept_office.course-teacher.index') }}" class="nav-link {{ Request::is('dept-office/course-teacher') ? 'active' : '' }}">
+								<i class="fa fa-circle-o nav-icon"></i>
+								<p>All Course Teachers</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+
 				<li class="nav-item has-treeview {{ Request::is('dept-office/student*') ? 'menu-open' : '' }}">
 					<a href="#" class="nav-link {{ Request::is('dept-office/student*') ? 'active' : '' }}">
 						<i class="nav-icon fa fa-pie-chart"></i>
