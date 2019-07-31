@@ -19,7 +19,7 @@ class CourseController extends Controller
     public function index()
     {
         $teacher = Teacher::with('dept')->where('name', Auth::user()->name)->first();
-        $courses = CourseTeacher::with('session', 'course', 'teacher')->where('teacher_id', $teacher->id)->get();
+        $courses = CourseTeacher::with('session', 'course', 'teacher')->where('teacher_id', $teacher->id)->orderBy('id', 'desc')->get();
         return view('teacher.course.index', compact('teacher', 'courses'));
     }
 
