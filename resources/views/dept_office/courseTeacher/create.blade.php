@@ -57,7 +57,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Semester</label>
-                                                    <select name="code" class="form-control" required>
+                                                    <select name="code" class="form-control dynamic" required>
                                                         <option value="" selected disabled>Select Semester</option>
                                                         @foreach($semesters as $semester)
                                                             <option value="{{ $semester->code }}">{{ $semester->name }}</option>
@@ -69,7 +69,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Year</label>
-                                                    <select name="code" class="form-control" required>
+                                                    <select name="code" class="form-control dynamic" id="code" data-dependent="course_id" required>
                                                         <option value="" selected disabled>Select Year</option>
                                                         @foreach($years as $year)
                                                             <option value="{{ $year->code }}">{{ $year->name }}</option>
@@ -81,11 +81,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Course Name</label>
-                                                <select name="course_id" class="form-control" required>
+                                                <select name="course_id" class="form-control dynamic" id="course_id" required>
                                                     <option value="" selected disabled>Select Course Name</option>
-                                                    @foreach($courses as $course)
-                                                        <option value="{{ $course->id }}">{{ $course->course_code }} - {{ $course->course_title }}</option>
-                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -102,7 +99,7 @@
                                             </div>
                                         </div>
 
-
+                                        {{ csrf_field() }}
 
                                     </div>
 
@@ -128,5 +125,32 @@
 @endsection
 
 @push('js')
+
+    <script>
+        $(document).ready(function () {
+
+            $('.dynamic').change(function () {
+
+                if ($(this).val() != '')
+                {
+                    var value = $(this).val();
+                    var _token = $('input[name="_token"]').val();
+
+                    $.ajax({
+                        url: "{{ route('dept_office.fetch_course') }}",
+                        method: "POST",
+                        data: { value:value, _token:_token },
+                        success: function (result) {
+
+                            $('#course_id').html(result);
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+    
+
 
 @endpush

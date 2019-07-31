@@ -98,4 +98,32 @@ class CourseTeacherController extends Controller
     {
         //
     }
+
+    public function fetch_course(Request $request)
+    {
+        $value = $request->get('value');
+
+        $dept = Dept::where('name', Auth::user()->name)->first();
+        if ($dept->is_semester == 1)
+        {
+            $data = Semester::where('code', $value)->first();
+
+        } else {
+            $data = Year::where('code', $value)->first();
+        }
+
+        $courses = Course::where('dept_id', $dept->id)->where('year_semester_id', $data->id)->get();
+
+        $output = '<option value="" selected disabled>Select Course</option>';
+
+        //$output = '';
+
+        foreach ($courses as $row)
+        {
+            $output .= '<option value=" '. $row->id .' "> ' . $row->course_code .' - '. $row->course_title .' </option>';
+        }
+
+        echo $output;
+    }
+
 }
