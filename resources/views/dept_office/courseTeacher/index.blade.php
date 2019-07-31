@@ -72,13 +72,13 @@
                                             <td>{{ $course->course->course_code .' - '. $course->course->course_title }}</td>
                                             <td>{{ $course->teacher->name }}</td>
                                             <td>
-                                                <a href="{{ route('dept_office.course-teacher.edit', $course->id) }}" class="btn btn-info">
+                                                <a href="{{ route('dept_office.teacher-course.edit', $course->id) }}" class="btn btn-info">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                                 <button class="btn btn-danger" type="button" onclick="deleteItem({{ $course->id }})">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
-                                                <form id="delete-form-{{ $course->id }}" action="{{ route('dept_office.course-teacher.destroy', $course->id) }}" method="post"
+                                                <form id="delete-form-{{ $course->id }}" action="{{ route('dept_office.teacher-course.destroy', $course->id) }}" method="post"
                                                       style="display:none;">
                                                     @csrf
                                                     @method('DELETE')

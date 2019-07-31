@@ -88,15 +88,13 @@ class CourseTeacherController extends Controller
             $course_teacher->save();
 
             Toastr::success('Course Teacher assign successfully', 'Success');
-            return redirect()->route('dept_office.course-teacher.index');
+            return redirect()->route('dept_office.teacher-course.index');
 
 
         } else {
             Toastr::error('Course Teacher already assigned!', 'Error');
             return redirect()->back();
         }
-
-
 
     }
 
@@ -119,7 +117,15 @@ class CourseTeacherController extends Controller
      */
     public function edit(CourseTeacher $courseTeacher)
     {
-        //
+       // return $courseTeacher->session;
+
+        $sessions = Session::latest()->get();
+        $dept = Dept::where('name', Auth::user()->name)->first();
+        $courses = Course::where('dept_id', $dept->id)->get();
+        $teachers = Teacher::where('dept_id', $dept->id)->get();
+        $years = Year::all();
+        $semesters = Semester::all();
+        return view('dept_office.courseTeacher.edit', compact('courseTeacher','sessions', 'dept', 'courses', 'teachers', 'years', 'semesters'));
     }
 
     /**
@@ -131,7 +137,48 @@ class CourseTeacherController extends Controller
      */
     public function update(Request $request, CourseTeacher $courseTeacher)
     {
-        //
+        $inputs = $request->except('_token');
+        $rules = [
+            'session_id' => 'required',
+            'code' => 'required',
+            'course_id' => 'required | integer',
+            'teacher_id' => 'required | integer',
+        ];
+
+        $validator = Validator::make($inputs, $rules);
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $dept = Dept::where('name', Auth::user()->name)->first();
+
+        $dept_id = $dept->id;
+        $session_id = $request->input('session_id');
+        $code = $request->input('code');
+        $course_id = $request->input('course_id');
+        $teacher_id = $request->input('teacher_id');
+
+        $check = CourseTeacher::where('dept_id', $dept_id)->where('session_id', $session_id)->where('code', $code)->where('course_id', $course_id)->where('id', '!=', $courseTeacher->id)->count();
+
+        if ($check == 0)
+        {
+            $course_teacher = new CourseTeacher();
+            $course_teacher->dept_id = $dept_id;
+            $course_teacher->session_id = $session_id;
+            $course_teacher->code = $code;
+            $course_teacher->course_id = $course_id;
+            $course_teacher->teacher_id = $teacher_id;
+            $course_teacher->save();
+
+            Toastr::success('Course Teacher assign updated successfully', 'Success');
+            return redirect()->route('dept_office.teacher-course.index');
+
+
+        } else {
+            Toastr::error('Course Teacher already assigned!', 'Error');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -140,9 +187,11 @@ class CourseTeacherController extends Controller
      * @param  \App\Models\CourseTeacher  $courseTeacher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CourseTeacher $courseTeacher)
+    public function destroy($id)
     {
-        //
+        CourseTeacher::findOrfail($id)->delete();
+        Toastr::success('Course Teacher deleted successfully', 'Success');
+        return redirect()->route('dept_office.teacher-course.index');
     }
 
     public function fetch_course(Request $request)

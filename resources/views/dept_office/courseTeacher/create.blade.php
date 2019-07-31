@@ -38,7 +38,7 @@
                             <!-- /.card-header -->
 
                             <!-- form start -->
-                            <form role="form" action="{{ route('dept_office.course-teacher.store') }}" method="post" enctype="multipart/form-data">
+                            <form role="form" action="{{ route('dept_office.teacher-course.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="row">

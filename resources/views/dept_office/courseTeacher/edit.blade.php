@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Update Year Head')
+@section('title', 'Update Course Teacher')
 
 @push('css')
 
@@ -17,7 +17,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('register.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Update Year Head</li>
+                            <li class="breadcrumb-item active">Update Course Teacher</li>
                         </ol>
                     </div>
                 </div>
@@ -33,57 +33,82 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Update Year Head</h3>
+                                <h3 class="card-title">Update Course Teacher</h3>
                             </div>
                             <!-- /.card-header -->
 
                             <!-- form start -->
-                            <form role="form" action="{{ route('dept_office.year-head.update',$yearHead->id ) }}" method="post" enctype="multipart/form-data">
+                            <form role="form" action="{{ route('dept_office.teacher-course.update',$courseTeacher->id ) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Session</label>
                                                 <select name="session_id" class="form-control" required>
                                                     <option value="" selected disabled>Select Session</option>
                                                     @foreach($sessions as $session)
-                                                        <option value="{{ $session->id }}" {{ $yearHead->session->id == $session->id ? 'selected' : '' }}>{{ $session->name }}</option>
+                                                        <option value="{{ $session->id }}" {{ $courseTeacher->session_id == $session->id ? 'selected' : '' }}>{{ $session->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        @if($dept->is_semester == 1)
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Semester</label>
+                                                    <select name="code" class="form-control dynamic" required>
+                                                        <option value="" selected disabled>Select Semester</option>
+                                                        @foreach($semesters as $semester)
+                                                            <option value="{{ $semester->code }}" {{ $courseTeacher->code == $semester->id ? 'selected' : '' }} >{{ $semester->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Year</label>
+                                                    <select name="code" class="form-control dynamic" id="code" data-dependent="course_id" required>
+                                                        <option value="" selected disabled>Select Year</option>
+                                                        @foreach($years as $year)
+                                                            <option value="{{ $year->code }}" {{ $courseTeacher->code == $year->id ? 'selected' : '' }}>{{ $year->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Year</label>
-                                                <select name="year_id" class="form-control" required>
-                                                    <option value="" selected disabled>Select Year</option>
-                                                    @foreach($years as $year)
-                                                        <option value="{{ $year->id }}" {{ $yearHead->year->id == $year->id ? 'selected' : '' }}>{{ $year->name }}</option>
-                                                    @endforeach
+                                                <label>Course Name</label>
+                                                <select name="course_id" class="form-control dynamic" id="course_id" required>
+                                                    <option value="" selected disabled>Select Course Name</option>
                                                 </select>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Teacher</label>
                                                 <select name="teacher_id" class="form-control" required>
                                                     <option value="" selected disabled>Select Teacher</option>
                                                     @foreach($teachers as $teacher)
-                                                        <option value="{{ $teacher->id }}" {{ $yearHead->teacher->id == $teacher->id ? 'selected' : '' }}>{{ $teacher->name }}</option>
+                                                        <option value="{{ $teacher->id }}" {{ $courseTeacher->teacher_id == $teacher->id ? 'selected' : '' }}>{{ $teacher->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
+
+                                        {{ csrf_field() }}
+
                                     </div>
 
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-md-right">Update Year Head</button>
+                                    <button type="submit" class="btn btn-primary float-md-right">Update Course Teacher</button>
                                 </div>
                             </form>
                         </div>
@@ -101,5 +126,30 @@
 @endsection
 
 @push('js')
+
+    <script>
+        $(document).ready(function () {
+
+            $('.dynamic').change(function () {
+
+                if ($(this).val() != '')
+                {
+                    var value = $(this).val();
+                    var _token = $('input[name="_token"]').val();
+
+                    $.ajax({
+                        url: "{{ route('dept_office.fetch_course') }}",
+                        method: "POST",
+                        data: { value:value, _token:_token },
+                        success: function (result) {
+
+                            $('#course_id').html(result);
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
 
 @endpush

@@ -216,8 +216,8 @@
 					</ul>
 				</li>
 
-				<li class="nav-item has-treeview {{ Request::is('dept-office/course-teacher*') ? 'menu-open' : '' }}">
-					<a href="#" class="nav-link {{ Request::is('dept-office/course-teacher*') ? 'active' : '' }}">
+				<li class="nav-item has-treeview {{ Request::is('dept-office/teacher-course*') ? 'menu-open' : '' }}">
+					<a href="#" class="nav-link {{ Request::is('dept-office/teacher-course*') ? 'active' : '' }}">
 						<i class="nav-icon fa fa-pie-chart"></i>
 						<p>
 							Course Teacher
@@ -226,13 +226,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="{{ route('dept_office.course-teacher.create') }}" class="nav-link {{ Request::is('dept-office/course-teacher/create') ? 'active' : '' }}">
+							<a href="{{ route('dept_office.teacher-course.create') }}" class="nav-link {{ Request::is('dept-office/teacher-course/create') ? 'active' : '' }}">
 								<i class="fa fa-circle-o nav-icon"></i>
 								<p>Add Course Teacher</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{ route('dept_office.course-teacher.index') }}" class="nav-link {{ Request::is('dept-office/course-teacher') ? 'active' : '' }}">
+							<a href="{{ route('dept_office.teacher-course.index') }}" class="nav-link {{ Request::is('dept-office/teacher-course') ? 'active' : '' }}">
 								<i class="fa fa-circle-o nav-icon"></i>
 								<p>All Course Teachers</p>
 							</a>
