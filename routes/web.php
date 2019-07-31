@@ -70,7 +70,9 @@ Route::group(['as'=>'dept_office.','prefix' => 'dept-office', 'namespace' => 'De
 Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 'middleware' => ['auth', 'teacher'] ], function (){
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-    Route::resource('course', 'CourseController');
+    Route::get('course', 'CourseController@index')->name('course.index');
+    Route::get('attendance/{course_teacher_id}', 'AttendanceController@index')->name('attendance.index');
+    Route::post('attendance', 'AttendanceController@store')->name('attendance.store');
 
 });
 
