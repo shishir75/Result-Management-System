@@ -37,6 +37,17 @@
                             </div>
                             <!-- /.card-header -->
 
+                            <div class="card-body">
+                                <div class="col-6 offset-3 text-center">
+                                    <h3>Dept : {{ $course->dept->name }}</h3>
+                                    <h5>Session : {{ $course->session->name }} | Subject : {{ $course->course->course_code }} - {{ $course->course->course_title }}</h5>
+                                    <h6>{{ $course->dept->is_semester == 1 ? 'Semester' : 'Year' }} : {{ $course->dept->is_semester == 1 ? $semester->name : $year->name }}   |  Teacher Name : {{ $course->teacher->name }}</h6>
+                                    <h4>Date : {{ Carbon\Carbon::now()->format('D, d F Y') }}</h4>
+
+                                </div>
+
+                            </div>
+
                             <!-- form start -->
                             <form role="form" action="{{ route('teacher.attendance.store') }}" method="post">
                                 @csrf
