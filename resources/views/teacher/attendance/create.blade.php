@@ -70,24 +70,26 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        @foreach($students as $key => $student)
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $student->class_roll }}</td>
-                                                <td>{{ $student->name }}</td>
-                                                <td>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="p-option{{ $student->class_roll }}"  name="attend-{{ $student->class_roll }}" value="P" checked  class="custom-control-input">
-                                                        <label class="custom-control-label" for="p-option{{ $student->class_roll }}">Present</label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="a-option{{ $student->class_roll }}" name="attend-{{ $student->class_roll }}" value="A" class="custom-control-input">
-                                                        <label class="custom-control-label" for="a-option{{ $student->class_roll }}">Absent</label>
-                                                    </div>
-                                                </td>
+                                            @foreach($students as $key => $student)
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $student->class_roll }}</td>
+                                                    <td>{{ $student->name }}</td>
+                                                    <td>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="p-option{{ $student->id }}"  name="attend[{{ $student->id }}]" value="P" checked  class="custom-control-input">
+                                                            <label class="custom-control-label" for="p-option{{ $student->class_roll }}">Present</label>
+                                                        </div>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="a-option{{ $student->id }}" name="attend[{{ $student->id }}]" value="A" class="custom-control-input">
+                                                            <label class="custom-control-label" for="a-option{{ $student->id }}">Absent</label>
+                                                        </div>
+                                                    </td>
 
-                                            </tr>
-                                        @endforeach
+                                                </tr>
+                                            @endforeach
+                                            <input type="hidden" name="course_teacher" value="{{ $course->id }}">
+
                                         </tbody>
 
                                     </table>
@@ -95,7 +97,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-md-right">Add Course</button>
+                                    <button type="submit" class="btn btn-primary float-md-right">Add Attendance</button>
                                 </div>
                             </form>
                         </div>
