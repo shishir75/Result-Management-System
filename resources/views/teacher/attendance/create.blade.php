@@ -43,8 +43,8 @@
                                     <h5>Session : {{ $course->session->name }} | Subject : {{ $course->course->course_code }} - {{ $course->course->course_title }}</h5>
                                     <h6>{{ $course->dept->is_semester == 1 ? 'Semester' : 'Year' }} : {{ $course->dept->is_semester == 1 ? $semester->name : $year->name }}   |  Teacher Name : {{ $course->teacher->name }}</h6>
                                     <h4>Date : {{ Carbon\Carbon::now()->format('D, d F Y') }}</h4>
-
                                 </div>
+                                <a href="" class="btn btn-info float-right">View Attendance</a>
 
                             </div>
 
@@ -77,8 +77,8 @@
                                                     <td>{{ $student->name }}</td>
                                                     <td>
                                                         <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" id="p-option{{ $student->id }}"  name="attend[{{ $student->id }}]" value="P" checked  class="custom-control-input">
-                                                            <label class="custom-control-label" for="p-option{{ $student->class_roll }}">Present</label>
+                                                            <input type="radio" id="p-option{{ $student->id }}"  name="attend[{{ $student->id }}]" value="P" class="custom-control-input" checked>
+                                                            <label class="custom-control-label" for="p-option{{ $student->id }}">Present</label>
                                                         </div>
                                                         <div class="custom-control custom-radio custom-control-inline">
                                                             <input type="radio" id="a-option{{ $student->id }}" name="attend[{{ $student->id }}]" value="A" class="custom-control-input">

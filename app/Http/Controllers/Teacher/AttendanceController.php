@@ -7,11 +7,13 @@ use App\Models\CourseTeacher;
 use App\Models\Semester;
 use App\Models\Session;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\Year;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AttendanceController extends Controller
@@ -24,6 +26,13 @@ class AttendanceController extends Controller
 
         $semester = Semester::where('id', $course->course->year_semester_id)->first();
         $year = Year::where('id', $course->course->year_semester_id)->first();
+
+        $user_name = Auth::user()->name;
+        $teacher = Teacher::where('name', $user_name)->first();
+        if ($teacher->id !== $course->teacher_id )
+        {
+            return redirect()->route('teacher.course.index');
+        }
 
         return view('teacher.attendance.create', compact('students', 'course', 'semester', 'year'));
 
@@ -48,6 +57,13 @@ class AttendanceController extends Controller
         $course = CourseTeacher::with('session', 'course', 'teacher','dept')->where('id', $course_teacher_id)->first();
 
         $date = Carbon::now()->format('Y-m-d');
+
+        $user_name = Auth::user()->name;
+        $teacher = Teacher::where('name', $user_name)->first();
+        if ($teacher->id !== $course->teacher_id )
+        {
+            return redirect()->route('teacher.course.index');
+        }
 
         $check = Attendance::distinct('attend_date')->where('course_id', $course->course->id)->where('attend_date', $date)->count('attend_date');
 
