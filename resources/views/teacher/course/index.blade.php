@@ -88,17 +88,17 @@
                                             <td>{{ $course_teacher->course->incourse_marks }}</td>
                                             <td>{{ $course_teacher->course->final_marks  }}</td>
                                             <td>
-                                                <a href="{{ route('teacher.attendance.index', $course_teacher->id) }}" class="btn btn-success">
+                                                <a href="{{ route('teacher.attendance.create', $course_teacher->id) }}" class="btn btn-success">
                                                     <i class="fa fa-male" aria-hidden="true"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('teacher.attendance.index', $course_teacher->id) }}" class="btn btn-info">
+                                                <a href="{{ route('teacher.attendance.create', $course_teacher->id) }}" class="btn btn-info">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('teacher.attendance.index', $course_teacher->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('teacher.attendance.create', $course_teacher->id) }}" class="btn btn-primary">
                                                     <i class="fa fa-bars" aria-hidden="true"></i>
                                                 </a>
                                             </td>
