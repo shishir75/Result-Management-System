@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Update Course')
+@section('title', 'Update Attendance')
 
 @push('css')
 
@@ -16,8 +16,8 @@
                 <div class="row mb-2">
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('register.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Update Course</li>
+                            <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Update Attendance</li>
                         </ol>
                     </div>
                 </div>
@@ -33,72 +33,68 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Update Teacher</h3>
+                                <h3 class="card-title">Update Attendance</h3>
                             </div>
                             <!-- /.card-header -->
 
+                            <div class="col-6 offset-3 text-center mt-4">
+                                <h3>Dept : {{ \App\Models\Dept::findOrFail($attendances[0]->course->dept_id)->name }}</h3>
+                                <h5>Session : {{ $attendances[0]->session->name }} | Subject : {{ $attendances[0]->course->course_code }} - {{ $attendances[0]->course->course_title }}</h5>
+                                <h5>Teacher Name : {{ $attendances[0]->teacher->name }}</h5>
+                                <h4>Date : {{ $attendances[0]->attend_date }}</h4>
+                            </div>
+
                             <!-- form start -->
-                            <form role="form" action="{{ route('dept_office.course.update',$course->id ) }}" method="post" enctype="multipart/form-data">
+                            <form role="form" action="{{ route('teacher.attendance.update_by_date', [$attendances[0]->session->id,$attendances[0]->course->id,$attendances[0]->teacher->id, $attendances[0]->attend_date ]) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="name">Course Title</label>
-                                                <input type="text" class="form-control" id="name" name="course_title" value="{{ $course->course_title }}" placeholder="Enter Course Title" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="name">Course Code</label>
-                                                <input type="text" class="form-control" id="name" name="course_code" value="{{ $course->course_code }}" placeholder="Enter Course Code" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Year / Semester</label>
-                                                <select name="semester_id" class="form-control" required>
-                                                    <option value="" selected disabled>Select Year / Semester</option>
-                                                    @foreach($semesters as $semester)
-                                                        <option value="{{ $semester->id }}" {{ $course->semester->id == $semester->id ? 'selected' : '' }}>{{ $semester->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Credit Hour</label>
-                                                <input type="number" min="0.5" max="4.0" step=".1" class="form-control" name="credit_hour" value="{{ $course->credit_hour }}" placeholder="Enter Credit Hour">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>In-course Marks</label>
-                                                <input type="number" class="form-control" name="incourse_marks" value="{{ $course->incourse_marks }}" placeholder="Enter In-course Marks">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Final Marks</label>
-                                                <input type="number" class="form-control" name="final_marks" value="{{ $course->final_marks }}" placeholder="Enter Final Marks">
-                                            </div>
-                                        </div>
+                                    <table id="example1" class="table table-bordered table-striped text-center">
+                                        <thead>
+                                        <tr>
+                                            <th>Serial</th>
+                                            <th>Class Roll</th>
+                                            <th>Name</th>
+                                            <th>Attendance</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Serial</th>
+                                            <th>Class Roll</th>
+                                            <th>Name</th>
+                                            <th>Attendance</th>
+                                        </tr>
+                                        </tfoot>
+                                        <tbody>
+                                        @foreach($attendances as $key => $attendance)
+                                            <tr>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $attendance->student->class_roll }}</td>
+                                                <td>{{ $attendance->student->name }}</td>
+                                                <td>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="p-option{{ $attendance->student->id }}"  name="attend[{{ $attendance->student->id }}]" value="P" class="custom-control-input" {{ $attendance->attend == 'P' ? 'checked' : '' }}>
+                                                        <label class="custom-control-label" for="p-option{{ $attendance->student->id }}">Present</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="a-option{{ $attendance->student->id }}" name="attend[{{ $attendance->student->id }}]" value="A" class="custom-control-input" {{ $attendance->attend == 'A' ? 'checked' : '' }}>
+                                                        <label class="custom-control-label" for="a-option{{ $attendance->student->id }}">Absent</label>
+                                                    </div>
+                                                </td>
 
-                                        <div class="col-auto my-1">
-                                            <div class="custom-control custom-checkbox mr-sm-2">
-                                                <input type="checkbox" name="is_lab" {{ $course->is_lab == 1 ? 'checked' : '' }} class="custom-control-input" id="customControlAutosizing">
-                                                <label class="custom-control-label" for="customControlAutosizing">It's a Lab Course / Viva</label>
-                                            </div>
-                                        </div>
+                                            </tr>
+                                        @endforeach
 
-                                    </div>
 
+                                        </tbody>
+
+                                    </table>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-md-right">Update Teacher</button>
+                                    <button type="submit" class="btn btn-primary float-md-right">Update Attendance</button>
                                 </div>
                             </form>
                         </div>

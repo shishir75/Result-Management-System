@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Show Employee')
+@section('title', 'Show Attendance')
 
 @push('css')
 
@@ -15,8 +15,8 @@
                 <div class="row mb-2">
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Show Employee</li>
+                            <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Show Attendance</li>
                         </ol>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Show Employee</h3>
+                                <h3 class="card-title">Show Attendance</h3>
                             </div>
                             <!-- /.card-header -->
 
@@ -40,56 +40,40 @@
 
 
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Name</label>
-                                                <p>{{ $employee->name }}</p>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <p>{{ $employee->email }}</p>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Phone</label>
-                                                <p>{{ $employee->phone }}</p>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Address</label>
-                                                <p>{{ $employee->address }}</p>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>City</label>
-                                                <p>{{ $employee->city }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Experience</label>
-                                                <p>{{ $employee->experience }}</p>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputFile">Photo</label>
-                                                <p>
-                                                    <img width="50" height="50" src="{{ URL::asset("storage/employee/".$employee->photo) }}" alt="{{ $employee->name }}">
-                                                </p>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label>NID No</label>
-                                                <p>{{ $employee->nid_no }}</p>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Salary</label>
-                                                <p>{{ $employee->salary }}</p>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Vacation</label>
-                                                <p>{{ $employee->vacation }}</p>
-                                            </div>
-                                        </div>
+                                    <div class="col-6 offset-3 text-center">
+                                        <h3>Dept : {{ \App\Models\Dept::findOrFail($attendances[0]->course->dept_id)->name }}</h3>
+                                        <h5>Session : {{ $attendances[0]->session->name }} | Subject : {{ $attendances[0]->course->course_code }} - {{ $attendances[0]->course->course_title }}</h5>
+                                        <h5>Teacher Name : {{ $attendances[0]->teacher->name }}</h5>
+                                        <h4>Date : {{ $attendances[0]->attend_date }}</h4>
                                     </div>
 
+                                    <table id="example1" class="table table-bordered table-striped text-center">
+                                        <thead>
+                                        <tr>
+                                            <th>Serial</th>
+                                            <th>Class Roll</th>
+                                            <th>Name</th>
+                                            <th>Attendance</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($attendances as $key => $attendance)
+                                            <tr>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $attendance->student->class_roll }}</td>
+                                                <td>{{ $attendance->student->name }}</td>
+                                                <td>
+                                                    @if( $attendance->attend === 'P' )
+                                                        <span class="badge badge-success">Present</span>
+                                                    @else
+                                                        <span class="badge badge-danger">Absent</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+
+                                    </table>
                                 </div>
                                 <!-- /.card-body -->
 

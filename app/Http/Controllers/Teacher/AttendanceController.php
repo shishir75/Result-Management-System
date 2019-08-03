@@ -101,9 +101,44 @@ class AttendanceController extends Controller
 
     public function show_by_date($session_id,$course_id, $teacher_id, $attend_date)
     {
-        $attendances = Attendance::with('session', 'course')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('attend_date', $attend_date)->orderBy('student_id', 'asc')->get();
+        $attendances = Attendance::with('session', 'course', 'student', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('attend_date', $attend_date)->orderBy('student_id', 'asc')->get();
 
         return view('teacher.attendance.show', compact('attendances'));
+    }
+
+    public function edit_by_date($session_id,$course_id, $teacher_id, $attend_date)
+    {
+        $attendances = Attendance::with('session', 'course', 'student', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('attend_date', $attend_date)->orderBy('student_id', 'asc')->get();
+
+        return view('teacher.attendance.edit', compact('attendances'));
+    }
+
+    public function update_by_date(Request $request, $session_id,$course_id, $teacher_id, $attend_date)
+    {
+        $inputs = $request->except('_token');
+        $rules = [
+          'attend' => 'required',
+        ];
+
+        $validator = Validator::make($inputs, $rules);
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $attend = $request->input('attend');
+
+
+
+        foreach ($attend as $student_id => $value)
+        {
+            $attendance = Attendance::where('session_id', $session_id)->where('course_id', $course_id)->where('teacher_id', $teacher_id)->where('attend_date', $attend_date)->where('student_id', $student_id)->first();
+            $attendance->attend = $value;
+            $attendance->save();
+        }
+
+        Toastr::success("Attendance updated successfully!", "Success");
+        return redirect()->route('teacher.attendance.show_by_date', [ $attendance->session_id, $attendance->course_id, $attendance->teacher_id, $attendance->attend_date]);
     }
 
 

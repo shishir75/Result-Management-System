@@ -65,6 +65,9 @@
                                                 <a href="{{ route('teacher.attendance.show_by_date', [$attendance->session_id, $attendance->course_id, $attendance->teacher_id, $attendance->attend_date]) }}" class="btn btn-info">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
+                                                <a href="{{ route('teacher.attendance.edit_by_date', [$attendance->session_id, $attendance->course_id, $attendance->teacher_id, $attendance->attend_date]) }}" class="btn btn-warning">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
