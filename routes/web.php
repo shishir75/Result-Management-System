@@ -80,6 +80,7 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::put('course/attendance/{session_id}/{course_id}/{teacher_id}/{attend_date}', 'AttendanceController@update_by_date')->name('attendance.update_by_date');
 
     Route::get('course/tutorial/{course_teacher_id}', 'TutorialController@create')->name('tutorial.create');
+    Route::post('course/tutorial', 'TutorialController@store')->name('tutorial.store');
 
 
 

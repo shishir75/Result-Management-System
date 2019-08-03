@@ -49,7 +49,7 @@
                             </div>
 
                             <!-- form start -->
-                            <form role="form" action="#" method="post">
+                            <form role="form" action="{{ route('teacher.tutorial.store') }}" method="post">
                                 @csrf
                                 <div class="card-body">
 
@@ -58,8 +58,8 @@
                                             <h4 class="float-right">Tutorial No :</h4>
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <select name="tutorial_no" class="form-control">
-                                                <option selected>-----Select Tutorial No-----</option>
+                                            <select name="tutorial_no" class="form-control" required>
+                                                <option value="">-----Select Tutorial No-----</option>
                                                 <option value="1">Tutorial 1</option>
                                                 <option value="2">Tutorial 2</option>
                                                 <option value="3">Tutorial 3</option>
@@ -67,7 +67,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    
+
                                     <table id="example1" class="table table-bordered table-striped text-center">
                                         <thead>
                                         <tr>
@@ -92,8 +92,8 @@
                                                     <td>{{ $student->class_roll }}</td>
                                                     <td>{{ $student->name }}</td>
                                                     <td>
-                                                        <div class="form-group">
-                                                            <input type="number" name="tutorial_marks" step="0.01" class="form-control" placeholder="Enter Tutorial Marks" required>
+                                                        <div class="form-group" style="margin-bottom: 0px">
+                                                            <input type="number" name="tutorial_marks[{{ $student->id }}]" step="0.01" class="form-control" placeholder="Enter Tutorial Marks" required>
                                                         </div>
                                                     </td>
 
