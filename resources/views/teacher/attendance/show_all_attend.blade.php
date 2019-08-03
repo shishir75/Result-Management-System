@@ -84,11 +84,11 @@
                                                 @endforeach
                                                 <td>
                                                     @if($percentage >= 75)
-                                                        <span class="badge badge-success">{{ $percentage }} %</span>
+                                                        <span class="badge badge-success">{{ number_format($percentage, 2) }} %</span>
                                                     @elseif($percentage >=50 && $percentage < 75)
-                                                        <span class="badge badge-warning">{{ $percentage }} %</span>
+                                                        <span class="badge badge-warning">{{ number_format($percentage, 2) }} %</span>
                                                     @else
-                                                        <span class="badge badge-danger">{{ $percentage }} %</span>
+                                                        <span class="badge badge-danger">{{ number_format($percentage, 2) }} %</span>
                                                     @endif
                                                 </td>
                                             </tr>
