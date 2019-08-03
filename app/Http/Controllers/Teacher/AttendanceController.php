@@ -82,11 +82,11 @@ class AttendanceController extends Controller
             }
 
             Toastr::success("Attendance taken successfully!", "Success");
-            return redirect()->route('teacher.course.index');
+            return redirect()->route('teacher.attendance.show_all_attend',[$course->session->id,$course->course->id, $course->teacher->id]);
 
         } else {
             Toastr::error("Attendance already taken!", "Error");
-            return redirect()->route('teacher.course.index');
+            return redirect()->route('teacher.attendance.show_all_attend',[$course->session->id,$course->course->id, $course->teacher->id]);
         }
 
     }
