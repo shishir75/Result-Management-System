@@ -55,20 +55,25 @@
                                             @foreach($dates as $date)
                                                 <th>{{ $date->attend_date }}</th>
                                             @endforeach
+                                            <th>Percentage</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($students_data as $key => $student_data)
+                                            @php
+                                                $present_count = \App\Models\Attendance::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->where('attend', 'P')->count();
+                                                $absent_count = \App\Models\Attendance::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->where('attend', 'A')->count();
+                                                $percentage = $present_count/($present_count + $absent_count) *100;
+                                            @endphp
+
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $student_data->student->class_roll }}</td>
                                                 <td>{{ $student_data->student->name }}</td>
-
                                                 @foreach($dates as $date)
                                                     @php
                                                         $attendance = \App\Models\Attendance::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->where('attend_date', $date->attend_date)->first();
                                                     @endphp
-
                                                     <td>
                                                         @if( $attendance->attend === 'P' )
                                                             <span class="badge badge-success">Present</span>
@@ -76,9 +81,16 @@
                                                             <span class="badge badge-danger">Absent</span>
                                                         @endif
                                                     </td>
-
-                                                    @endforeach
-
+                                                @endforeach
+                                                <td>
+                                                    @if($percentage >= 75)
+                                                        <span class="badge badge-success">{{ $percentage }} %</span>
+                                                    @elseif($percentage >=50 && $percentage < 75)
+                                                        <span class="badge badge-warning">{{ $percentage }} %</span>
+                                                    @else
+                                                        <span class="badge badge-danger">{{ $percentage }} %</span>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
