@@ -102,10 +102,10 @@ class AttendanceController extends Controller
     public function show_all_attend($session_id,$course_id, $teacher_id)
     {
         $dates = Attendance::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('attend_date');
-        $students_data = Attendance::with('student')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('student_id');
+        $students_data = Attendance::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
        //return $attendances = Attendance::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get();
 
-        return view('teacher.attendance.show_all_attend', compact('students_data', 'dates'));
+        return view('teacher.attendance.show_all_attend', compact('students_data', 'dates', 'session_id', 'course_id', 'teacher_id'));
 
     }
 

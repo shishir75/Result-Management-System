@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/teacher/attendance/show_all_attend.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teacher/AttendanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teacher/AttendanceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teacher/attendance/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/attendance/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teacher/attendance/show_all_attend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/attendance/show_all_attend.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Teacher/AttendanceController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
-              <caret line="104" column="22" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="22" />
+              <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
               <folding>
                 <element signature="e#48#74#0#PHP" expanded="true" />
               </folding>
@@ -35,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/teacher/attendance/show_all_attend.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="65" column="91" lean-forward="true" selection-start-line="65" selection-start-column="91" selection-end-line="65" selection-end-column="91" />
+            <state relative-caret-position="360">
+              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
             </state>
           </provider>
         </entry>
@@ -207,7 +204,7 @@
       <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="-10" />
     <option name="y" value="30" />
     <option name="width" value="1938" />
@@ -352,12 +349,13 @@
       <workItem from="1564673291506" duration="4285000" />
       <workItem from="1564753046661" duration="3654000" />
       <workItem from="1564770487119" duration="7950000" />
-      <workItem from="1564821275092" duration="12836000" />
+      <workItem from="1564821275092" duration="13484000" />
+      <workItem from="1564848381429" duration="2569000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123884000" />
+    <option name="totallyTimeSpent" value="127101000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-10" y="30" width="1938" height="1068" extended-state="0" />
@@ -752,7 +750,7 @@
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Teacher/AttendanceController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
-          <caret line="104" column="22" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="22" />
+          <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
           <folding>
             <element signature="e#48#74#0#PHP" expanded="true" />
           </folding>
@@ -761,8 +759,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/teacher/attendance/show_all_attend.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="65" column="91" lean-forward="true" selection-start-line="65" selection-start-column="91" selection-end-line="65" selection-end-column="91" />
+        <state relative-caret-position="360">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
         </state>
       </provider>
     </entry>

@@ -40,11 +40,10 @@
 
 
                                 <div class="card-body">
-                                    <div class="col-6 offset-3 text-center">
-{{--                                        <h3>Dept : {{ \App\Models\Dept::findOrFail($attendances->course->dept_id)->name }}</h3>--}}
-{{--                                        <h5>Session : {{ $attendances[0]->session->name }} | Subject : {{ $attendances->course->course_code }} - {{ $attendances->course->course_title }}</h5>--}}
-{{--                                        <h5>Teacher Name : {{ $attendances[0]->teacher->name }}</h5>--}}
-{{--                                        <h4>Date : {{ $attendances[0]->attend_date }}</h4>--}}
+                                    <div class="col-6 offset-3 text-center my-4">
+                                        <h3>Dept : {{ \App\Models\Dept::findOrFail($students_data[0]->course->dept_id)->name }}</h3>
+                                        <h5>Session : {{ $students_data[0]->session->name }} | Subject : {{ $students_data[0]->course->course_code }} - {{ $students_data[0]->course->course_title }}</h5>
+                                        <h5>Teacher Name : {{ $students_data[0]->teacher->name }}</h5>
                                     </div>
 
                                     <table id="example1" class="table table-bordered table-striped text-center">
@@ -66,10 +65,12 @@
                                                 <td>{{ $student_data->student->name }}</td>
 
                                                 @foreach($dates as $date)
-
+                                                    @php
+                                                        $attendance = \App\Models\Attendance::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->where('attend_date', $date->attend_date)->first();
+                                                    @endphp
 
                                                     <td>
-                                                        @if( 1 === 'P' )
+                                                        @if( $attendance->attend === 'P' )
                                                             <span class="badge badge-success">Present</span>
                                                         @else
                                                             <span class="badge badge-danger">Absent</span>
