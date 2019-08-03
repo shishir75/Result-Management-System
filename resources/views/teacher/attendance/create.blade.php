@@ -44,7 +44,8 @@
                                     <h6>{{ $course->dept->is_semester == 1 ? 'Semester' : 'Year' }} : {{ $course->dept->is_semester == 1 ? $semester->name : $year->name }}   |  Teacher Name : {{ $course->teacher->name }}</h6>
                                     <h4>Date : {{ Carbon\Carbon::now()->format('D, d F Y') }}</h4>
                                 </div>
-                                <a href="{{ route('teacher.attendance.show_all',[$course->session->id,$course->course->id, $course->teacher->id] ) }}" class="btn btn-info float-right">View Attendance</a>
+                                <a href="{{ route('teacher.attendance.show_all_attend',[$course->session->id,$course->course->id, $course->teacher->id] ) }}" class="btn btn-success">View All Attendance</a>
+                                <a href="{{ route('teacher.attendance.show_all',[$course->session->id,$course->course->id, $course->teacher->id] ) }}" class="btn btn-info float-right">View By Date</a>
 
                             </div>
 

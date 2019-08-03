@@ -74,6 +74,7 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::get('attendance/{course_teacher_id}', 'AttendanceController@create')->name('attendance.create');
     Route::post('attendance', 'AttendanceController@store')->name('attendance.store');
     Route::get('attendance/{session_id}/{course_id}/{teacher_id}', 'AttendanceController@show_all')->name('attendance.show_all');
+    Route::get('attendance/all/{session_id}/{course_id}/{teacher_id}', 'AttendanceController@show_all_attend')->name('attendance.show_all_attend');
     Route::get('attendance/{session_id}/{course_id}/{teacher_id}/{attend_date}', 'AttendanceController@show_by_date')->name('attendance.show_by_date');
     Route::get('attendance/{session_id}/{course_id}/{teacher_id}/{attend_date}/edit', 'AttendanceController@edit_by_date')->name('attendance.edit_by_date');
     Route::put('attendance/{session_id}/{course_id}/{teacher_id}/{attend_date}', 'AttendanceController@update_by_date')->name('attendance.update_by_date');

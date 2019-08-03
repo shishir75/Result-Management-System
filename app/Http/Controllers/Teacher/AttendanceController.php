@@ -99,6 +99,16 @@ class AttendanceController extends Controller
         return view('teacher.attendance.show_all', compact('attendances'));
     }
 
+    public function show_all_attend($session_id,$course_id, $teacher_id)
+    {
+        $dates = Attendance::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('attend_date');
+        $students_data = Attendance::with('student')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('student_id');
+       //return $attendances = Attendance::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get();
+
+        return view('teacher.attendance.show_all_attend', compact('students_data', 'dates'));
+
+    }
+
     public function show_by_date($session_id,$course_id, $teacher_id, $attend_date)
     {
         $attendances = Attendance::with('session', 'course', 'student', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('attend_date', $attend_date)->orderBy('student_id', 'asc')->get();
@@ -128,8 +138,6 @@ class AttendanceController extends Controller
 
         $attend = $request->input('attend');
 
-
-
         foreach ($attend as $student_id => $value)
         {
             $attendance = Attendance::where('session_id', $session_id)->where('course_id', $course_id)->where('teacher_id', $teacher_id)->where('attend_date', $attend_date)->where('student_id', $student_id)->first();
@@ -140,6 +148,8 @@ class AttendanceController extends Controller
         Toastr::success("Attendance updated successfully!", "Success");
         return redirect()->route('teacher.attendance.show_by_date', [ $attendance->session_id, $attendance->course_id, $attendance->teacher_id, $attendance->attend_date]);
     }
+
+
 
 
 
