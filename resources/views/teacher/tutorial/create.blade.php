@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Add Attendance')
+@section('title', 'Add Tutorial Marks')
 
 @push('css')
 
@@ -16,8 +16,8 @@
                 <div class="row mb-2">
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Add Attendance</li>
+                            <li class="breadcrumb-item"><a href="{{ route('register.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Add Tutorial Marks</li>
                         </ol>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Add Attendance</h3>
+                                <h3 class="card-title">Add Tutorial Marks</h3>
                             </div>
                             <!-- /.card-header -->
 
@@ -44,22 +44,37 @@
                                     <h6>{{ $course->dept->is_semester == 1 ? 'Semester' : 'Year' }} : {{ $course->dept->is_semester == 1 ? $semester->name : $year->name }}   |  Teacher Name : {{ $course->teacher->name }}</h6>
                                     <h4>Date : {{ Carbon\Carbon::now()->format('D, d F Y') }}</h4>
                                 </div>
-                                <a href="{{ route('teacher.attendance.show_all_attend',[$course->session->id,$course->course->id, $course->teacher->id] ) }}" class="btn btn-success">View All Attendance</a>
-                                <a href="{{ route('teacher.attendance.show_all',[$course->session->id,$course->course->id, $course->teacher->id] ) }}" class="btn btn-info float-right">View By Date</a>
+                                <a href="#" class="btn btn-info float-right">View Tutorial Marks</a>
 
                             </div>
 
                             <!-- form start -->
-                            <form role="form" action="{{ route('teacher.attendance.store') }}" method="post">
+                            <form role="form" action="#" method="post">
                                 @csrf
                                 <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-md-2 offset-3">
+                                            <h4 class="float-right">Tutorial No :</h4>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <select name="tutorial_no" class="form-control">
+                                                <option selected>-----Select Tutorial No-----</option>
+                                                <option value="1">Tutorial 1</option>
+                                                <option value="2">Tutorial 2</option>
+                                                <option value="3">Tutorial 3</option>
+                                                <option value="4">Tutorial 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
                                     <table id="example1" class="table table-bordered table-striped text-center">
                                         <thead>
                                         <tr>
                                             <th>Serial</th>
                                             <th>Class Roll</th>
                                             <th>Name</th>
-                                            <th>Attendance</th>
+                                            <th width="20%">Tutorial Marks</th>
                                         </tr>
                                         </thead>
                                         <tfoot>
@@ -67,7 +82,7 @@
                                             <th>Serial</th>
                                             <th>Class Roll</th>
                                             <th>Name</th>
-                                            <th>Attendance</th>
+                                            <th>Tutorial Marks</th>
                                         </tr>
                                         </tfoot>
                                         <tbody>
@@ -77,13 +92,8 @@
                                                     <td>{{ $student->class_roll }}</td>
                                                     <td>{{ $student->name }}</td>
                                                     <td>
-                                                        <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" id="p-option{{ $student->id }}"  name="attend[{{ $student->id }}]" value="P" class="custom-control-input" checked>
-                                                            <label class="custom-control-label" for="p-option{{ $student->id }}">Present</label>
-                                                        </div>
-                                                        <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" id="a-option{{ $student->id }}" name="attend[{{ $student->id }}]" value="A" class="custom-control-input">
-                                                            <label class="custom-control-label" for="a-option{{ $student->id }}">Absent</label>
+                                                        <div class="form-group">
+                                                            <input type="number" name="tutorial_marks" step="0.01" class="form-control" placeholder="Enter Tutorial Marks" required>
                                                         </div>
                                                     </td>
 
@@ -98,7 +108,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-md-right">Add Attendance</button>
+                                    <button type="submit" class="btn btn-primary float-md-right">Add Tutorial Marks</button>
                                 </div>
                             </form>
                         </div>

@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Courses')
+@section('title', 'Attendances')
 
 @push('css')
     <!-- DataTables -->
@@ -18,7 +18,7 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Courses</li>
+                            <li class="breadcrumb-item active">Attendances</li>
                         </ol>
                     </div>
                 </div>
@@ -34,7 +34,10 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ strtoupper('Course list of '.$teacher->name ) }}</h3>
+                                <h3 class="card-title">
+                                    {{ strtoupper('Attendances list of '. $attendances[0]->course->course_title . ' - by : ' .$attendances[0]->teacher->name ) }}
+                                    <span class="float-right">Session : {{ $attendances[0]->session->name }}</span>
+                                </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -42,64 +45,28 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Session</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $teacher->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>In-course Marks</th>
-                                        <th>Final Marks</th>
-                                        <th>Attend</th>
-                                        <th>Tutorial</th>
-                                        <th>Assignment</th>
+                                        <th>Attendance Date</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Session</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $teacher->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>In-course Marks</th>
-                                        <th>Final Marks</th>
-                                        <th>Attend</th>
-                                        <th>Tutorial</th>
-                                        <th>Assignment</th>
+                                        <th>Attendance Date</th>
+                                        <th>Action</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($course_teachers as $key => $course_teacher)
+                                    @foreach($attendances as $key => $attendance)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $course_teacher->session->name }}</td>
-                                            <td>{{ $course_teacher->course->course_code .' - '. $course_teacher->course->course_title }}</td>
-                                            <td>{{ $course_teacher->code }}</td>
-
-                                            <td>{{ number_format($course_teacher->course->credit_hour, 1) }}</td>
+                                            <td>{{ $attendance->attend_date }}</td>
                                             <td>
-                                                @if($course_teacher->course->is_lab == true)
-                                                    <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
-                                                @else
-                                                    <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
-                                                @endif
-                                            </td>
-                                            <td>{{ $course_teacher->course->incourse_marks }}</td>
-                                            <td>{{ $course_teacher->course->final_marks  }}</td>
-                                            <td>
-                                                <a href="{{ route('teacher.attendance.create', $course_teacher->id) }}" class="btn btn-success">
-                                                    <i class="fa fa-male" aria-hidden="true"></i>
+                                                <a href="{{ route('teacher.attendance.show_by_date', [$attendance->session_id, $attendance->course_id, $attendance->teacher_id, $attendance->attend_date]) }}" class="btn btn-info">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('teacher.tutorial.create', $course_teacher->id) }}" class="btn btn-info">
+                                                <a href="{{ route('teacher.attendance.edit_by_date', [$attendance->session_id, $attendance->course_id, $attendance->teacher_id, $attendance->attend_date]) }}" class="btn btn-warning">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('teacher.attendance.create', $course_teacher->id) }}" class="btn btn-primary">
-                                                    <i class="fa fa-bars" aria-hidden="true"></i>
                                                 </a>
                                             </td>
                                         </tr>
