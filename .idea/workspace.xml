@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/resources/views/teacher/attendance/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/attendance/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teacher/attendance/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/attendance/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teacher/attendance/show_all.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/attendance/show_all.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teacher/attendance/show_all_attend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/attendance/show_all_attend.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,11 +14,9 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/teacher/attendance/edit.blade.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/teacher/course/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="691">
-              <caret line="54" column="233" selection-start-line="54" selection-start-column="233" selection-end-line="54" selection-end-column="233" />
-            </state>
+            <state relative-caret-position="-2610" />
           </provider>
         </entry>
       </file>
@@ -257,7 +250,7 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="teacher" type="462c0819:PsiDirectoryNode" />
-              <item name="attendance" type="462c0819:PsiDirectoryNode" />
+              <item name="course" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ju_rms" type="b2602c69:ProjectViewProjectNode" />
@@ -334,12 +327,12 @@
       <workItem from="1564848381429" duration="12014000" />
       <workItem from="1564898363894" duration="5496000" />
       <workItem from="1564925351199" duration="4419000" />
-      <workItem from="1564935778011" duration="12657000" />
+      <workItem from="1564935778011" duration="12981000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159118000" />
+    <option name="totallyTimeSpent" value="159442000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-10" y="30" width="1938" height="1068" extended-state="0" />
@@ -391,16 +384,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dept_Office/StudentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="26" column="136" selection-start-line="26" selection-start-column="136" selection-end-line="26" selection-end-column="136" />
-          <folding>
-            <element signature="e#52#83#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_30_001923_create_courses_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -751,6 +734,11 @@
         <state relative-caret-position="691">
           <caret line="54" column="233" selection-start-line="54" selection-start-column="233" selection-end-line="54" selection-end-column="233" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/teacher/course/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2610" />
       </provider>
     </entry>
   </component>
