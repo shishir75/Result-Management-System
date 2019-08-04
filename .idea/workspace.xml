@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teacher/TutorialController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teacher/TutorialController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teacher/tutorial/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/tutorial/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/teacher/tutorial/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/tutorial/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Teacher/TutorialController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="99" column="79" selection-start-line="99" selection-start-column="79" selection-end-line="99" selection-end-column="79" />
+            <state relative-caret-position="180">
+              <caret line="90" column="5" lean-forward="true" selection-start-line="90" selection-start-column="5" selection-end-line="90" selection-end-column="5" />
               <folding>
                 <element signature="e#48#77#0#PHP" expanded="true" />
               </folding>
@@ -31,20 +27,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/web.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="564">
-              <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/teacher/tutorial/show.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="72" column="94" selection-start-line="72" selection-start-column="94" selection-end-line="72" selection-end-column="94" />
+            <state relative-caret-position="308">
+              <caret line="79" column="103" lean-forward="true" selection-start-line="79" selection-start-column="103" selection-end-line="79" selection-end-column="103" />
+              <folding>
+                <element signature="e#4649#4655#0#HTML" expanded="true" />
+                <element signature="e#5004#5010#0#HTML" expanded="true" />
+                <element signature="e#5358#5364#0#HTML" expanded="true" />
+                <element signature="e#5677#5683#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,8 +106,8 @@
         <option value="$PROJECT_DIR$/app/Models/Tutorial.php" />
         <option value="$PROJECT_DIR$/resources/views/teacher/tutorial/create.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/resources/views/teacher/tutorial/show.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Teacher/TutorialController.php" />
+        <option value="$PROJECT_DIR$/resources/views/teacher/tutorial/show.blade.php" />
       </list>
     </option>
   </component>
@@ -215,7 +208,7 @@
       <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-10" />
     <option name="y" value="30" />
     <option name="width" value="1938" />
@@ -362,12 +355,12 @@
       <workItem from="1564770487119" duration="7950000" />
       <workItem from="1564821275092" duration="13484000" />
       <workItem from="1564848381429" duration="12014000" />
-      <workItem from="1564898363894" duration="2515000" />
+      <workItem from="1564898363894" duration="4893000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139061000" />
+    <option name="totallyTimeSpent" value="141439000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-10" y="30" width="1938" height="1068" extended-state="0" />
@@ -375,7 +368,7 @@
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.15814696" />
+      <window_info content_ui="combo" id="Project" order="2" weight="0.15814696" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32893288" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -753,26 +746,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/teacher/tutorial/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="72" column="94" selection-start-line="72" selection-start-column="94" selection-end-line="72" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="564">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Teacher/TutorialController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="99" column="79" selection-start-line="99" selection-start-column="79" selection-end-line="99" selection-end-column="79" />
+        <state relative-caret-position="180">
+          <caret line="90" column="5" lean-forward="true" selection-start-line="90" selection-start-column="5" selection-end-line="90" selection-end-column="5" />
           <folding>
             <element signature="e#48#77#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/teacher/tutorial/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="79" column="103" lean-forward="true" selection-start-line="79" selection-start-column="103" selection-end-line="79" selection-end-column="103" />
+          <folding>
+            <element signature="e#4649#4655#0#HTML" expanded="true" />
+            <element signature="e#5004#5010#0#HTML" expanded="true" />
+            <element signature="e#5358#5364#0#HTML" expanded="true" />
+            <element signature="e#5677#5683#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
