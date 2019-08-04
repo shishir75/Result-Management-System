@@ -41,6 +41,9 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+
+                                <a href="{{ route('teacher.tutorial.show', [$tutorials[0]->session->id,$tutorials[0]->course->id, $tutorials[0]->teacher->id]) }}" class="btn btn-info mb-4">View Tutorial Marks</a>
+
                                 <table id="example1" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
