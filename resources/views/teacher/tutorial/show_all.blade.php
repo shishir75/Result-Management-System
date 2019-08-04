@@ -65,6 +65,14 @@
                                                 <a href="{{ route('teacher.tutorial.edit_by_tutorial_no', [$tutorial->session_id, $tutorial->course_id, $tutorial->teacher_id, $tutorial->tutorial_no]) }}" class="btn btn-warning">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
+                                                <button class="btn btn-danger" type="button" onclick="deleteItem({{ $key + 1 }})">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                                <form id="delete-form-{{ $key + 1 }}" action="{{ route('teacher.tutorial.delete_by_tutorial_no', [$tutorial->session_id, $tutorial->course_id, $tutorial->teacher_id, $tutorial->tutorial_no]) }}" method="post"
+                                                      style="display:none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

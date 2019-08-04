@@ -147,6 +147,18 @@ class TutorialController extends Controller
         return redirect()->route('teacher.tutorial.show', [ $session_id,$course_id, $teacher_id]);
     }
 
+    public function delete_by_tutorial_no($session_id,$course_id, $teacher_id, $tutorial_no)
+    {
+        $tutorials = Tutorial::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('tutorial_no', $tutorial_no)->get();
+        foreach ($tutorials as $tutorial)
+        {
+            $tutorial->delete();
+        }
+
+        Toastr::success("Tutorial have been deleted successfully!", "Success");
+        return redirect()->back();
+    }
+
 
 
 }
