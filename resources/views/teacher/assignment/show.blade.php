@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Show Tutorial Marks')
+@section('title', 'Show Assignment Marks')
 
 @push('css')
 
@@ -16,7 +16,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Show Tutorial Marks</li>
+                            <li class="breadcrumb-item active">Show Assignment Marks</li>
                         </ol>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Show Tutorial Marks</h3>
+                                <h3 class="card-title">Show Assignment Marks</h3>
                             </div>
                             <!-- /.card-header -->
 
@@ -52,8 +52,8 @@
                                         <th>Serial</th>
                                         <th>Class Roll</th>
                                         <th>Name</th>
-                                        @foreach($tutorial_nos as $tutorial_no)
-                                            <th>Tutorial - {{ $tutorial_no->tutorial_no }}</th>
+                                        @foreach($assignment_nos as $assignment_no)
+                                            <th>Assignment - {{ $assignment_no->assignment_no }}</th>
                                         @endforeach
                                         <th>Best Two</th>
                                     </tr>
@@ -62,12 +62,12 @@
                                     @foreach($students_data as $key => $student_data)
 
                                         @php
-                                            $best_two = \App\Models\Tutorial::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->orderBy('marks', 'desc')->take(2)->get();
+                                            $best_two = \App\Models\Assignment::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->orderBy('marks', 'desc')->take(2)->get();
 
                                             if (count($best_two) >= 2)
                                             {
                                                 $avarage = ($best_two[0]->marks + $best_two[1]->marks)/2;
-                                                $percantage = ($avarage/20)*100;
+                                                $percantage = ($avarage/10)*100;
                                             }
                                         @endphp
 
@@ -76,12 +76,12 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $student_data->student->class_roll }}</td>
                                             <td>{{ $student_data->student->name }}</td>
-                                            @foreach($tutorial_nos as $tutorial_no)
+                                            @foreach($assignment_nos as $assignment_no)
                                                 @php
-                                                    $tutorial_marks = \App\Models\Tutorial::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->where('tutorial_no', $tutorial_no->tutorial_no)->first();
+                                                    $assignment_marks = \App\Models\Assignment::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->where('assignment_no', $assignment_no->assignment_no)->first();
                                                 @endphp
 
-                                                <td>{{ number_format($tutorial_marks->marks, 2) }}</td>
+                                                <td>{{ number_format($assignment_marks->marks, 2) }}</td>
                                             @endforeach
                                             <td>
                                                 @if(isset($percantage))

@@ -87,6 +87,18 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::put('course/tutorial/{session_id}/{course_id}/{teacher_id}/{tutorial_no}', 'TutorialController@update_by_tutorial_no')->name('tutorial.update_by_tutorial_no');
     Route::delete('course/tutorial/{session_id}/{course_id}/{teacher_id}/{tutorial_no}', 'TutorialController@delete_by_tutorial_no')->name('tutorial.delete_by_tutorial_no');
 
+
+    Route::get('course/assignment/{course_teacher_id}', 'AssignmentController@create')->name('assignment.create');
+    Route::post('course/assignment', 'AssignmentController@store')->name('assignment.store');
+    Route::get('course/assignment/{session_id}/{course_id}/{teacher_id}', 'AssignmentController@show')->name('assignment.show');
+    Route::get('course/assignment/all/{session_id}/{course_id}/{teacher_id}', 'AssignmentController@show_all')->name('assignment.show_all');
+    Route::get('course/assignment/{session_id}/{course_id}/{teacher_id}/{assignment_no}/edit', 'AssignmentController@edit_by_assignment_no')->name('assignment.edit_by_assignment_no');
+    Route::put('course/assignment/{session_id}/{course_id}/{teacher_id}/{assignment_no}', 'AssignmentController@update_by_assignment_no')->name('assignment.update_by_assignment_no');
+    Route::delete('course/assignment/{session_id}/{course_id}/{teacher_id}/{assignment_no}', 'AssignmentController@delete_by_assignment_no')->name('assignment.delete_by_assignment_no');
+
+
+
+
 });
 
 

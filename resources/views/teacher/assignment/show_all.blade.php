@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Tutorials')
+@section('title', 'Assignments')
 
 @push('css')
     <!-- DataTables -->
@@ -18,7 +18,7 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Tutorials</li>
+                            <li class="breadcrumb-item active">Assignments</li>
                         </ol>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    {{ strtoupper('Tutorials list of '. $tutorials[0]->course->course_title . ' - by : ' .$tutorials[0]->teacher->name ) }}
-                                    <span class="float-right">Session : {{ $tutorials[0]->session->name }}</span>
+                                    {{ strtoupper('Assignments list of '. $assignments[0]->course->course_title . ' - by : ' .$assignments[0]->teacher->name ) }}
+                                    <span class="float-right">Session : {{ $assignments[0]->session->name }}</span>
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -45,30 +45,30 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Tutorial No</th>
+                                        <th>Assignment No</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Tutorial No</th>
+                                        <th>Assignment No</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($tutorials as $key => $tutorial)
+                                    @foreach($assignments as $key => $assignment)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>Tutorial - {{ $tutorial->tutorial_no }}</td>
+                                            <td>Assignment - {{ $assignment->assignment_no }}</td>
                                             <td>
-                                                <a href="{{ route('teacher.tutorial.edit_by_tutorial_no', [$tutorial->session_id, $tutorial->course_id, $tutorial->teacher_id, $tutorial->tutorial_no]) }}" class="btn btn-warning">
+                                                <a href="{{ route('teacher.assignment.edit_by_assignment_no', [$assignment->session_id, $assignment->course_id, $assignment->teacher_id, $assignment->assignment_no]) }}" class="btn btn-warning">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                                 <button class="btn btn-danger" type="button" onclick="deleteItem({{ $key + 1 }})">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
-                                                <form id="delete-form-{{ $key + 1 }}" action="{{ route('teacher.tutorial.delete_by_tutorial_no', [$tutorial->session_id, $tutorial->course_id, $tutorial->teacher_id, $tutorial->tutorial_no]) }}" method="post"
+                                                <form id="delete-form-{{ $key + 1 }}" action="{{ route('teacher.assignment.delete_by_assignment_no', [$assignment->session_id, $assignment->course_id, $assignment->teacher_id, $assignment->assignment_no]) }}" method="post"
                                                       style="display:none;">
                                                     @csrf
                                                     @method('DELETE')

@@ -98,7 +98,7 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('teacher.attendance.create', $course_teacher->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('teacher.assignment.create', $course_teacher->id) }}" class="btn btn-primary">
                                                     <i class="fa fa-bars" aria-hidden="true"></i>
                                                 </a>
                                             </td>

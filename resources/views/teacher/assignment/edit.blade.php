@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Update Tutorial')
+@section('title', 'Update Assignment')
 
 @push('css')
 
@@ -17,7 +17,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Update Tutorial</li>
+                            <li class="breadcrumb-item active">Update Assignment</li>
                         </ol>
                     </div>
                 </div>
@@ -33,19 +33,19 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Update Tutorial Marks</h3>
+                                <h3 class="card-title">Update Assignment Marks</h3>
                             </div>
                             <!-- /.card-header -->
 
                             <div class="col-6 offset-3 text-center mt-4">
-                                <h3>Dept : {{ \App\Models\Dept::findOrFail($tutorials[0]->course->dept_id)->name }}</h3>
-                                <h5>Session : {{ $tutorials[0]->session->name }} | Subject : {{ $tutorials[0]->course->course_code }} - {{ $tutorials[0]->course->course_title }}</h5>
-                                <h5>Teacher Name : {{ $tutorials[0]->teacher->name }}</h5>
-                                <h4>Tutorial No : {{ $tutorials[0]->tutorial_no }}</h4>
+                                <h3>Dept : {{ \App\Models\Dept::findOrFail($assignments[0]->course->dept_id)->name }}</h3>
+                                <h5>Session : {{ $assignments[0]->session->name }} | Subject : {{ $assignments[0]->course->course_code }} - {{ $assignments[0]->course->course_title }}</h5>
+                                <h5>Teacher Name : {{ $assignments[0]->teacher->name }}</h5>
+                                <h4>Tutorial No : {{ $assignments[0]->tutorial_no }}</h4>
                             </div>
 
                             <!-- form start -->
-                            <form role="form" action="{{ route('teacher.tutorial.update_by_tutorial_no', [$tutorials[0]->session->id,$tutorials[0]->course->id,$tutorials[0]->teacher->id, $tutorials[0]->tutorial_no ]) }}" method="post">
+                            <form role="form" action="{{ route('teacher.assignment.update_by_assignment_no', [$assignments[0]->session->id,$assignments[0]->course->id,$assignments[0]->teacher->id, $assignments[0]->assignment_no ]) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
@@ -67,14 +67,14 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        @foreach($tutorials as $key => $tutorial)
+                                        @foreach($assignments as $key => $assignment)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $tutorial->student->class_roll }}</td>
-                                                <td>{{ $tutorial->student->name }}</td>
+                                                <td>{{ $assignment->student->class_roll }}</td>
+                                                <td>{{ $assignment->student->name }}</td>
                                                 <td>
                                                     <div class="form-group" style="margin-bottom: 0px">
-                                                        <input type="number" name="tutorial_marks[{{ $tutorial->student->id }}]" value="{{ $tutorial->marks }}" step="0.01" class="form-control" placeholder="Enter Tutorial Marks" required>
+                                                        <input type="number" name="assignment_marks[{{ $assignment->student->id }}]" value="{{ $assignment->marks }}" step="0.01" class="form-control" placeholder="Enter Assignment Marks" required>
                                                     </div>
                                                 </td>
 
@@ -89,7 +89,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-md-right">Update Tutorial Marks</button>
+                                    <button type="submit" class="btn btn-primary float-md-right">Update Assignment Marks</button>
                                 </div>
                             </form>
                         </div>
