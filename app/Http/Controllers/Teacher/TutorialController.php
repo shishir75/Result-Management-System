@@ -82,14 +82,29 @@ class TutorialController extends Controller
             }
 
             Toastr::success("Tutorial Marks added successfully!", "Success");
-            return redirect()->route('teacher.course.index');
-
-            //return redirect()->route('teacher.attendance.show_all_attend',[$course->session->id,$course->course->id, $course->teacher->id]);
+            return redirect()->route('teacher.tutorial.show',[$course->session->id,$course->course->id, $course->teacher->id]);
 
         } else {
             Toastr::error("Tutorial Marks already added!", "Error");
-            return redirect()->route('teacher.course.index');
-            //return redirect()->route('teacher.attendance.show_all_attend',[$course->session->id,$course->course->id, $course->teacher->id]);
+            return redirect()->route('teacher.tutorial.show',[$course->session->id,$course->course->id, $course->teacher->id]);
         }
     }
+
+
+    public function show($session_id,$course_id, $teacher_id)
+    {
+        $tutorial_nos = Tutorial::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('tutorial_no');
+        $students_data = Tutorial::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
+        if (count($tutorial_nos) < 1)
+        {
+            Toastr::error("No Tutorial Marks added! Please Add Tutorial Marks!!", "Error");
+            return redirect()->back();
+        }
+
+
+        return view('teacher.tutorial.show', compact('students_data', 'tutorial_nos', 'session_id', 'course_id', 'teacher_id'));
+    }
+
+
+
 }

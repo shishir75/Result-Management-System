@@ -81,6 +81,7 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
 
     Route::get('course/tutorial/{course_teacher_id}', 'TutorialController@create')->name('tutorial.create');
     Route::post('course/tutorial', 'TutorialController@store')->name('tutorial.store');
+    Route::get('course/tutorial/{session_id}/{course_id}/{teacher_id}', 'TutorialController@show')->name('tutorial.show');
 
 
 

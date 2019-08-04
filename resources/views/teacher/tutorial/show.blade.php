@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Show Attendance')
+@section('title', 'Show Tutorial Marks')
 
 @push('css')
 
@@ -16,7 +16,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Show Attendance</li>
+                            <li class="breadcrumb-item active">Show Tutorial Marks</li>
                         </ol>
                     </div>
                 </div>
@@ -32,49 +32,53 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Show Attendance</h3>
+                                <h3 class="card-title">Show Tutorial Marks</h3>
                             </div>
                             <!-- /.card-header -->
 
                             <!-- form start -->
 
 
-                                <div class="card-body">
-                                    <div class="col-6 offset-3 text-center">
-                                        <h3>Dept : {{ \App\Models\Dept::findOrFail($attendances[0]->course->dept_id)->name }}</h3>
-                                        <h5>Session : {{ $attendances[0]->session->name }} | Subject : {{ $attendances[0]->course->course_code }} - {{ $attendances[0]->course->course_title }}</h5>
-                                        <h5>Teacher Name : {{ $attendances[0]->teacher->name }}</h5>
-                                        <h4>Date : {{ $attendances[0]->attend_date }}</h4>
-                                    </div>
-
-                                    <table id="example1" class="table table-bordered table-striped text-center">
-                                        <thead>
-                                        <tr>
-                                            <th>Serial</th>
-                                            <th>Class Roll</th>
-                                            <th>Name</th>
-                                            <th>Attendance</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($attendances as $key => $attendance)
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $attendance->student->class_roll }}</td>
-                                                <td>{{ $attendance->student->name }}</td>
-                                                <td>
-                                                    @if( $attendance->attend === 'P' )
-                                                        <span class="badge badge-success">Present</span>
-                                                    @else
-                                                        <span class="badge badge-danger">Absent</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-
-                                    </table>
+                            <div class="card-body">
+                                <div class="col-6 offset-3 text-center my-4">
+                                    <h3>Dept : {{ \App\Models\Dept::findOrFail($students_data[0]->course->dept_id)->name }}</h3>
+                                    <h5>Session : {{ $students_data[0]->session->name }} | Subject : {{ $students_data[0]->course->course_code }} - {{ $students_data[0]->course->course_title }}</h5>
+                                    <h5>Teacher Name : {{ $students_data[0]->teacher->name }}</h5>
                                 </div>
+
+                                <table id="example1" class="table table-bordered table-striped text-center">
+                                    <thead>
+                                    <tr>
+                                        <th>Serial</th>
+                                        <th>Class Roll</th>
+                                        <th>Name</th>
+                                        @foreach($tutorial_nos as $tutorial_no)
+                                            <th>Tutorial - {{ $tutorial_no->tutorial_no }}</th>
+                                        @endforeach
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($students_data as $key => $student_data)
+
+
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $student_data->student->class_roll }}</td>
+                                            <td>{{ $student_data->student->name }}</td>
+                                            @foreach($tutorial_nos as $tutorial_no)
+                                                @php
+                                                    $tutorial_marks = \App\Models\Tutorial::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->where('tutorial_no', $tutorial_no->tutorial_no)->first();
+                                                @endphp
+
+                                                <td>{{ number_format($tutorial_marks->marks, 2) }}</td>
+                                            @endforeach
+
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+
+                                </table>
+                            </div>
                                 <!-- /.card-body -->
 
                         </div>
