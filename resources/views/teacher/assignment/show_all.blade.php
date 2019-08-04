@@ -39,8 +39,13 @@
                                     <span class="float-right">Session : {{ $assignments[0]->session->name }}</span>
                                 </h3>
                             </div>
+
                             <!-- /.card-header -->
                             <div class="card-body">
+
+                                <a href="{{ route('teacher.assignment.show', [$assignments[0]->session->id,$assignments[0]->course->id, $assignments[0]->teacher->id]) }}" class="btn btn-info mb-4">View Assignment Marks</a>
+
+
                                 <table id="example1" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
