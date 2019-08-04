@@ -41,6 +41,9 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+
+                                <a href="{{ route('teacher.attendance.show_all_attend',[$attendances[0]->session->id,$attendances[0]->course->id, $attendances[0]->teacher->id] ) }}" class="btn btn-success mb-4">View All Attendance</a>
+
                                 <table id="example1" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
