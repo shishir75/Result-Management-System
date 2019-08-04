@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Update Attendance')
+@section('title', 'Update Tutorial')
 
 @push('css')
 
@@ -17,7 +17,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Update Attendance</li>
+                            <li class="breadcrumb-item active">Update Tutorial</li>
                         </ol>
                     </div>
                 </div>
@@ -33,19 +33,19 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Update Attendance</h3>
+                                <h3 class="card-title">Update Tutorial Marks</h3>
                             </div>
                             <!-- /.card-header -->
 
                             <div class="col-6 offset-3 text-center mt-4">
-                                <h3>Dept : {{ \App\Models\Dept::findOrFail($attendances[0]->course->dept_id)->name }}</h3>
-                                <h5>Session : {{ $attendances[0]->session->name }} | Subject : {{ $attendances[0]->course->course_code }} - {{ $attendances[0]->course->course_title }}</h5>
-                                <h5>Teacher Name : {{ $attendances[0]->teacher->name }}</h5>
-                                <h4>Date : {{ $attendances[0]->attend_date }}</h4>
+                                <h3>Dept : {{ \App\Models\Dept::findOrFail($tutorials[0]->course->dept_id)->name }}</h3>
+                                <h5>Session : {{ $tutorials[0]->session->name }} | Subject : {{ $tutorials[0]->course->course_code }} - {{ $tutorials[0]->course->course_title }}</h5>
+                                <h5>Teacher Name : {{ $tutorials[0]->teacher->name }}</h5>
+                                <h4>Tutorial No : {{ $tutorials[0]->tutorial_no }}</h4>
                             </div>
 
                             <!-- form start -->
-                            <form role="form" action="{{ route('teacher.attendance.update_by_date', [$attendances[0]->session->id,$attendances[0]->course->id,$attendances[0]->teacher->id, $attendances[0]->attend_date ]) }}" method="post">
+                            <form role="form" action="{{ route('teacher.tutorial.update_by_tutorial_no', [$tutorials[0]->session->id,$tutorials[0]->course->id,$tutorials[0]->teacher->id, $tutorials[0]->tutorial_no ]) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
@@ -55,7 +55,7 @@
                                             <th>Serial</th>
                                             <th>Class Roll</th>
                                             <th>Name</th>
-                                            <th>Attendance</th>
+                                            <th width="20%">Marks</th>
                                         </tr>
                                         </thead>
                                         <tfoot>
@@ -63,23 +63,18 @@
                                             <th>Serial</th>
                                             <th>Class Roll</th>
                                             <th>Name</th>
-                                            <th>Attendance</th>
+                                            <th>Marks</th>
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        @foreach($attendances as $key => $attendance)
+                                        @foreach($tutorials as $key => $tutorial)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $attendance->student->class_roll }}</td>
-                                                <td>{{ $attendance->student->name }}</td>
+                                                <td>{{ $tutorial->student->class_roll }}</td>
+                                                <td>{{ $tutorial->student->name }}</td>
                                                 <td>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="p-option{{ $attendance->student->id }}"  name="attend[{{ $attendance->student->id }}]" value="P" class="custom-control-input" {{ $attendance->attend == 'P' ? 'checked' : '' }}>
-                                                        <label class="custom-control-label" for="p-option{{ $attendance->student->id }}">Present</label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="a-option{{ $attendance->student->id }}" name="attend[{{ $attendance->student->id }}]" value="A" class="custom-control-input" {{ $attendance->attend == 'A' ? 'checked' : '' }}>
-                                                        <label class="custom-control-label" for="a-option{{ $attendance->student->id }}">Absent</label>
+                                                    <div class="form-group" style="margin-bottom: 0px">
+                                                        <input type="number" name="tutorial_marks[{{ $tutorial->student->id }}]" value="{{ $tutorial->marks }}" step="0.01" class="form-control" placeholder="Enter Tutorial Marks" required>
                                                     </div>
                                                 </td>
 
@@ -94,7 +89,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-md-right">Update Attendance</button>
+                                    <button type="submit" class="btn btn-primary float-md-right">Update Tutorial Marks</button>
                                 </div>
                             </form>
                         </div>

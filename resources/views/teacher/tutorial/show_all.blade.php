@@ -62,7 +62,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>Tutorial - {{ $tutorial->tutorial_no }}</td>
                                             <td>
-                                                <a href="{{ route('teacher.attendance.edit_by_date', [$tutorial->session_id, $tutorial->course_id, $tutorial->teacher_id, $tutorial->tutorial_no]) }}" class="btn btn-warning">
+                                                <a href="{{ route('teacher.tutorial.edit_by_tutorial_no', [$tutorial->session_id, $tutorial->course_id, $tutorial->teacher_id, $tutorial->tutorial_no]) }}" class="btn btn-warning">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                             </td>

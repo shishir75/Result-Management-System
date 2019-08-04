@@ -114,5 +114,39 @@ class TutorialController extends Controller
     }
 
 
+    public function edit_by_tutorial_no($session_id,$course_id, $teacher_id, $tutorial_no)
+    {
+        $tutorials = Tutorial::with('session', 'course', 'student', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('tutorial_no', $tutorial_no)->orderBy('student_id', 'asc')->get();
+
+        return view('teacher.tutorial.edit', compact('tutorials'));
+    }
+
+    public function update_by_tutorial_no(Request $request, $session_id,$course_id, $teacher_id, $tutorial_no)
+    {
+        $inputs = $request->except('_token');
+        $rules = [
+            'tutorial_marks' => 'required',
+        ];
+
+        $validator = Validator::make($inputs, $rules);
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $tutorial_marks = $request->input('tutorial_marks');
+
+        foreach ($tutorial_marks as $student_id => $marks)
+        {
+            $tutorial = Tutorial::where('session_id', $session_id)->where('course_id', $course_id)->where('teacher_id', $teacher_id)->where('tutorial_no', $tutorial_no)->where('student_id', $student_id)->first();
+            $tutorial->marks = $marks;
+            $tutorial->save();
+        }
+
+        Toastr::success("Tutorial Marks updated successfully!", "Success");
+        return redirect()->route('teacher.tutorial.show', [ $session_id,$course_id, $teacher_id]);
+    }
+
+
 
 }

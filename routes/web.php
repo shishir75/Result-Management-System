@@ -83,7 +83,8 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::post('course/tutorial', 'TutorialController@store')->name('tutorial.store');
     Route::get('course/tutorial/{session_id}/{course_id}/{teacher_id}', 'TutorialController@show')->name('tutorial.show');
     Route::get('course/tutorial/all/{session_id}/{course_id}/{teacher_id}', 'TutorialController@show_all')->name('tutorial.show_all');
-
+    Route::get('course/tutorial/{session_id}/{course_id}/{teacher_id}/{tutorial_no}/edit', 'TutorialController@edit_by_tutorial_no')->name('tutorial.edit_by_tutorial_no');
+    Route::put('course/tutorial/{session_id}/{course_id}/{teacher_id}/{tutorial_no}', 'TutorialController@update_by_tutorial_no')->name('tutorial.update_by_tutorial_no');
 
 });
 
