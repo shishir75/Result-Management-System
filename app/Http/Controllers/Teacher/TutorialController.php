@@ -10,11 +10,12 @@ use App\Models\Teacher;
 use App\Models\Tutorial;
 use App\Models\Year;
 use Brian2694\Toastr\Facades\Toastr;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use PDO;
 
 class TutorialController extends Controller
 {
@@ -34,7 +35,9 @@ class TutorialController extends Controller
             return redirect()->route('teacher.course.index');
         }
 
-        return view('teacher.tutorial.create', compact('students', 'course', 'semester', 'year'));
+        $existing_tutorials = Tutorial::where('session_id', $course->session->id)->where('course_id', $course->course->id)->where('teacher_id', $course->teacher->id)->distinct()->get('tutorial_no'); // array of arrays instead of objects
+
+        return view('teacher.tutorial.create', compact('students', 'course', 'semester', 'year', 'existing_tutorials'));
     }
 
     public function store(Request $request)
@@ -100,8 +103,6 @@ class TutorialController extends Controller
             Toastr::error("No Tutorial Marks added! Please Add Tutorial Marks!!", "Error");
             return redirect()->back();
         }
-
-
         return view('teacher.tutorial.show', compact('students_data', 'tutorial_nos', 'session_id', 'course_id', 'teacher_id'));
     }
 
@@ -109,7 +110,13 @@ class TutorialController extends Controller
     public function show_all($session_id,$course_id, $teacher_id)
     {
         $tutorials = Tutorial::with('session', 'course', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->orderBy('tutorial_no', 'asc')->get(['tutorial_no', 'session_id', 'course_id', 'teacher_id']);
+        $tutorial_nos = Tutorial::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('tutorial_no');
 
+        if (count($tutorial_nos) < 1)
+        {
+            Toastr::error("No Tutorial Marks added! Please Add Tutorial Marks!!", "Error");
+            return redirect()->back();
+        }
         return view('teacher.tutorial.show_all', compact('tutorials'));
     }
 

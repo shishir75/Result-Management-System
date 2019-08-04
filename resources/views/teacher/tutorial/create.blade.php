@@ -61,10 +61,18 @@
                                         <div class="form-group col-md-3">
                                             <select name="tutorial_no" class="form-control" required>
                                                 <option value="">-----Select Tutorial No-----</option>
-                                                <option value="1">Tutorial 1</option>
-                                                <option value="2">Tutorial 2</option>
-                                                <option value="3">Tutorial 3</option>
-                                                <option value="4">Tutorial 4</option>
+                                                    @if(isset($existing_tutorials[3]->tutorial_no) && $existing_tutorials[3]->tutorial_no == 4)
+                                                        <option value="">All Tutorials are Taken</option>
+                                                    @elseif(isset($existing_tutorials[2]->tutorial_no) && $existing_tutorials[2]->tutorial_no == 3)
+                                                        <option value="4">Tutorial 4</option>
+                                                    @elseif(isset($existing_tutorials[1]->tutorial_no) && $existing_tutorials[1]->tutorial_no == 2)
+                                                        <option value="3">Tutorial 3</option>
+                                                    @elseif(isset($existing_tutorials[0]->tutorial_no) && $existing_tutorials[0]->tutorial_no == 1)
+                                                        <option value="2">Tutorial 2</option>
+                                                    @else()
+                                                        <option value="1">Tutorial 1</option>
+                                                    @endif
+
                                             </select>
                                         </div>
                                     </div>

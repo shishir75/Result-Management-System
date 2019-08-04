@@ -63,8 +63,12 @@
 
                                         @php
                                             $best_two = \App\Models\Tutorial::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->orderBy('marks', 'desc')->take(2)->get();
-                                            $avarage = ($best_two[0]->marks + $best_two[1]->marks)/2;
-                                            $percantage = ($avarage/20)*100;
+
+                                            if (count($best_two) >= 2)
+                                            {
+                                                $avarage = ($best_two[0]->marks + $best_two[1]->marks)/2;
+                                                $percantage = ($avarage/20)*100;
+                                            }
                                         @endphp
 
 
@@ -80,19 +84,25 @@
                                                 <td>{{ number_format($tutorial_marks->marks, 2) }}</td>
                                             @endforeach
                                             <td>
-                                                @if($percantage >= 80)
-                                                    <span class="badge badge-success">{{ number_format($avarage, 2) }}</span> &rarr;
-                                                    <span class="badge badge-success"> {{ number_format($percantage, 2) }} %</span>
-                                                @elseif($avarage < 80 && $avarage >= 60 )
-                                                    <span class="badge badge-info">{{ number_format($avarage, 2) }}</span> &rarr;
-                                                    <span class="badge badge-info"> {{ number_format($percantage, 2) }} %</span>
-                                                @elseif($avarage < 60 && $avarage >= 40)
-                                                    <span class="badge badge-warning">{{ number_format($avarage, 2) }}</span> &rarr;
-                                                    <span class="badge badge-warning"> {{ number_format($percantage, 2) }} %</span>
+                                                @if(isset($percantage))
+                                                    @if($percantage >= 80)
+                                                        <span class="badge badge-success">{{ number_format($avarage, 2) }}</span> &rarr;
+                                                        <span class="badge badge-success"> {{ number_format($percantage, 2) }} %</span>
+                                                    @elseif($percantage < 80 && $percantage >= 60 )
+                                                        <span class="badge badge-info">{{ number_format($avarage, 2) }}</span> &rarr;
+                                                        <span class="badge badge-info"> {{ number_format($percantage, 2) }} %</span>
+                                                    @elseif($percantage < 60 && $percantage >= 40)
+                                                        <span class="badge badge-warning">{{ number_format($avarage, 2) }}</span> &rarr;
+                                                        <span class="badge badge-warning"> {{ number_format($percantage, 2) }} %</span>
+                                                    @else
+                                                        <span class="badge badge-danger">{{ number_format($avarage, 2) }}</span> &rarr;
+                                                        <span class="badge badge-danger"> {{ number_format($percantage, 2) }} %</span>
+                                                    @endif
+
                                                 @else
-                                                    <span class="badge badge-danger">{{ number_format($avarage, 2) }}</span> &rarr;
-                                                    <span class="badge badge-danger"> {{ number_format($percantage, 2) }} %</span>
+                                                    <span class="badge badge-warning">Not Enough Data</span>
                                                 @endif
+
                                             </td>
 
                                         </tr>
