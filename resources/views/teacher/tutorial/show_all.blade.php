@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Attendances')
+@section('title', 'Tutorials')
 
 @push('css')
     <!-- DataTables -->
@@ -18,7 +18,7 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Attendances</li>
+                            <li class="breadcrumb-item active">Tutorials</li>
                         </ol>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    {{ strtoupper('Attendances list of '. $attendances[0]->course->course_title . ' - by : ' .$attendances[0]->teacher->name ) }}
-                                    <span class="float-right">Session : {{ $attendances[0]->session->name }}</span>
+                                    {{ strtoupper('Tutorials list of '. $tutorials[0]->course->course_title . ' - by : ' .$tutorials[0]->teacher->name ) }}
+                                    <span class="float-right">Session : {{ $tutorials[0]->session->name }}</span>
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -45,27 +45,24 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Attendance Date</th>
+                                        <th>Tutorial No</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Attendance Date</th>
+                                        <th>Tutorial No</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($attendances as $key => $attendance)
+                                    @foreach($tutorials as $key => $tutorial)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $attendance->attend_date }}</td>
+                                            <td>Tutorial - {{ $tutorial->tutorial_no }}</td>
                                             <td>
-                                                <a href="{{ route('teacher.attendance.show_by_date', [$attendance->session_id, $attendance->course_id, $attendance->teacher_id, $attendance->attend_date]) }}" class="btn btn-info">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.attendance.edit_by_date', [$attendance->session_id, $attendance->course_id, $attendance->teacher_id, $attendance->attend_date]) }}" class="btn btn-warning">
+                                                <a href="{{ route('teacher.attendance.edit_by_date', [$tutorial->session_id, $tutorial->course_id, $tutorial->teacher_id, $tutorial->tutorial_no]) }}" class="btn btn-warning">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                             </td>

@@ -44,7 +44,8 @@
                                     <h6>{{ $course->dept->is_semester == 1 ? 'Semester' : 'Year' }} : {{ $course->dept->is_semester == 1 ? $semester->name : $year->name }}   |  Teacher Name : {{ $course->teacher->name }}</h6>
                                     <h4>Date : {{ Carbon\Carbon::now()->format('D, d F Y') }}</h4>
                                 </div>
-                                <a href="{{ route('teacher.tutorial.show', [$course->session->id,$course->course->id, $course->teacher->id]) }}" class="btn btn-info float-right">View Tutorial Marks</a>
+                                <a href="{{ route('teacher.tutorial.show', [$course->session->id,$course->course->id, $course->teacher->id]) }}" class="btn btn-info">View Tutorial Marks</a>
+                                <a href="{{ route('teacher.tutorial.show_all', [$course->session->id,$course->course->id, $course->teacher->id]) }}" class="btn btn-warning float-right">Edit Tutoral Marks</a>
 
                             </div>
 

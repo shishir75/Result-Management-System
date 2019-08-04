@@ -106,5 +106,13 @@ class TutorialController extends Controller
     }
 
 
+    public function show_all($session_id,$course_id, $teacher_id)
+    {
+        $tutorials = Tutorial::with('session', 'course', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->orderBy('tutorial_no', 'asc')->get(['tutorial_no', 'session_id', 'course_id', 'teacher_id']);
+
+        return view('teacher.tutorial.show_all', compact('tutorials'));
+    }
+
+
 
 }
