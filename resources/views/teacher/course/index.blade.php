@@ -108,7 +108,7 @@
                                             </td>
                                             <td>
                                                 @if($course_teacher->course->is_lab == 1)
-                                                    <a href="{{ route('teacher.assignment.create', $course_teacher->id) }}" class="btn btn-success">
+                                                    <a href="{{ route('teacher.report.create', $course_teacher->id) }}" class="btn btn-success">
                                                         <i class="fa fa-bar-chart" aria-hidden="true"></i>
                                                     </a>
                                                 @else

@@ -96,6 +96,14 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::put('course/assignment/{session_id}/{course_id}/{teacher_id}/{assignment_no}', 'AssignmentController@update_by_assignment_no')->name('assignment.update_by_assignment_no');
     Route::delete('course/assignment/{session_id}/{course_id}/{teacher_id}/{assignment_no}', 'AssignmentController@delete_by_assignment_no')->name('assignment.delete_by_assignment_no');
 
+    Route::get('course/report/{course_teacher_id}', 'ReportController@create')->name('report.create');
+    Route::post('course/report', 'ReportController@store')->name('report.store');
+    Route::get('course/report/{session_id}/{course_id}/{teacher_id}', 'ReportController@show')->name('report.show');
+    Route::get('course/report/all/{session_id}/{course_id}/{teacher_id}', 'ReportController@show_all')->name('report.show_all');
+    Route::get('course/report/{session_id}/{course_id}/{teacher_id}/{report_no}/edit', 'ReportController@edit_by_report_no')->name('report.edit_by_report_no');
+    Route::put('course/report/{session_id}/{course_id}/{teacher_id}/{report_no}', 'ReportController@update_by_report_no')->name('report.update_by_report_no');
+    Route::delete('course/report/{session_id}/{course_id}/{teacher_id}/{report_no}', 'ReportController@delete_by_report_no')->name('report.delete_by_report_no');
+
 
 
 
