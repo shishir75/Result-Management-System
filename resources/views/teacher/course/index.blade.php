@@ -52,6 +52,8 @@
                                         <th>Attend</th>
                                         <th>Tutorial</th>
                                         <th>Assignment</th>
+                                        <th>Report</th>
+                                        <th>Quiz/Viva</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
@@ -67,6 +69,8 @@
                                         <th>Attend</th>
                                         <th>Tutorial</th>
                                         <th>Assignment</th>
+                                        <th>Report</th>
+                                        <th>Quiz/Viva</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
@@ -101,6 +105,24 @@
                                                 <a href="{{ route('teacher.assignment.create', $course_teacher->id) }}" class="btn btn-primary">
                                                     <i class="fa fa-bars" aria-hidden="true"></i>
                                                 </a>
+                                            </td>
+                                            <td>
+                                                @if($course_teacher->course->is_lab == 1)
+                                                    <a href="{{ route('teacher.assignment.create', $course_teacher->id) }}" class="btn btn-success">
+                                                        <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <i class="fa fa-times-circle btn btn-outline-danger" aria-hidden="true"></i>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($course_teacher->course->is_lab == 1)
+                                                    <a href="{{ route('teacher.assignment.create', $course_teacher->id) }}" class="btn btn-info">
+                                                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <i class="fa fa-times-circle btn btn-outline-danger" aria-hidden="true"></i>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
