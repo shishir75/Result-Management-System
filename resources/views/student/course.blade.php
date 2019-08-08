@@ -68,7 +68,7 @@
                                             <td>{{ $course->course->credit_hour }}</td>
                                             <td>{{ $course->teacher->name }}</td>
                                             <td>
-                                                <a href="" class="btn btn-info">Details</a>
+                                                <a href="{{ route('student.course.show', $course->id) }}" class="btn btn-info">Details</a>
                                             </td>
                                         </tr>
                                     @endforeach
