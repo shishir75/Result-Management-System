@@ -15,12 +15,10 @@
 			</div>
 			<div class="info">
 				<a href="#" class="d-block">
-					@php
-						use App\Models\Dept;
-                        $dept = Dept::where('name', Auth::user()->name)->first();
-					@endphp
-
 					@if(Auth::user()->role->id == 3)
+						@php
+                            $dept = App\Models\Dept::where('name', Auth::user()->name)->first();
+						@endphp
 						{{ $dept->short_name }}
 					@else
 						{{ Auth::user()->name }}

@@ -45,6 +45,7 @@
                                         <th>Course Code</th>
                                         <th>Course Title</th>
                                         <th>Credit Hour</th>
+                                        <th>Course Teacher</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -54,6 +55,7 @@
                                         <th>Course Code</th>
                                         <th>Course Title</th>
                                         <th>Credit Hour</th>
+                                        <th>Course Teacher</th>
                                         <th>Actions</th>
                                     </tr>
                                     </tfoot>
@@ -64,7 +66,10 @@
                                             <td>{{ $course->course->course_code }}</td>
                                             <td>{{ $course->course->course_title }}</td>
                                             <td>{{ $course->course->credit_hour }}</td>
-                                            <td></td>
+                                            <td>{{ $course->teacher->name }}</td>
+                                            <td>
+                                                <a href="" class="btn btn-info">Details</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
