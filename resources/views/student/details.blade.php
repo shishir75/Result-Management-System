@@ -209,12 +209,12 @@
                                 <table id="example1" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
-                                        <th>Attendance</th>
-                                        <th>Tutorial</th>
-                                        <th>Assignment</th>
+                                        <th>Attendance (10)</th>
+                                        <th>Tutorial (20)</th>
+                                        <th>Assignment (10)</th>
                                         @if($course->is_lab === 1)
-                                            <th>Report</th>
-                                            <th>Quiz/Viva</th>
+                                            <th>Report (10)</th>
+                                            <th>Quiz/Viva (10)</th>
                                         @endif
                                         <th>Total ({{ $course->incourse_marks }})</th>
                                     </tr>
@@ -222,12 +222,12 @@
 
                                     <tbody>
                                         <tr>
-                                            <td>{{ $attendance }}</td>
-                                            <td>{{ isset($tutorial_marks) ? $tutorial_marks : '-' }}</td>
-                                            <td>{{ isset($assignment_marks) ? $assignment_marks : '-' }}</td>
+                                            <td>{{ number_format($attendance, 2) }}</td>
+                                            <td>{{ isset($tutorial_marks) ? number_format($tutorial_marks, 2) : '-' }}</td>
+                                            <td>{{ isset($assignment_marks) ? number_format($assignment_marks, 2) : '-' }}</td>
                                             @if($course->is_lab === 1)
-                                                <td>{{ isset($report_marks) ? $report_marks : '-' }}</td>
-                                                <td>{{ isset($quiz_marks) ? $quiz_marks : '-' }}</td>
+                                                <td>{{ isset($report_marks) ? number_format($report_marks, 2) : '-' }}</td>
+                                                <td>{{ isset($quiz_marks) ? number_format($quiz_marks, 2) : '-' }}</td>
                                                 <td>
                                                     {{ (isset($attendance) ? $attendance : 0) + (isset($tutorial_marks) ? $tutorial_marks : 0) + (isset($assignment_marks) ? $assignment_marks : 0) + (isset($report_marks) ? $report_marks : 0) + (isset($quiz_marks) ? $quiz_marks : 0)   }}
                                                 </td>

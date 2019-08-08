@@ -25,7 +25,7 @@ class CourseController extends Controller
 
         $courses = CourseTeacher::with('course', 'teacher')->where('session_id', $session->id)->where('dept_id', $student->dept_id)->orderBy('code', 'desc')->get();
 
-        return view('student.course', compact('courses'));
+        return view('student.dashboard', compact('courses'));
     }
 
     public function show($course_id)
@@ -37,7 +37,10 @@ class CourseController extends Controller
 
         $present_count = Attendance::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->where('attend', 'P')->count();
         $total_count = Attendance::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->count();
-        $attendance = ($present_count/$total_count)*10;
+        if ($total_count > 0)
+        {
+            $attendance = ($present_count/$total_count)*10;
+        }
 
         $tutorials = Tutorial::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->orderBy('tutorial_no', 'asc')->get();
         $tutorials_best_two = Tutorial::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->orderBy('marks', 'desc')->take(2)->get();

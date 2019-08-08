@@ -276,7 +276,7 @@
 
 			@elseif(Request::is('student*')))
 				<li class="nav-item has-treeview">
-					<a href="{{ route('student.course.index') }}" class="nav-link {{ Request::is('student/course*') ? 'active' : '' }}">
+					<a href="{{ route('student.dashboard') }}" class="nav-link {{ Request::is('student/course*') ? 'active' : '' }}">
 						<i class="nav-icon fa fa-dashboard"></i>
 						<p>
 							Courses
