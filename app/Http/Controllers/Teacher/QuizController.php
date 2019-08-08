@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Models\CourseTeacher;
+use App\Models\Quiz;
 use App\Models\Semester;
 use App\Models\Session;
 use App\Models\Student;
@@ -33,17 +34,17 @@ class QuizController extends Controller
             return redirect()->route('teacher.course.index');
         }
 
-        $existing_reports = Report::where('session_id', $course->session->id)->where('course_id', $course->course->id)->where('teacher_id', $course->teacher->id)->distinct()->get('report_no');
+        $existing_quizzes = Quiz::where('session_id', $course->session->id)->where('course_id', $course->course->id)->where('teacher_id', $course->teacher->id)->distinct()->get('quiz_no');
 
-        return view('teacher.report.create', compact('students', 'course', 'semester', 'year', 'existing_reports'));
+        return view('teacher.quiz.create', compact('students', 'course', 'semester', 'year', 'existing_quizzes'));
     }
 
     public function store(Request $request)
     {
         $inputs = $request->except('_token');
         $rules = [
-            'report_marks' => 'required | min:0 | max:10',
-            'report_no' => 'required | integer',
+            'quiz_marks' => 'required | min:0 | max:10',
+            'quiz_no' => 'required | integer',
         ];
 
         $validator = Validator::make($inputs, $rules);
@@ -52,8 +53,8 @@ class QuizController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $report_marks = $request->input('report_marks');
-        $report_no = $request->input('report_no');
+        $quiz_marks = $request->input('quiz_marks');
+        $quiz_no = $request->input('quiz_no');
         $course_teacher_id = $request->input('course_teacher');
 
         $course = CourseTeacher::with('session', 'course', 'teacher','dept')->where('id', $course_teacher_id)->first();
@@ -67,71 +68,71 @@ class QuizController extends Controller
             return redirect()->route('teacher.course.index');
         }
 
-        $check = Report::distinct('report_no')->where('session_id', $course->session->id)->where('course_id', $course->course->id)->where('report_no', $report_no)->count('report_no');
+        $check = Quiz::distinct('report_no')->where('session_id', $course->session->id)->where('course_id', $course->course->id)->where('quiz_no', $quiz_no)->count('quiz_no');
 
         if ($check == 0)
         {
-            foreach ($report_marks as $student_id => $value)
+            foreach ($quiz_marks as $student_id => $value)
             {
-                $report = new Report();
-                $report->student_id = $student_id;
-                $report->marks = $value;
-                $report->course_id = $course->course->id;
-                $report->session_id = $course->session->id;
-                $report->teacher_id = $course->teacher->id;
-                $report->report_no = $report_no;
-                $report->save();
+                $quiz = new Quiz();
+                $quiz->student_id = $student_id;
+                $quiz->marks = $value;
+                $quiz->course_id = $course->course->id;
+                $quiz->session_id = $course->session->id;
+                $quiz->teacher_id = $course->teacher->id;
+                $quiz->quiz_no = $quiz_no;
+                $quiz->save();
             }
 
-            Toastr::success("Report Marks added successfully!", "Success");
-            return redirect()->route('teacher.report.show',[$course->session->id,$course->course->id, $course->teacher->id]);
+            Toastr::success("Quiz / Viva Marks added successfully!", "Success");
+            return redirect()->route('teacher.quiz.show',[$course->session->id,$course->course->id, $course->teacher->id]);
 
         } else {
-            Toastr::error("Report Marks already added!", "Error");
-            return redirect()->route('teacher.report.show',[$course->session->id,$course->course->id, $course->teacher->id]);
+            Toastr::error("Quiz / Viva Marks already added!", "Error");
+            return redirect()->route('teacher.quiz.show',[$course->session->id,$course->course->id, $course->teacher->id]);
         }
     }
 
 
     public function show($session_id,$course_id, $teacher_id)
     {
-        $report_nos = Report::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('report_no');
-        $students_data = Report::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
-        if (count($report_nos) < 1)
+        $quiz_nos = Quiz::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('quiz_no');
+        $students_data = Quiz::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
+        if (count($quiz_nos) < 1)
         {
-            Toastr::error("No Report Marks added! Please Add Report Marks!!", "Error");
+            Toastr::error("No Quiz / Viva Marks added! Please Add Report Marks!!", "Error");
             return redirect()->back();
         }
-        return view('teacher.report.show', compact('students_data', 'report_nos', 'session_id', 'course_id', 'teacher_id'));
+        return view('teacher.quiz.show', compact('students_data', 'quiz_nos', 'session_id', 'course_id', 'teacher_id'));
     }
 
 
     public function show_all($session_id,$course_id, $teacher_id)
     {
-        $reports = Report::with('session', 'course', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->orderBy('report_no', 'asc')->get(['report_no', 'session_id', 'course_id', 'teacher_id']);
-        $report_nos = Report::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('report_no');
+        $quizzes = Quiz::with('session', 'course', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->orderBy('quiz_no', 'asc')->get(['quiz_no', 'session_id', 'course_id', 'teacher_id']);
+        $quiz_nos = Quiz::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('quiz_no');
 
-        if (count($report_nos) < 1)
+        if (count($quiz_nos) < 1)
         {
-            Toastr::error("No Report Marks added! Please Add Report Marks!!", "Error");
+            Toastr::error("No Quiz / Viva Marks added! Please Add Report Marks!!", "Error");
             return redirect()->back();
         }
-        return view('teacher.report.show_all', compact('reports'));
+        return view('teacher.quiz.show_all', compact('quizzes'));
     }
 
 
-    public function edit_by_report_no($session_id,$course_id, $teacher_id, $report_no)
+    public function edit_by_quiz_no($session_id,$course_id, $teacher_id, $quiz_no)
     {
-        $reports = Report::with('session', 'course', 'student', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('report_no', $report_no)->orderBy('student_id', 'asc')->get();
+        $quizzes = Quiz::with('session', 'course', 'student', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('quiz_no', $quiz_no)->orderBy('student_id', 'asc')->get();
 
-        return view('teacher.report.edit', compact('reports'));
+        return view('teacher.quiz.edit', compact('quizzes'));
     }
 
-    public function update_by_report_no(Request $request, $session_id,$course_id, $teacher_id, $report_no)
+    public function update_by_quiz_no(Request $request, $session_id,$course_id, $teacher_id, $quiz_no)
     {
         $inputs = $request->except('_token');
         $rules = [
-            'report_marks' => 'required',
+            'quiz_marks' => 'required',
         ];
 
         $validator = Validator::make($inputs, $rules);
@@ -140,28 +141,28 @@ class QuizController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $report_marks = $request->input('report_marks');
+        $quiz_marks = $request->input('quiz_marks');
 
-        foreach ($report_marks as $student_id => $marks)
+        foreach ($quiz_marks as $student_id => $marks)
         {
-            $report = Report::where('session_id', $session_id)->where('course_id', $course_id)->where('teacher_id', $teacher_id)->where('report_no', $report_no)->where('student_id', $student_id)->first();
-            $report->marks = $marks;
-            $report->save();
+            $quiz = Quiz::where('session_id', $session_id)->where('course_id', $course_id)->where('teacher_id', $teacher_id)->where('quiz_no', $quiz_no)->where('student_id', $student_id)->first();
+            $quiz->marks = $marks;
+            $quiz->save();
         }
 
-        Toastr::success("Report Marks updated successfully!", "Success");
-        return redirect()->route('teacher.report.show', [ $session_id,$course_id, $teacher_id]);
+        Toastr::success("Quiz / Viva Marks updated successfully!", "Success");
+        return redirect()->route('teacher.quiz.show', [ $session_id,$course_id, $teacher_id]);
     }
 
-    public function delete_by_report_no($session_id,$course_id, $teacher_id, $report_no)
+    public function delete_by_quiz_no($session_id,$course_id, $teacher_id, $quiz_no)
     {
-        $reports = Report::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('report_no', $report_no)->get();
-        foreach ($reports as $report)
+        $quizzes = Quiz::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('quiz_no', $quiz_no)->get();
+        foreach ($quizzes as $quiz)
         {
-            $report->delete();
+            $quiz->delete();
         }
 
-        Toastr::success("Report have been deleted successfully!", "Success");
+        Toastr::success("Quiz / Viva have been deleted successfully!", "Success");
         return redirect()->back();
     }
 }
