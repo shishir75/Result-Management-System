@@ -112,8 +112,6 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::put('course/quiz/{session_id}/{course_id}/{teacher_id}/{quiz_no}', 'QuizController@update_by_quiz_no')->name('quiz.update_by_quiz_no');
     Route::delete('course/quiz/{session_id}/{course_id}/{teacher_id}/{quiz_no}', 'QuizController@delete_by_quiz_no')->name('quiz.delete_by_quiz_no');
 
-
-
 });
 
 
@@ -121,5 +119,6 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
 Route::group(['as'=>'student.','prefix' => 'student', 'namespace' => 'Student', 'middleware' => ['auth', 'student'] ], function (){
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('courses', 'CourseController@index')->name('course.index');
 
 });

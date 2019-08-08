@@ -15,4 +15,9 @@ class Course extends Model
     {
         return $this->belongsTo('App\Models\Year', 'year_semester_id');
     }
+
+    public function dept()
+    {
+        return $this->belongsTo(Dept::class);
+    }
 }

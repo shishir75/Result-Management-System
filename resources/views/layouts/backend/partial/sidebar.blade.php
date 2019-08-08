@@ -277,7 +277,14 @@
 				</li>
 
 			@elseif(Request::is('student*')))
-
+				<li class="nav-item has-treeview">
+					<a href="{{ route('student.course.index') }}" class="nav-link {{ Request::is('student/courses*') ? 'active' : '' }}">
+						<i class="nav-icon fa fa-dashboard"></i>
+						<p>
+							Courses
+						</p>
+					</a>
+				</li>
 			@endif
 
 				<li class="nav-header">MENU</li>
