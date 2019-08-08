@@ -184,15 +184,64 @@
                                                 <!-- /.info-box -->
                                             </div>
                                         @endforeach
-
                                     @endif
-
-
                                 </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!--/.col (left) -->
 
+                </div>
+                <!-- /.row -->
 
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">{{ strtoupper('In-Course Marks of '.$course->course_code .' - '.$course->course_title ) }}</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped text-center">
+                                    <thead>
+                                    <tr>
+                                        <th>Attendance</th>
+                                        <th>Tutorial</th>
+                                        <th>Assignment</th>
+                                        @if($course->is_lab === 1)
+                                            <th>Report</th>
+                                            <th>Quiz/Viva</th>
+                                        @endif
+                                        <th>Total ({{ $course->incourse_marks }})</th>
+                                    </tr>
+                                    </thead>
 
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $attendance }}</td>
+                                            <td>{{ isset($tutorial_marks) ? $tutorial_marks : '-' }}</td>
+                                            <td>{{ isset($assignment_marks) ? $assignment_marks : '-' }}</td>
+                                            @if($course->is_lab === 1)
+                                                <td>{{ isset($report_marks) ? $report_marks : '-' }}</td>
+                                                <td>{{ isset($quiz_marks) ? $quiz_marks : '-' }}</td>
+                                                <td>
+                                                    {{ (isset($attendance) ? $attendance : 0) + (isset($tutorial_marks) ? $tutorial_marks : 0) + (isset($assignment_marks) ? $assignment_marks : 0) + (isset($report_marks) ? $report_marks : 0) + (isset($quiz_marks) ? $quiz_marks : 0)   }}
+                                                </td>
 
+                                            @else
+                                                <td>
+                                                    {{ (isset($attendance) ? $attendance : 0) + (isset($tutorial_marks) ? $tutorial_marks : 0) + (isset($assignment_marks) ? $assignment_marks : 0)  }}
+                                                </td>
+                                            @endif
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
                             </div>
                             <!-- /.card-body -->
                         </div>
