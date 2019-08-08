@@ -161,7 +161,14 @@ class AssignmentController extends Controller
         }
 
         Toastr::success("Assignment have been deleted successfully!", "Success");
-        return redirect()->back();
+
+        $assignment_nos = Assignment::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('assignment_no');
+        if (count($assignment_nos) < 1)
+        {
+            return redirect()->route('teacher.course.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
 }

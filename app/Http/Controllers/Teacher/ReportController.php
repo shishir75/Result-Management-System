@@ -163,6 +163,13 @@ class ReportController extends Controller
         }
 
         Toastr::success("Report have been deleted successfully!", "Success");
-        return redirect()->back();
+
+        $report_nos = Report::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('report_no');
+        if (count($report_nos) < 1)
+        {
+            return redirect()->route('teacher.course.index');
+        } else {
+            return redirect()->back();
+        }
     }
 }

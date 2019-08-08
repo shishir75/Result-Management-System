@@ -161,7 +161,14 @@ class TutorialController extends Controller
         }
 
         Toastr::success("Tutorial have been deleted successfully!", "Success");
-        return redirect()->back();
+
+        $tutorial_nos = Tutorial::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('tutorial_no');
+        if (count($tutorial_nos) < 1)
+        {
+            return redirect()->route('teacher.course.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
 
