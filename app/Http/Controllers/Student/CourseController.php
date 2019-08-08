@@ -6,6 +6,8 @@ use App\Models\Assignment;
 use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\CourseTeacher;
+use App\Models\Quiz;
+use App\Models\Report;
 use App\Models\Session;
 use App\Models\Student;
 use App\Http\Controllers\Controller;
@@ -31,18 +33,17 @@ class CourseController extends Controller
         $name = Auth::user()->name;
         $student = Student::where('name', $name)->first();
         $session = Session::where('name', $student->session)->first();
-
         $course = Course::findOrFail($course_id);
 
-        $present_count = Attendance::where('course_id', $course_id)->where('session_id', $session->id)->where('student_id', $student->id)->where('attend', 'P')->count();
-        $absent_count = Attendance::where('course_id', $course_id)->where('session_id', $session->id)->where('student_id', $student->id)->where('attend', 'A')->count();
+        $present_count = Attendance::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->where('attend', 'P')->count();
+        $total_count = Attendance::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->count();
 
+        $tutorials = Tutorial::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->orderBy('tutorial_no', 'asc')->get();
+        $assignments = Assignment::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->orderBy('assignment_no', 'asc')->get();
+        $reports = Report::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->orderBy('report_no', 'asc')->get();
+        $quizzes = Quiz::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->orderBy('quiz_no', 'asc')->get();
 
-
-        $tutorials = Tutorial::where('course_id', $course_id)->where('session_id', $session->id)->where('student_id', $student->id)->orderBy('tutorial_no', 'asc')->get();
-        $assignments = Assignment::where('course_id', $course_id)->where('session_id', $session->id)->where('student_id', $student->id)->orderBy('assignment_no', 'asc')->get();
-
-        return view('student.details', compact('course','tutorials', 'assignments', 'present_count', 'absent_count'));
+        return view('student.details', compact('course','tutorials', 'assignments', 'present_count', 'total_count', 'reports', 'quizzes'));
 
     }
 

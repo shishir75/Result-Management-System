@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/student/details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Student/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Student/CourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend/partial/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend/partial/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/student/course.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/student/course.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/student/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/student/details.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Student/CourseController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="44" column="114" selection-start-line="44" selection-start-column="114" selection-end-line="44" selection-end-column="114" />
+            <state relative-caret-position="714">
+              <caret line="43" column="55" selection-start-line="43" selection-start-column="55" selection-end-line="43" selection-end-column="55" />
               <folding>
                 <element signature="e#48#74#0#PHP" expanded="true" />
               </folding>
@@ -32,15 +28,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/student/course.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="73" column="47" selection-start-line="73" selection-start-column="47" selection-end-line="73" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/student/details.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="548">
-              <caret line="56" column="198" selection-start-line="56" selection-start-column="198" selection-end-line="56" selection-end-column="198" />
+            <state relative-caret-position="3070">
+              <caret line="175" column="93" selection-start-line="175" selection-start-column="93" selection-end-line="175" selection-end-column="93" />
               <folding>
                 <element signature="e#3205#3252#0#HTML" expanded="true" />
+                <element signature="e#1630#2614#0#HTML" />
                 <element signature="e#2261#2279#0#HTML" expanded="true" />
+                <element signature="e#3807#5821#0#HTML" />
                 <element signature="e#5415#5462#0#HTML" expanded="true" />
+                <element signature="e#10341#10390#0#HTML" expanded="true" />
+                <element signature="e#12589#12638#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -110,8 +119,8 @@
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/backend/partial/sidebar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/student/course.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Student/CourseController.php" />
         <option value="$PROJECT_DIR$/resources/views/student/details.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Student/CourseController.php" />
       </list>
     </option>
   </component>
@@ -370,12 +379,12 @@
       <workItem from="1565184510048" duration="429000" />
       <workItem from="1565202791887" duration="6258000" />
       <workItem from="1565279738484" duration="6770000" />
-      <workItem from="1565291390354" duration="8818000" />
+      <workItem from="1565291390354" duration="10632000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="182508000" />
+    <option name="totallyTimeSpent" value="184322000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-10" y="30" width="1938" height="1068" extended-state="0" />
@@ -747,13 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/student/course.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="70" column="100" selection-start-line="70" selection-start-column="100" selection-end-line="70" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/teacher/tutorial/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
@@ -761,24 +763,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Student/CourseController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/student/details.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="44" column="114" selection-start-line="44" selection-start-column="114" selection-end-line="44" selection-end-column="114" />
+        <state relative-caret-position="3070">
+          <caret line="175" column="93" selection-start-line="175" selection-start-column="93" selection-end-line="175" selection-end-column="93" />
           <folding>
-            <element signature="e#48#74#0#PHP" expanded="true" />
+            <element signature="e#3205#3252#0#HTML" expanded="true" />
+            <element signature="e#1630#2614#0#HTML" />
+            <element signature="e#2261#2279#0#HTML" expanded="true" />
+            <element signature="e#3807#5821#0#HTML" />
+            <element signature="e#5415#5462#0#HTML" expanded="true" />
+            <element signature="e#10341#10390#0#HTML" expanded="true" />
+            <element signature="e#12589#12638#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/student/details.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/student/course.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="56" column="198" selection-start-line="56" selection-start-column="198" selection-end-line="56" selection-end-column="198" />
+        <state relative-caret-position="660">
+          <caret line="73" column="47" selection-start-line="73" selection-start-column="47" selection-end-line="73" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Student/CourseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="43" column="55" selection-start-line="43" selection-start-column="55" selection-end-line="43" selection-end-column="55" />
           <folding>
-            <element signature="e#3205#3252#0#HTML" expanded="true" />
-            <element signature="e#2261#2279#0#HTML" expanded="true" />
-            <element signature="e#5415#5462#0#HTML" expanded="true" />
+            <element signature="e#48#74#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
