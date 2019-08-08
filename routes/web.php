@@ -108,9 +108,9 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::post('course/quiz', 'QuizController@store')->name('quiz.store');
     Route::get('course/quiz/{session_id}/{course_id}/{teacher_id}', 'QuizController@show')->name('quiz.show');
     Route::get('course/quiz/all/{session_id}/{course_id}/{teacher_id}', 'QuizController@show_all')->name('quiz.show_all');
-    Route::get('course/quiz/{session_id}/{course_id}/{teacher_id}/{quiz_no}/edit', 'QuizController@edit_by_report_no')->name('quiz.edit_by_quiz_no');
-    Route::put('course/quiz/{session_id}/{course_id}/{teacher_id}/{quiz_no}', 'QuizController@update_by_report_no')->name('quiz.update_by_quiz_no');
-    Route::delete('course/quiz/{session_id}/{course_id}/{teacher_id}/{quiz_no}', 'QuizController@delete_by_report_no')->name('quiz.delete_by_quiz_no');
+    Route::get('course/quiz/{session_id}/{course_id}/{teacher_id}/{quiz_no}/edit', 'QuizController@edit_by_quiz_no')->name('quiz.edit_by_quiz_no');
+    Route::put('course/quiz/{session_id}/{course_id}/{teacher_id}/{quiz_no}', 'QuizController@update_by_quiz_no')->name('quiz.update_by_quiz_no');
+    Route::delete('course/quiz/{session_id}/{course_id}/{teacher_id}/{quiz_no}', 'QuizController@delete_by_quiz_no')->name('quiz.delete_by_quiz_no');
 
 
 

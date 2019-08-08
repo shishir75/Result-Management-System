@@ -100,7 +100,7 @@ class QuizController extends Controller
         $students_data = Quiz::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
         if (count($quiz_nos) < 1)
         {
-            Toastr::error("No Quiz / Viva Marks added! Please Add Report Marks!!", "Error");
+            Toastr::error("No Quiz / Viva Marks added! Please Add Quiz / Viva Marks!!", "Error");
             return redirect()->back();
         }
         return view('teacher.quiz.show', compact('students_data', 'quiz_nos', 'session_id', 'course_id', 'teacher_id'));
@@ -114,7 +114,7 @@ class QuizController extends Controller
 
         if (count($quiz_nos) < 1)
         {
-            Toastr::error("No Quiz / Viva Marks added! Please Add Report Marks!!", "Error");
+            Toastr::error("No Quiz / Viva Marks added! Please Add Quiz / Viva Marks!!", "Error");
             return redirect()->back();
         }
         return view('teacher.quiz.show_all', compact('quizzes'));
@@ -163,6 +163,14 @@ class QuizController extends Controller
         }
 
         Toastr::success("Quiz / Viva have been deleted successfully!", "Success");
-        return redirect()->back();
+
+        $quiz_nos = Quiz::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('quiz_no');
+        if (count($quiz_nos) < 1)
+        {
+            return redirect()->route('teacher.course.index');
+        } else {
+            return redirect()->back();
+        }
+
     }
 }

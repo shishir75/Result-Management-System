@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Add Report Marks')
+@section('title', 'Add Quiz / Viva Marks')
 
 @push('css')
 
@@ -17,7 +17,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Add Report Marks</li>
+                            <li class="breadcrumb-item active">Add Quiz / Viva Marks</li>
                         </ol>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Add Report Marks</h3>
+                                <h3 class="card-title">Add Quiz / Viva Marks</h3>
                             </div>
                             <!-- /.card-header -->
 
@@ -44,33 +44,33 @@
                                     <h6>{{ $course->dept->is_semester == 1 ? 'Semester' : 'Year' }} : {{ $course->dept->is_semester == 1 ? $semester->name : $year->name }}   |  Teacher Name : {{ $course->teacher->name }}</h6>
                                     <h4>Date : {{ Carbon\Carbon::now()->format('D, d F Y') }}</h4>
                                 </div>
-                                <a href="{{ route('teacher.report.show', [$course->session->id,$course->course->id, $course->teacher->id]) }}" class="btn btn-info">View Report Marks</a>
-                                <a href="{{ route('teacher.report.show_all', [$course->session->id,$course->course->id, $course->teacher->id]) }}" class="btn btn-warning float-right">Edit Report Marks</a>
+                                <a href="{{ route('teacher.quiz.show', [$course->session->id,$course->course->id, $course->teacher->id]) }}" class="btn btn-info">View Quiz / Viva Marks</a>
+                                <a href="{{ route('teacher.quiz.show_all', [$course->session->id,$course->course->id, $course->teacher->id]) }}" class="btn btn-warning float-right">Edit Quiz / Viva Marks</a>
 
                             </div>
 
                             <!-- form start -->
-                            <form role="form" action="{{ route('teacher.report.store') }}" method="post">
+                            <form role="form" action="{{ route('teacher.quiz.store') }}" method="post">
                                 @csrf
                                 <div class="card-body">
 
                                     <div class="row">
                                         <div class="col-md-2 offset-3">
-                                            <h4 class="float-right">Report No :</h4>
+                                            <h4 class="float-right">Quiz / Viva No :</h4>
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <select name="report_no" class="form-control" required>
-                                                <option value="">-----Select Report No-----</option>
-                                                    @if(isset($existing_reports[3]->report_no) && $existing_reports[3]->report_no == 4)
-                                                        <option value="">All Report are Taken</option>
-                                                    @elseif(isset($existing_reports[2]->report_no) && $existing_reports[2]->report_no == 3)
-                                                        <option value="4">Report 4</option>
-                                                    @elseif(isset($existing_reports[1]->report_no) && $existing_reports[1]->report_no == 2)
-                                                        <option value="3">Report 3</option>
-                                                    @elseif(isset($existing_reports[0]->report_no) && $existing_reports[0]->report_no == 1)
-                                                        <option value="2">Report 2</option>
+                                            <select name="quiz_no" class="form-control" required>
+                                                <option value="">-----Select Quiz / Viva No-----</option>
+                                                    @if(isset($existing_quizzes[3]->quiz_no) && $existing_quizzes[3]->quiz_no == 4)
+                                                        <option value="">All Quiz / Viva are Taken</option>
+                                                    @elseif(isset($existing_quizzes[2]->quiz_no) && $existing_quizzes[2]->quiz_no == 3)
+                                                        <option value="4">Quiz / Viva 4</option>
+                                                    @elseif(isset($existing_quizzes[1]->quiz_no) && $existing_quizzes[1]->quiz_no == 2)
+                                                        <option value="3">Quiz / Viva 3</option>
+                                                    @elseif(isset($existing_quizzes[0]->quiz_no) && $existing_quizzes[0]->quiz_no == 1)
+                                                        <option value="2">Quiz / Viva 2</option>
                                                     @else()
-                                                        <option value="1">Report 1</option>
+                                                        <option value="1">Quiz / Viva 1</option>
                                                     @endif
 
                                             </select>
@@ -83,7 +83,7 @@
                                             <th>Serial</th>
                                             <th>Class Roll</th>
                                             <th>Name</th>
-                                            <th width="20%">Report Marks (10)</th>
+                                            <th width="20%">Quiz/Viva Marks (10)</th>
                                         </tr>
                                         </thead>
                                         <tfoot>
@@ -91,7 +91,7 @@
                                             <th>Serial</th>
                                             <th>Class Roll</th>
                                             <th>Name</th>
-                                            <th>Report Marks</th>
+                                            <th>Quiz/Viva Marks</th>
                                         </tr>
                                         </tfoot>
                                         <tbody>
@@ -102,7 +102,7 @@
                                                     <td>{{ $student->name }}</td>
                                                     <td>
                                                         <div class="form-group" style="margin-bottom: 0px">
-                                                            <input type="number" name="report_marks[{{ $student->id }}]" step="0.01" class="form-control" placeholder="Enter Report Marks" required>
+                                                            <input type="number" name="quiz_marks[{{ $student->id }}]" step="0.01" class="form-control" placeholder="Enter Quiz/Viva Marks" required>
                                                         </div>
                                                     </td>
 
@@ -117,7 +117,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-md-right">Add Report Marks</button>
+                                    <button type="submit" class="btn btn-primary float-md-right">Add Quiz/Viva Marks</button>
                                 </div>
                             </form>
                         </div>

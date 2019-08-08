@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Show Report Marks')
+@section('title', 'Show Quiz/Viva Marks')
 
 @push('css')
 
@@ -16,7 +16,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Show Report Marks</li>
+                            <li class="breadcrumb-item active">Show Quiz/Viva Marks</li>
                         </ol>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Show Report Marks</h3>
+                                <h3 class="card-title">Show Quiz/Viva Marks</h3>
                             </div>
                             <!-- /.card-header -->
 
@@ -46,7 +46,7 @@
                                     <h5>Teacher Name : {{ $students_data[0]->teacher->name }}</h5>
                                 </div>
 
-                                <a href="{{ route('teacher.report.show_all', [$students_data[0]->session->id,$students_data[0]->course->id, $students_data[0]->teacher->id]) }}" class="btn btn-warning float-right mb-4">Edit Report Marks</a>
+                                <a href="{{ route('teacher.quiz.show_all', [$students_data[0]->session->id,$students_data[0]->course->id, $students_data[0]->teacher->id]) }}" class="btn btn-warning float-right mb-4">Edit Quiz/Viva Marks</a>
 
                                 <table id="example1" class="table table-bordered table-striped text-center">
                                     <thead>
@@ -54,8 +54,8 @@
                                         <th>Serial</th>
                                         <th>Class Roll</th>
                                         <th>Name</th>
-                                        @foreach($report_nos as $report_no)
-                                            <th>Report - {{ $report_no->report_no }}</th>
+                                        @foreach($quiz_nos as $quiz_no)
+                                            <th>Quiz/Viva - {{ $quiz_no->quiz_no }}</th>
                                         @endforeach
                                         <th>Best Two</th>
                                     </tr>
@@ -64,7 +64,7 @@
                                     @foreach($students_data as $key => $student_data)
 
                                         @php
-                                            $best_two = \App\Models\Report::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->orderBy('marks', 'desc')->take(2)->get();
+                                            $best_two = \App\Models\Quiz::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->orderBy('marks', 'desc')->take(2)->get();
 
                                             if (count($best_two) >= 2)
                                             {
@@ -78,12 +78,12 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $student_data->student->class_roll }}</td>
                                             <td>{{ $student_data->student->name }}</td>
-                                            @foreach($report_nos as $report_no)
+                                            @foreach($quiz_nos as $quiz_no)
                                                 @php
-                                                    $report_marks = \App\Models\Report::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->where('report_no', $report_no->report_no)->first();
+                                                    $quiz_marks = \App\Models\Quiz::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->where('student_id',$student_data->student_id )->where('quiz_no', $quiz_no->quiz_no)->first();
                                                 @endphp
 
-                                                <td>{{ number_format($report_marks->marks, 2) }}</td>
+                                                <td>{{ number_format($quiz_marks->marks, 2) }}</td>
                                             @endforeach
                                             <td>
                                                 @if(isset($percantage))

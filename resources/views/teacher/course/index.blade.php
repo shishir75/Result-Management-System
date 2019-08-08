@@ -117,7 +117,7 @@
                                             </td>
                                             <td>
                                                 @if($course_teacher->course->is_lab == 1)
-                                                    <a href="{{ route('teacher.assignment.create', $course_teacher->id) }}" class="btn btn-info">
+                                                    <a href="{{ route('teacher.quiz.create', $course_teacher->id) }}" class="btn btn-info">
                                                         <i class="fa fa-question-circle" aria-hidden="true"></i>
                                                     </a>
                                                 @else
