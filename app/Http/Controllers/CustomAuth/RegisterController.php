@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CustomAuth;
 
 use App\Models\Dept;
 use App\Models\Role;
+use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -136,10 +137,41 @@ class RegisterController extends Controller
                 session()->flash('error', 'Teacher Registration Error!!');
                 return redirect()->back();
             }
+
+        } elseif ($role_id == 5)
+        {
+            $check_student = Student::where('name', $name)->count();
+            $duplicate_check = User::where('name', $name)->count();
+
+            if ($check_student == 0)
+            {
+                session()->flash('error', 'You are not authorised to register! Please contact Dept Office.');
+                return redirect()->back();
+
+            } elseif ($check_student == 1)
+            {
+                if ($duplicate_check == 0)
+                {
+                    $user = new User();
+                    $user->role_id = $role_id;
+                    $user->name = $name;
+                    $user->email = $request->input('email');
+                    $user->password = Hash::make($request->input('password'));
+                    $user->save();
+
+                    session()->flash('success', 'You have successfully registered! Please Login!!');
+                    return redirect()->route('login');
+
+                } else {
+                    session()->flash('error', 'You are already registered! Please try to login!!');
+                    return redirect()->back();
+                }
+
+            } else {
+                session()->flash('error', 'Student Registration Error!!');
+                return redirect()->back();
+            }
         }
-
-
-
 
         else
         {
