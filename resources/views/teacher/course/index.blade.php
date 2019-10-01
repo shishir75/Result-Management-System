@@ -54,6 +54,7 @@
                                         <th>Assignment</th>
                                         <th>Report</th>
                                         <th>Quiz/Viva</th>
+                                        <th>Marks</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
@@ -71,6 +72,7 @@
                                         <th>Assignment</th>
                                         <th>Report</th>
                                         <th>Quiz/Viva</th>
+                                        <th>Marks</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
@@ -123,6 +125,11 @@
                                                 @else
                                                     <i class="fa fa-times-circle btn btn-outline-danger" aria-hidden="true"></i>
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('teacher.marks.index', $course_teacher->id) }}" class="btn btn-success">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
