@@ -106,7 +106,7 @@ class ExternalController extends Controller
             $external->save();
 
             Toastr::success('External Teacher added Successfully!', 'Success');
-            return redirect()->back();
+            return redirect()->route('dept_office.external.index');
 
         } else {
             Toastr::error('2nd & 3rd Examiner has already been added for this course at this batch!', 'Error');
@@ -133,9 +133,18 @@ class ExternalController extends Controller
      * @param  \App\Models\External  $external
      * @return \Illuminate\Http\Response
      */
-    public function edit(External $external)
+    public function edit($id)
     {
-        //
+
+        $external = External::with('session', 'course')->findOrFail($id);
+
+        $sessions = Session::latest()->get();
+        $dept = Dept::where('name', Auth::user()->name)->first();
+        $courses = Course::where('dept_id', $dept->id)->get();
+        $teachers = Teacher::where('dept_id', $dept->id)->get();
+        $years = Year::all();
+        $semesters = Semester::all();
+        return view('dept_office.external.edit', compact('external','sessions', 'dept', 'courses', 'teachers', 'years', 'semesters'));
     }
 
     /**
