@@ -138,11 +138,11 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>2nd Examiner</label>
-                                                <select name="external_1" class="form-control" required>
+                                                <label>3rd Examiner</label>
+                                                <select name="external_2" class="form-control" required>
                                                     <option value="" selected disabled>Select Teacher</option>
                                                     @foreach($teachers as $teacher)
-                                                        <option value="{{ $teacher->id }}" {{ $external->external_1 == $teacher->id ? 'selected' : '' }}>{{ $teacher->name }}</option>
+                                                        <option value="{{ $teacher->id }}" {{ $external->external_2 == $teacher->id ? 'selected' : '' }}>{{ $teacher->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -156,7 +156,7 @@
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary float-md-right">Update Course Teacher</button>
+                                    <button type="submit" class="btn btn-primary float-md-right">Update Course External Teacher</button>
                                 </div>
                             </form>
                         </div>
