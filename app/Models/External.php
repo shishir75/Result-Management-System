@@ -21,10 +21,6 @@ class External extends Model
         return $this->belongsTo(Dept::class);
     }
 
-    public function teacher()
-    {
-        return $this->belongsTo(Teacher::class);
-    }
 
 
 

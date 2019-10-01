@@ -71,12 +71,23 @@
                                         @php
                                             $external_1 = \App\Models\Teacher::findOrFail($external->external_1);
                                             $external_2 = \App\Models\Teacher::findOrFail($external->external_2);
+
+                                            if ($dept->is_semester == 1)
+                                            {
+                                                $code = explode('-', $external->course->course_code);
+                                                $year = substr($code[1], 0, 1);
+                                                $semester = substr($code[1], 1, 1);
+
+                                            } else {
+                                                $code = explode('-', $external->course->course_code);
+                                                $year = substr($code[1], 0, 1);
+                                            }
                                         @endphp
 
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $external->session->name }}</td>
-                                            <td>semester</td>
+                                            <td>{{ $dept->is_semester == 1 ? $year ." - ". $semester : $semester }}</td>
                                             <td>{{ $external->course->course_code .' - '. $external->course->course_title }}</td>
                                             <td>{{ $external_1->name }}</td>
                                             <td>{{ $external_2->name }}</td>

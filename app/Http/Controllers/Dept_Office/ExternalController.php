@@ -26,7 +26,7 @@ class ExternalController extends Controller
     public function index()
     {
         $dept = Dept::where('name', Auth::user()->name)->first();
-        $externals = External::with('session', 'course', 'teacher')->where('dept_id', $dept->id)->get();
+        $externals = External::with('session', 'course')->where('dept_id', $dept->id)->get();
         return view('dept_office.external.index', compact('externals', 'dept'));
     }
 
