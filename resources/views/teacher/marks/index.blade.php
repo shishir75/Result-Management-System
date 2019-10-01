@@ -40,28 +40,28 @@
 
 
                             <div class="card-body">
-                                <div class="col-6 offset-3 text-center">
+                                <div class="col-6 offset-3 text-center mb-4">
                                     <h3>Dept : {{ $course_teacher->course->dept->name }}</h3>
                                     <h5>Session : {{ $course_teacher->session->name }} | Subject : {{ $course_teacher->course->course_code }} - {{ $course_teacher->course->course_title }}</h5>
                                     <h5>Teacher Name : {{ $course_teacher->teacher->name }}</h5>
                                 </div>
 
-{{--                                <a href="{{ route('teacher.attendance.show_all_attend',[$attendances[0]->session->id,$attendances[0]->course->id, $attendances[0]->teacher->id] ) }}" class="btn btn-success mb-4">View All Attendance</a>--}}
-{{--                                <a href="{{ route('teacher.attendance.show_all',[$attendances[0]->session->id,$attendances[0]->course->id, $attendances[0]->teacher->id] ) }}" class="btn btn-info float-right mb-4">View By Date</a>--}}
+                                <a href="{{ route('teacher.course.index') }}" class="btn btn-info mb-4">View All Courses</a>
+                                <a target="_blank" href="{{ route('teacher.marks.download', $course_teacher->id) }}" class="btn btn-success float-right mb-4">Download PDF</a>
 
 
-                                <table id="example1" class="table table-bordered table-striped text-center mt-5">
+                                <table id="example1" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
                                         <th>Class Roll</th>
                                         <th>Name</th>
-                                        <th>Attendance</th>
-                                        <th>Tutorial</th>
-                                        <th>Assignment</th>
+                                        <th>Attendance (10)</th>
+                                        <th>Tutorial (20)</th>
+                                        <th>Assignment (10)</th>
                                         @if($course_teacher->course->is_lab == 1)
-                                            <th>Report</th>
-                                            <th>Quiz</th>
+                                            <th>Report (10)</th>
+                                            <th>Quiz (10)</th>
                                         @endif
                                         <th>Total ({{ $course_teacher->course->is_lab == 1 ? 60 : 40 }})</th>
                                     </tr>

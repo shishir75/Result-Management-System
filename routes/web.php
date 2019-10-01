@@ -113,6 +113,7 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::delete('course/quiz/{session_id}/{course_id}/{teacher_id}/{quiz_no}', 'QuizController@delete_by_quiz_no')->name('quiz.delete_by_quiz_no');
 
     Route::get('course/marks/{course_teacher_id}', 'MarksController@index')->name('marks.index');
+    Route::get('course/marks/{course_teacher_id}/download', 'MarksController@download')->name('marks.download');
 });
 
 
