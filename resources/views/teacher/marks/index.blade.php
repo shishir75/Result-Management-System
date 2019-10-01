@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Show Marks')
+@section('title', 'Show In-Course Marks')
 
 @push('css')
 
@@ -16,7 +16,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Show Marks</li>
+                            <li class="breadcrumb-item active">Show In-Course Marks</li>
                         </ol>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Show Marks</h3>
+                                <h3 class="card-title text-uppercase">In-Course Marks of {{ $course_teacher->course->course_code }} - {{ $course_teacher->course->course_title }}</h3>
                             </div>
                             <!-- /.card-header -->
 
@@ -40,18 +40,17 @@
 
 
                             <div class="card-body">
-{{--                                <div class="col-6 offset-3 text-center">--}}
-{{--                                    <h3>Dept : {{ \App\Models\Dept::findOrFail($attendances[0]->course->dept_id)->name }}</h3>--}}
-{{--                                    <h5>Session : {{ $attendances[0]->session->name }} | Subject : {{ $attendances[0]->course->course_code }} - {{ $attendances[0]->course->course_title }}</h5>--}}
-{{--                                    <h5>Teacher Name : {{ $attendances[0]->teacher->name }}</h5>--}}
-{{--                                    <h4>Date : {{ $attendances[0]->attend_date }}</h4>--}}
-{{--                                </div>--}}
+                                <div class="col-6 offset-3 text-center">
+                                    <h3>Dept : {{ $course_teacher->course->dept->name }}</h3>
+                                    <h5>Session : {{ $course_teacher->session->name }} | Subject : {{ $course_teacher->course->course_code }} - {{ $course_teacher->course->course_title }}</h5>
+                                    <h5>Teacher Name : {{ $course_teacher->teacher->name }}</h5>
+                                </div>
 
 {{--                                <a href="{{ route('teacher.attendance.show_all_attend',[$attendances[0]->session->id,$attendances[0]->course->id, $attendances[0]->teacher->id] ) }}" class="btn btn-success mb-4">View All Attendance</a>--}}
 {{--                                <a href="{{ route('teacher.attendance.show_all',[$attendances[0]->session->id,$attendances[0]->course->id, $attendances[0]->teacher->id] ) }}" class="btn btn-info float-right mb-4">View By Date</a>--}}
 
 
-                                <table id="example1" class="table table-bordered table-striped text-center">
+                                <table id="example1" class="table table-bordered table-striped text-center mt-5">
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
