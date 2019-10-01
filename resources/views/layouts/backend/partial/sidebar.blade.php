@@ -238,6 +238,30 @@
 					</ul>
 				</li>
 
+                <li class="nav-item has-treeview {{ Request::is('dept-office/external*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('dept-office/external*') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-pie-chart"></i>
+                        <p>
+                            Externals
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('dept_office.external.create') }}" class="nav-link {{ Request::is('dept-office/external/create') ? 'active' : '' }}">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>Add External</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dept_office.external.index') }}" class="nav-link {{ Request::is('dept-office/external') ? 'active' : '' }}">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>All Externals</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 				<li class="nav-item has-treeview {{ Request::is('dept-office/student*') ? 'menu-open' : '' }}">
 					<a href="#" class="nav-link {{ Request::is('dept-office/student*') ? 'active' : '' }}">
 						<i class="nav-icon fa fa-pie-chart"></i>
@@ -269,10 +293,19 @@
 					<a href="{{ route('teacher.course.index') }}" class="nav-link {{ Request::is('teacher/course*') ? 'active' : '' }}">
 						<i class="nav-icon fa fa-dashboard"></i>
 						<p>
-							Courses
+							In-Courses
 						</p>
 					</a>
 				</li>
+
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('teacher.course.index') }}" class="nav-link {{ Request::is('teacher/course*') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-dashboard"></i>
+                        <p>
+                            Final Marks
+                        </p>
+                    </a>
+                </li>
 
 			@elseif(Request::is('student*')))
 				<li class="nav-item has-treeview">

@@ -58,7 +58,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Year / Semester</label>
-                                                <select name="semester_id" class="form-control" required>
+                                                <select name="year_semester_id" class="form-control" required>
                                                     <option value="" selected disabled>Select Year / Semester</option>
                                                     @foreach($semesters as $semester)
                                                         <option value="{{ $semester->id }}" {{ $course->semester->id == $semester->id ? 'selected' : '' }}>{{ $semester->name }}</option>

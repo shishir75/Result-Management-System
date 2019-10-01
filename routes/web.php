@@ -63,6 +63,7 @@ Route::group(['as'=>'dept_office.','prefix' => 'dept-office', 'namespace' => 'De
     Route::resource('student', 'StudentController');
     Route::resource('teacher-course', 'CourseTeacherController');
     Route::post('fetch-course', 'CourseTeacherController@fetch_course')->name('fetch_course');
+    Route::resource('external', 'ExternalController');
 
 });
 
