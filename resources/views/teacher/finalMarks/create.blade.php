@@ -55,10 +55,15 @@
                                         <input type="file" name="file" class="form-control-file" id="file" required>
                                     </div>
 
+
+
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
+
+                                        <a href="{{ asset('assets/backend/file/Final Marks - format.xlsx') }}" download>Download Marks Excel Format</a>
+
                                     <button type="submit" class="btn btn-primary float-md-right">Add Final Marks</button>
                                 </div>
                             </form>
