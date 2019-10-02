@@ -118,9 +118,24 @@ class FinalMarksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($session_id, $course_id)
     {
-        //
+        $session = Session::findOrFail($session_id);
+        $course = Course::with('dept')->findOrFail($course_id);
+
+        $teacher = Teacher::where('name', Auth::user()->name)->first();
+
+        $course_teacher_check = CourseTeacher::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('teacher_id', $teacher->id)->count();
+
+        if ($course_teacher_check === 1)
+        {
+            $final_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->get();
+            return view('teacher.finalMarks.show', compact('course', 'session', 'final_marks'));
+
+        } else {
+            Toastr::error('Unauthorized Access Denied!', 'Error');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -155,5 +170,25 @@ class FinalMarksController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function download($session_id, $course_id)
+    {
+        $session = Session::findOrFail($session_id);
+        $course = Course::with('dept')->findOrFail($course_id);
+
+        $teacher = Teacher::where('name', Auth::user()->name)->first();
+
+        $course_teacher_check = CourseTeacher::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('teacher_id', $teacher->id)->count();
+
+        if ($course_teacher_check === 1)
+        {
+            $final_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->get();
+            return view('teacher.finalMarks.download', compact('course', 'session', 'final_marks'));
+
+        } else {
+            Toastr::error('Unauthorized Access Denied!', 'Error');
+            return redirect()->back();
+        }
     }
 }

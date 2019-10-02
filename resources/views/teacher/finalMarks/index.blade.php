@@ -49,6 +49,7 @@
                                         <th>Lab / Viva</th>
                                         <th>Written Marks</th>
                                         <th>Add Written Marks</th>
+                                        <th>View Written Marks</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
@@ -61,6 +62,7 @@
                                         <th>Lab / Viva</th>
                                         <th>Written Marks</th>
                                         <th>Add Written Marks</th>
+                                        <th>View Written Marks</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
@@ -83,6 +85,11 @@
                                             <td>
                                                 <a href="{{ route('teacher.final-marks.create', [$course_teacher->session->id, $course_teacher->course->id]) }}" class="btn btn-info">
                                                     <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('teacher.final-marks.show', [$course_teacher->session->id, $course_teacher->course->id]) }}" class="btn btn-success">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                             </td>
 
