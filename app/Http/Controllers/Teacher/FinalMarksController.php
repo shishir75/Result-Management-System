@@ -45,7 +45,7 @@ class FinalMarksController extends Controller
 
         } else {
             Toastr::error('Unauthorized Access Denied!', 'Error');
-            return redirect()->route('teacher.final-marks.index');
+            return redirect()->back();
         }
 
 
