@@ -118,7 +118,7 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
 
     Route::get('final-marks', 'FinalMarksController@index')->name('final-marks.index');
     Route::get('final-marks/create/{session_id}/{course_id}', 'FinalMarksController@create')->name('final-marks.create');
-    Route::post('final-marks', 'FinalMarksController@store')->name('final-marks.store');
+    Route::post('final-marks/{session_id}/{course_id}', 'FinalMarksController@store')->name('final-marks.store');
 });
 
 

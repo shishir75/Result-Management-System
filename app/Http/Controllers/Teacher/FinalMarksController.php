@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Imports\FinalMarksImport;
 use App\Models\Course;
 use App\Models\CourseTeacher;
+use App\Models\Dept;
+use App\Models\FinalMarks;
 use App\Models\Session;
+use App\Models\Student;
 use App\Models\Teacher;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FinalMarksController extends Controller
 {
@@ -57,9 +62,54 @@ class FinalMarksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $session_id, $course_id)
     {
-        //
+        $session = Session::findOrFail($session_id);
+        $course = Course::with('dept')->findOrFail($course_id);
+
+        if ($request->hasFile('file')){
+            $file = $request->file('file');
+
+            $data = Excel::toArray(new FinalMarksImport(), $file);
+
+            //$dept = Dept::select('id')->where('name', Auth::user()->name)->first();
+
+            if (!empty($data)  && count($data) > 0)
+            {
+
+                foreach ($data as $rows)
+                {
+                    foreach ($rows as $key => $value)
+                    {
+                        if ($key > 3)
+                        {
+                            $finalMarks = new FinalMarks();
+
+                            $check = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->where('reg_no', $value[1])->where('exam_roll', $value[2])->count();
+
+                            if ($check > 0)
+                            {
+                                continue;
+
+                            } else {
+
+                                $finalMarks->reg_no = $value[1];
+                                $finalMarks->exam_roll = $value[2];
+                                $finalMarks->teacher_1_marks = $value[3];
+                                $finalMarks->session_id = $session->id;
+                                $finalMarks->dept_id = $course->dept->id;
+                                $finalMarks->course_id = $course->id;
+                                $finalMarks->save();
+                            }
+
+                        }
+                    }
+                }
+
+                Toastr::success('Course Written Marks added successfully', 'Success');
+                return redirect()->back();
+            }
+        }
     }
 
     /**

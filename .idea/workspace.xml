@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Imports/FinalMarksImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teacher/FinalMarksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teacher/FinalMarksController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teacher/finalMarks/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/finalMarks/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -212,7 +216,8 @@
       <workItem from="1569892759828" duration="10323000" />
       <workItem from="1569927263604" duration="3670000" />
       <workItem from="1569950738177" duration="10557000" />
-      <workItem from="1570001827648" duration="5831000" />
+      <workItem from="1570001827648" duration="5905000" />
+      <workItem from="1570030152699" duration="2407000" />
     </task>
     <servers />
   </component>

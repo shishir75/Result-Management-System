@@ -46,7 +46,7 @@
                             </div>
 
                             <!-- form start -->
-                            <form role="form" action="{{ route('teacher.final-marks.store') }}" method="post" enctype="multipart/form-data">
+                            <form role="form" action="{{ route('teacher.final-marks.store', [$session->id, $course->id]) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
 
