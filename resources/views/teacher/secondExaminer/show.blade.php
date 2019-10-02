@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Show Final Marks')
+@section('title', 'Show Second Examiner Marks')
 
 @push('css')
 
@@ -16,7 +16,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Show Final Marks</li>
+                            <li class="breadcrumb-item active">Show Second Examiner Marks</li>
                         </ol>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title text-uppercase">Course Teacher Final Marks of {{ $course->course_code }} - {{ $course->course_title }}</h3>
+                                <h3 class="card-title text-uppercase">Second Examiner Marks of {{ $course->course_code }} - {{ $course->course_title }}</h3>
                             </div>
                             <!-- /.card-header -->
 
@@ -46,8 +46,8 @@
                                     <h5>Teacher Name : {{ \Illuminate\Support\Facades\Auth::user()->name }}</h5>
                                 </div>
 
-                                <a href="{{ route('teacher.final-marks.index') }}" class="btn btn-info mb-4">View All Courses</a>
-                                <a target="_blank" href="{{ route('teacher.final-marks.download', [$session->id, $course->id]) }}" class="btn btn-success float-right mb-4">Download PDF</a>
+                                <a href="{{ route('teacher.second-examiner.index') }}" class="btn btn-info mb-4">View All Courses</a>
+                                <a target="_blank" href="{{ route('teacher.second-examiner.download', [$session->id, $course->id]) }}" class="btn btn-success float-right mb-4">Download PDF</a>
 
 
                                 <table id="example1" class="table table-bordered table-striped text-center">
@@ -60,12 +60,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($final_marks as $key => $final_mark)
+                                        @foreach($second_examiner_marks as $key => $second_examiner_mark)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $final_mark->reg_no }}</td>
-                                                <td>{{ $final_mark->exam_roll }}</td>
-                                                <td>{{ number_format(round($final_mark->teacher_1_marks), 2) }}</td>
+                                                <td>{{ $second_examiner_mark->reg_no }}</td>
+                                                <td>{{ $second_examiner_mark->exam_roll }}</td>
+                                                <td>{{ number_format(round($second_examiner_mark->teacher_2_marks), 2) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

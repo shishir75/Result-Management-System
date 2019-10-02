@@ -37,7 +37,7 @@
             <div class="col-md-12 mt-4">
                 <div class="col-12 text-center mb-4">
                     <h3>Dept : {{ $course->dept->name }}</h3>
-                    <h4 class="text-uppercase">Course Teacher Final Marks</h4>
+                    <h4 class="text-uppercase">Second Examiner Marks</h4>
                     <h5>Session : {{ $session->name }} | Subject : {{ $course->course_code }} - {{ $course->course_title }}</h5>
                     <h5>Teacher Name : {{ \Illuminate\Support\Facades\Auth::user()->name }}</h5>
                     <h5 class="text-right">Date: {{ \Carbon\Carbon::now()->format(' F d, Y') }}</h5>
@@ -53,14 +53,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($final_marks as $key => $final_mark)
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $final_mark->reg_no }}</td>
-                                <td>{{ $final_mark->exam_roll }}</td>
-                                <td>{{ number_format(round($final_mark->teacher_1_marks), 2) }}</td>
-                            </tr>
-                        @endforeach
+                    @foreach($second_examiner_marks as $key => $second_examiner_mark)
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $second_examiner_mark->reg_no }}</td>
+                            <td>{{ $second_examiner_mark->exam_roll }}</td>
+                            <td>{{ number_format(round($second_examiner_mark->teacher_2_marks), 2) }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
 
                 </table>

@@ -85,11 +85,14 @@ class FinalMarksController extends Controller
                         {
                             $finalMarks = new FinalMarks();
 
+                            $course_teacher_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->where('reg_no', $value[1])->where('exam_roll', $value[2])->first();
+
                             $check = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->where('reg_no', $value[1])->where('exam_roll', $value[2])->count();
 
                             if ($check > 0)
                             {
-                                continue;
+                                $course_teacher_marks->teacher_1_marks = $value[3];
+                                $course_teacher_marks->save();
 
                             } else {
 
@@ -107,7 +110,7 @@ class FinalMarksController extends Controller
                 }
 
                 Toastr::success('Course Written Marks added successfully', 'Success');
-                return redirect()->back();
+                return redirect()->route('teacher.final-marks.show', [$session_id, $course_id]);
             }
         }
     }

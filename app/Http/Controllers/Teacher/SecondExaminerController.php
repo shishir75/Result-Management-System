@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Imports\FinalMarksImport;
+use App\Imports\SecondExaminerImport;
 use App\Models\Course;
 use App\Models\CourseTeacher;
 use App\Models\External;
@@ -42,11 +43,11 @@ class SecondExaminerController extends Controller
 
         $teacher = Teacher::where('name', Auth::user()->name)->first();
 
-        $course_teacher_check = CourseTeacher::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('teacher_id', $teacher->id)->count();
+        $second_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_1', $teacher->id)->count();
 
-        if ($course_teacher_check === 1)
+        if ($second_examiner_check === 1)
         {
-            return view('teacher.finalMarks.create', compact('course', 'session'));
+            return view('teacher.secondExaminer.create', compact('course', 'session'));
 
         } else {
             Toastr::error('Unauthorized Access Denied!', 'Error');
@@ -70,9 +71,8 @@ class SecondExaminerController extends Controller
         if ($request->hasFile('file')){
             $file = $request->file('file');
 
-            $data = Excel::toArray(new FinalMarksImport(), $file);
+            $data = Excel::toArray(new SecondExaminerImport(), $file);
 
-            //$dept = Dept::select('id')->where('name', Auth::user()->name)->first();
 
             if (!empty($data)  && count($data) > 0)
             {
@@ -85,17 +85,20 @@ class SecondExaminerController extends Controller
                         {
                             $finalMarks = new FinalMarks();
 
+                            $second_examiner_mark = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->where('reg_no', $value[1])->where('exam_roll', $value[2])->first();
+
                             $check = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->where('reg_no', $value[1])->where('exam_roll', $value[2])->count();
 
                             if ($check > 0)
                             {
-                                continue;
+                                $second_examiner_mark->teacher_2_marks = $value[3];
+                                $second_examiner_mark->save();
 
                             } else {
 
                                 $finalMarks->reg_no = $value[1];
                                 $finalMarks->exam_roll = $value[2];
-                                $finalMarks->teacher_1_marks = $value[3];
+                                $finalMarks->teacher_2_marks = $value[3];
                                 $finalMarks->session_id = $session->id;
                                 $finalMarks->dept_id = $course->dept->id;
                                 $finalMarks->course_id = $course->id;
@@ -106,8 +109,8 @@ class SecondExaminerController extends Controller
                     }
                 }
 
-                Toastr::success('Course Written Marks added successfully', 'Success');
-                return redirect()->back();
+                Toastr::success('Second Examiner Marks added successfully', 'Success');
+                return redirect()->route('teacher.second-examiner.show', [$session_id, $course_id]);
             }
         }
     }
@@ -125,12 +128,12 @@ class SecondExaminerController extends Controller
 
         $teacher = Teacher::where('name', Auth::user()->name)->first();
 
-        $course_teacher_check = CourseTeacher::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('teacher_id', $teacher->id)->count();
+        $second_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_1', $teacher->id)->count();
 
-        if ($course_teacher_check === 1)
+        if ($second_examiner_check === 1)
         {
-            $final_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->get();
-            return view('teacher.finalMarks.show', compact('course', 'session', 'final_marks'));
+            $second_examiner_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->get();
+            return view('teacher.secondExaminer.show', compact('course', 'session', 'second_examiner_marks'));
 
         } else {
             Toastr::error('Unauthorized Access Denied!', 'Error');
@@ -179,12 +182,12 @@ class SecondExaminerController extends Controller
 
         $teacher = Teacher::where('name', Auth::user()->name)->first();
 
-        $course_teacher_check = CourseTeacher::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('teacher_id', $teacher->id)->count();
+        $second_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_1', $teacher->id)->count();
 
-        if ($course_teacher_check === 1)
+        if ($second_examiner_check === 1)
         {
-            $final_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->get();
-            return view('teacher.finalMarks.download', compact('course', 'session', 'final_marks'));
+            $second_examiner_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->get();
+            return view('teacher.secondExaminer.download', compact('course', 'session', 'second_examiner_marks'));
 
         } else {
             Toastr::error('Unauthorized Access Denied!', 'Error');

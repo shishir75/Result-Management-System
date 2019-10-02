@@ -105,12 +105,12 @@
                                             </td>
                                             <td>{{ $second_examiner_course->course->final_marks  }}</td>
                                             <td>
-                                                <a href="{{ route('teacher.final-marks.create', [$second_examiner_course->session->id, $second_examiner_course->course->id]) }}" class="btn btn-info">
+                                                <a href="{{ route('teacher.second-examiner.create', [$second_examiner_course->session->id, $second_examiner_course->course->id]) }}" class="btn btn-info">
                                                     <i class="fa fa-plus-square" aria-hidden="true"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('teacher.final-marks.show', [$second_examiner_course->session->id, $second_examiner_course->course->id]) }}" class="btn btn-success">
+                                                <a href="{{ route('teacher.second-examiner.show', [$second_examiner_course->session->id, $second_examiner_course->course->id]) }}" class="btn btn-success">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                             </td>

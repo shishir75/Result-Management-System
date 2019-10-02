@@ -15,7 +15,9 @@ class SecondExaminerImport implements ToModel
     public function model(array $row)
     {
         return new FinalMarks([
-            //
+            'reg_no'     => $row[1],
+            'exam_roll'    => $row[2],
+            'teacher_2_marks'    => $row[3],
         ]);
     }
 }
