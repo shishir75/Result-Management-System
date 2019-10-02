@@ -299,7 +299,7 @@
 				</li>
 
                 <li class="nav-item has-treeview">
-                    <a href="{{ route('teacher.course.index') }}" class="nav-link {{ Request::is('teacher/course*') ? 'active' : '' }}">
+                    <a href="{{ route('teacher.final-marks.index') }}" class="nav-link {{ Request::is('teacher/final-marks*') ? 'active' : '' }}">
                         <i class="nav-icon fa fa-dashboard"></i>
                         <p>
                             Final Marks

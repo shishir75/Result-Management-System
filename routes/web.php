@@ -115,6 +115,10 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
 
     Route::get('course/marks/{course_teacher_id}', 'MarksController@index')->name('marks.index');
     Route::get('course/marks/{course_teacher_id}/download', 'MarksController@download')->name('marks.download');
+
+    Route::get('final-marks', 'FinalMarksController@index')->name('final-marks.index');
+    Route::get('final-marks/create/{session_id}/{course_id}', 'FinalMarksController@create')->name('final-marks.create');
+    Route::post('final-marks', 'FinalMarksController@store')->name('final-marks.store');
 });
 
 
