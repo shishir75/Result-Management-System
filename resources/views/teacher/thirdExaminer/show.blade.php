@@ -57,6 +57,7 @@
                                         <th>Registration No</th>
                                         <th>Exam Roll</th>
                                         <th>Marks</th>
+                                        <th>Update</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -67,6 +68,11 @@
                                                     <td>{{ $third_examiner_mark->reg_no }}</td>
                                                     <td>{{ $third_examiner_mark->exam_roll }}</td>
                                                     <td>{{ number_format(round($third_examiner_mark->teacher_3_marks), 2) }}</td>
+                                                    <td>
+                                                        <a href="{{ route('teacher.third-examiner.edit', [$third_examiner_mark->session_id, $third_examiner_mark->course_id, $third_examiner_mark->exam_roll]) }}" class="btn btn-success">
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach

@@ -106,7 +106,7 @@ class ThirdExaminerController extends Controller
         }
 
         Toastr::success('Third Examiner Marks Added Successfully!', 'Success');
-        return redirect()->back();
+        return redirect()->route('teacher.second-examiner.show', [$session_id, $course_id]);
 
 
     }
@@ -143,9 +143,38 @@ class ThirdExaminerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($session_id, $course_id, $exam_roll)
     {
-        //
+        $session = Session::findOrFail($session_id);
+        $course = Course::with('dept')->findOrFail($course_id);
+
+        $teacher = Teacher::where('name', Auth::user()->name)->first();
+
+        $third_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_2', $teacher->id)->count();
+
+        if ($third_examiner_check === 1)
+        {
+            $student = FinalMarks::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('exam_roll', $exam_roll)->first();
+            if (isset($student))
+            {
+                if ($student->teacher_1_marks - $student->teacher_2_marks >= 12 | $student->teacher_2_marks - $student->teacher_1_marks >= 12)
+                {
+                    return view('teacher.thirdExaminer.edit', compact('course', 'session', 'student'));
+
+                } else {
+                    Toastr::error('This student is not allowed for third examiner marks for this course!', 'Error');
+                    return redirect()->back();
+                }
+
+            } else {
+                Toastr::error('Unauthorized Access Denied!', 'Error');
+                return redirect()->back();
+            }
+
+        } else {
+            Toastr::error('Unauthorized Access Denied!', 'Error');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -155,9 +184,44 @@ class ThirdExaminerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $session_id, $course_id, $exam_roll)
     {
-        //
+        $inputs = $request->except('_token');
+        $rules = [
+            'teacher_3_marks' => 'required',
+        ];
+
+        $validator = Validator::make($inputs, $rules);
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $session = Session::findOrFail($session_id);
+        $course = Course::with('dept')->findOrFail($course_id);
+
+        $teacher_3_marks = $request->input('teacher_3_marks');
+
+        $student_exists = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->where('exam_roll', $exam_roll)->first();
+
+        if (!isset($student_exists))
+        {
+            Toastr::error('This student does not exits for this case!', 'Error');
+            return redirect()->back();
+
+        } else {
+
+            if ($student_exists->teacher_1_marks - $student_exists->teacher_2_marks >= 12 | $student_exists->teacher_2_marks - $student_exists->teacher_1_marks >= 12)
+            {
+                $student_exists->teacher_3_marks = $teacher_3_marks;
+                $student_exists->save();
+
+            }
+
+        }
+
+        Toastr::success('Third Examiner Marks Updated Successfully!', 'Success');
+        return redirect()->route('teacher.third-examiner.show', [$session_id, $course_id]);
     }
 
     /**
