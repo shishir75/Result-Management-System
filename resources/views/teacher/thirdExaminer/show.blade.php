@@ -61,10 +61,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $i = 0;
+                                        @endphp
                                         @foreach($third_examiner_marks as $key => $third_examiner_mark)
                                             @if($third_examiner_mark->teacher_3_marks !== null)
+                                                @php
+                                                    $i++;
+                                                @endphp
                                                 <tr>
-                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $i }}</td>
                                                     <td>{{ $third_examiner_mark->reg_no }}</td>
                                                     <td>{{ $third_examiner_mark->exam_roll }}</td>
                                                     <td>{{ number_format(round($third_examiner_mark->teacher_3_marks), 2) }}</td>
