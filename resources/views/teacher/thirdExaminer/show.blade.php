@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Show Second Examiner Marks')
+@section('title', 'Show Third Examiner Marks')
 
 @push('css')
 
@@ -16,7 +16,7 @@
                     <div class="col-sm-6 offset-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Show Second Examiner Marks</li>
+                            <li class="breadcrumb-item active">Show Third Examiner Marks</li>
                         </ol>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title text-uppercase">Second Examiner Marks of {{ $course->course_code }} - {{ $course->course_title }}</h3>
+                                <h3 class="card-title text-uppercase">Third Examiner Marks of {{ $course->course_code }} - {{ $course->course_title }}</h3>
                             </div>
                             <!-- /.card-header -->
 
@@ -46,8 +46,8 @@
                                     <h5>Teacher Name : {{ \Illuminate\Support\Facades\Auth::user()->name }}</h5>
                                 </div>
 
-                                <a href="{{ route('teacher.second-examiner.index') }}" class="btn btn-info mb-4">View All Courses</a>
-                                <a target="_blank" href="{{ route('teacher.second-examiner.download', [$session->id, $course->id]) }}" class="btn btn-success float-right mb-4">Download PDF</a>
+                                <a href="{{ route('teacher.third-examiner.index') }}" class="btn btn-info mb-4">View All Courses</a>
+                                <a target="_blank" href="{{ route('teacher.third-examiner.download', [$session->id, $course->id]) }}" class="btn btn-success float-right mb-4">Download PDF</a>
 
 
                                 <table id="example1" class="table table-bordered table-striped text-center">
@@ -60,13 +60,15 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($second_examiner_marks as $key => $second_examiner_mark)
-                                            <tr>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $second_examiner_mark->reg_no }}</td>
-                                                <td>{{ $second_examiner_mark->exam_roll }}</td>
-                                                <td>{{ number_format(round($second_examiner_mark->teacher_2_marks), 2) }}</td>
-                                            </tr>
+                                        @foreach($third_examiner_marks as $key => $third_examiner_mark)
+                                            @if($third_examiner_mark->teacher_3_marks !== null)
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $third_examiner_mark->reg_no }}</td>
+                                                    <td>{{ $third_examiner_mark->exam_roll }}</td>
+                                                    <td>{{ number_format(round($third_examiner_mark->teacher_3_marks), 2) }}</td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
 

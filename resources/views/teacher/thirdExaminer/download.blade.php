@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Course Teacher Final Marks of {{ $course->course_code }} - {{ $course->course_title }}</title>
+    <title>Third Examiner Final Marks of {{ $course->course_code }} - {{ $course->course_title }}</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('assets/backend/plugins/font-awesome/css/font-awesome.min.css') }}">
@@ -37,7 +37,7 @@
             <div class="col-md-12 mt-4">
                 <div class="col-12 text-center mb-4">
                     <h3>Dept : {{ $course->dept->name }}</h3>
-                    <h4 class="text-uppercase">Second Examiner Marks</h4>
+                    <h4 class="text-uppercase">Third Examiner Marks</h4>
                     <h5>Session : {{ $session->name }} | Subject : {{ $course->course_code }} - {{ $course->course_title }}</h5>
                     <h5>Teacher Name : {{ \Illuminate\Support\Facades\Auth::user()->name }}</h5>
                     <h5 class="text-right">Date: {{ \Carbon\Carbon::now()->format(' F d, Y') }}</h5>
@@ -53,14 +53,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($second_examiner_marks as $key => $second_examiner_mark)
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $second_examiner_mark->reg_no }}</td>
-                            <td>{{ $second_examiner_mark->exam_roll }}</td>
-                            <td>{{ number_format(round($second_examiner_mark->teacher_2_marks), 2) }}</td>
-                        </tr>
-                    @endforeach
+                        @foreach($third_examiner_marks as $key => $third_examiner_mark)
+                            @if($third_examiner_mark->teacher_3_marks !== null)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $third_examiner_mark->reg_no }}</td>
+                                    <td>{{ $third_examiner_mark->exam_roll }}</td>
+                                    <td>{{ number_format(round($third_examiner_mark->teacher_3_marks), 2) }}</td>
+                                </tr>
+                            @endif
+                        @endforeach
                     </tbody>
 
                 </table>

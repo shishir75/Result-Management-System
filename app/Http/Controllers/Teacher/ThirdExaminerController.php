@@ -124,12 +124,12 @@ class ThirdExaminerController extends Controller
 
         $teacher = Teacher::where('name', Auth::user()->name)->first();
 
-        $second_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_1', $teacher->id)->count();
+        $third_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_2', $teacher->id)->count();
 
-        if ($second_examiner_check === 1)
+        if ($third_examiner_check === 1)
         {
-            $second_examiner_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->get();
-            return view('teacher.secondExaminer.show', compact('course', 'session', 'second_examiner_marks'));
+            $third_examiner_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->get();
+            return view('teacher.thirdExaminer.show', compact('course', 'session', 'third_examiner_marks'));
 
         } else {
             Toastr::error('Unauthorized Access Denied!', 'Error');
@@ -178,12 +178,12 @@ class ThirdExaminerController extends Controller
 
         $teacher = Teacher::where('name', Auth::user()->name)->first();
 
-        $second_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_1', $teacher->id)->count();
+        $third_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_2', $teacher->id)->count();
 
-        if ($second_examiner_check === 1)
+        if ($third_examiner_check === 1)
         {
-            $second_examiner_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->get();
-            return view('teacher.secondExaminer.download', compact('course', 'session', 'second_examiner_marks'));
+            $third_examiner_marks = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->get();
+            return view('teacher.thirdExaminer.download', compact('course', 'session', 'third_examiner_marks'));
 
         } else {
             Toastr::error('Unauthorized Access Denied!', 'Error');
