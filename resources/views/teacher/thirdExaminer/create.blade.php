@@ -83,7 +83,7 @@
                                                     <td>{{ $student->exam_roll }}</td>
                                                     <td>
                                                         <div class="form-group" style="margin-bottom: 0px">
-                                                            <input type="number" name="tutorial_marks[{{ $student->id }}]" step="0.01" class="form-control" placeholder="Enter Third Examiner Marks" required>
+                                                            <input type="number" name="teacher_3_marks[{{ $student->exam_roll }}]" step="0.01" class="form-control" placeholder="Enter Third Examiner Marks" required>
                                                         </div>
                                                     </td>
 

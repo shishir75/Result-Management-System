@@ -12,6 +12,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ThirdExaminerController extends Controller
@@ -64,54 +65,50 @@ class ThirdExaminerController extends Controller
      */
     public function store(Request $request, $session_id, $course_id)
     {
+        $inputs = $request->except('_token');
+        $rules = [
+            'teacher_3_marks' => 'required',
+        ];
+
+        $validator = Validator::make($inputs, $rules);
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+
         $session = Session::findOrFail($session_id);
         $course = Course::with('dept')->findOrFail($course_id);
 
-        if ($request->hasFile('file')){
-            $file = $request->file('file');
+        $teacher_3_marks = $request->input('teacher_3_marks');
 
-            $data = Excel::toArray(new SecondExaminerImport(), $file);
+        foreach ($teacher_3_marks as $exam_roll => $marks)
+        {
+            $student_exists = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->where('exam_roll', $exam_roll)->first();
 
-
-            if (!empty($data)  && count($data) > 0)
+            if (!isset($student_exists))
             {
+                continue;
 
-                foreach ($data as $rows)
+            } else {
+
+                if ($student_exists->teacher_1_marks - $student_exists->teacher_2_marks >= 12 | $student_exists->teacher_2_marks - $student_exists->teacher_1_marks >= 12)
                 {
-                    foreach ($rows as $key => $value)
-                    {
-                        if ($key > 3)
-                        {
-                            $finalMarks = new FinalMarks();
+                    $student_exists->teacher_3_marks = $marks;
+                    $student_exists->save();
 
-                            $second_examiner_mark = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->where('reg_no', $value[1])->where('exam_roll', $value[2])->first();
-
-                            $check = FinalMarks::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->where('reg_no', $value[1])->where('exam_roll', $value[2])->count();
-
-                            if ($check > 0)
-                            {
-                                $second_examiner_mark->teacher_2_marks = $value[3];
-                                $second_examiner_mark->save();
-
-                            } else {
-
-                                $finalMarks->reg_no = $value[1];
-                                $finalMarks->exam_roll = $value[2];
-                                $finalMarks->teacher_2_marks = $value[3];
-                                $finalMarks->session_id = $session->id;
-                                $finalMarks->dept_id = $course->dept->id;
-                                $finalMarks->course_id = $course->id;
-                                $finalMarks->save();
-                            }
-
-                        }
-                    }
+                } else {
+                    continue;
                 }
 
-                Toastr::success('Second Examiner Marks added successfully', 'Success');
-                return redirect()->route('teacher.second-examiner.show', [$session_id, $course_id]);
             }
         }
+
+        Toastr::success('Third Examiner Marks Added Successfully!', 'Success');
+        return redirect()->back();
+
+
     }
 
     /**
