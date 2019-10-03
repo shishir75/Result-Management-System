@@ -127,6 +127,13 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::post('second-examiner/{session_id}/{course_id}', 'SecondExaminerController@store')->name('second-examiner.store');
     Route::get('second-examiner/{session_id}/{course_id}', 'SecondExaminerController@show')->name('second-examiner.show');
     Route::get('second-examiner/{session_id}/{course_id}/download', 'SecondExaminerController@download')->name('second-examiner.download');
+
+    Route::get('third-examiner', 'ThirdExaminerController@index')->name('third-examiner.index');
+    Route::get('third-examiner/create/{session_id}/{course_id}', 'ThirdExaminerController@create')->name('third-examiner.create');
+    Route::post('third-examiner/{session_id}/{course_id}', 'ThirdExaminerController@store')->name('third-examiner.store');
+    Route::get('third-examiner/{session_id}/{course_id}', 'ThirdExaminerController@show')->name('third-examiner.show');
+    Route::get('third-examiner/{session_id}/{course_id}/download', 'ThirdExaminerController@download')->name('third-examiner.download');
+
 });
 
 

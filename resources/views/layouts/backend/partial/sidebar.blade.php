@@ -315,6 +315,15 @@
                     </a>
                 </li>
 
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('teacher.third-examiner.index') }}" class="nav-link {{ Request::is('teacher/third-examiner*') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-dashboard"></i>
+                        <p>
+                            Third Examiner Marks
+                        </p>
+                    </a>
+                </li>
+
 			@elseif(Request::is('student*')))
 				<li class="nav-item has-treeview">
 					<a href="{{ route('student.dashboard') }}" class="nav-link {{ Request::is('student/course*') ? 'active' : '' }}">

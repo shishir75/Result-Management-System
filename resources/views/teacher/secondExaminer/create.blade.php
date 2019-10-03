@@ -41,7 +41,7 @@
                                 <div class="col-6 offset-3 text-center">
                                     <h3>Dept : {{ $course->dept->name }}</h3>
                                     <h5>Session : {{ $session->name }}  | Subject : {{ $course->course_code }} - {{ $course->course_title }}</h5>
-                                    <h5>Course Teacher : {{ Auth::user()->name }}</h5>
+                                    <h5>Teacher : {{ Auth::user()->name }}</h5>
                                 </div>
                             </div>
 
