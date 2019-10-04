@@ -138,7 +138,23 @@
 				</li>
 
 				@elseif(Request::is('exam-controller*')))
+                    <li class="nav-item has-treeview">
+                        <a href="{{ route('exam_controller.dashboard') }}" class="nav-link {{ Request::is('exam-controller/dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-dashboard"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
 
+                    <li class="nav-item has-treeview">
+                        <a href="{{ route('exam_controller.course.index') }}" class="nav-link {{ Request::is('exam-controller/course*') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-dashboard"></i>
+                            <p>
+                                Courses
+                            </p>
+                        </a>
+                    </li>
 
 				@elseif(Request::is('dept-office*')))
 

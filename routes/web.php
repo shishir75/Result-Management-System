@@ -49,6 +49,7 @@ Route::group(['as'=>'register.','prefix' => 'register', 'namespace' => 'Register
 Route::group(['as'=>'exam_controller.','prefix' => 'exam-controller', 'namespace' => 'Exam_Controller', 'middleware' => ['auth', 'examController'] ], function (){
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('course', 'CourseController@index')->name('course.index');
 
 });
 
