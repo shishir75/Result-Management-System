@@ -194,4 +194,52 @@ class SecondExaminerController extends Controller
             return redirect()->back();
         }
     }
+
+    public function approved($id)
+    {
+        $teacher = Teacher::where('name', Auth::user()->name)->first();
+
+        $course = External::findOrFail($id);
+
+        if (isset($course))
+        {
+            if ($teacher->id == $course->external_1)
+            {
+                if ($course->external_1_status != 0)
+                {
+                    Toastr::error('You have already submitted!', 'Error');
+                    return redirect()->back();
+
+                } else {
+
+                    $check_marks_exists = FinalMarks::where('session_id', $course->session_id)->where('dept_id', $course->dept_id)->where('course_id', $course->course_id)->where('teacher_2_marks', '!=', null)->count();
+
+                    if ($check_marks_exists > 0)
+                    {
+                        $course->external_1_status = 1;
+                        $course->save();
+
+                        Toastr::success('Course Marks Submitted Successfully!', 'Success');
+                        return redirect()->back();
+
+                    } else {
+                        Toastr::error('You have not added marks yet! Please add course marks!!', 'Error');
+                        return redirect()->back();
+                    }
+
+
+                }
+
+            } else {
+                Toastr::error('Unauthorized Access Denied!', 'Error');
+                return redirect()->back();
+            }
+
+        } else {
+            Toastr::error('Unauthorized Access Denied!', 'Error');
+            return redirect()->back();
+        }
+
+    }
+
 }
