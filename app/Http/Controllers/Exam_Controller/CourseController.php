@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Exam_Controller;
 
+use App\Models\FinalMarks;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+       $courses = FinalMarks::with('session', 'dept', 'course')->where('teacher_1_marks', '!=', null)->where('teacher_2_marks', '!=', null)->distinct()->get(['course_id', 'session_id', 'dept_id']);
+       return view('exam_controller.course.index', compact('courses'));
     }
 
     /**
