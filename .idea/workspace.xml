@@ -4,6 +4,7 @@
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teacher/ThirdExaminerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teacher/ThirdExaminerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teacher/thirdExaminer/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/thirdExaminer/show.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -219,7 +220,7 @@
       <workItem from="1570114719120" duration="7932000" />
       <workItem from="1570209681591" duration="3299000" />
       <workItem from="1570260614944" duration="5305000" />
-      <workItem from="1570290719267" duration="3479000" />
+      <workItem from="1570290719267" duration="4343000" />
     </task>
     <servers />
   </component>
