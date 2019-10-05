@@ -42,7 +42,7 @@ class ThirdExaminerController extends Controller
 
         $teacher = Teacher::where('name', Auth::user()->name)->first();
 
-        $third_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_2', $teacher->id)->count();
+        $third_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_2', $teacher->id)->where('external_2_status', 0)->count();
 
         if ($third_examiner_check === 1)
         {
