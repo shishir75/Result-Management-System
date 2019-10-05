@@ -42,7 +42,7 @@ class FinalMarksController extends Controller
 
         $teacher = Teacher::where('name', Auth::user()->name)->first();
 
-        $course_teacher_check = CourseTeacher::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('teacher_id', $teacher->id)->count();
+        $course_teacher_check = CourseTeacher::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('teacher_id', $teacher->id)->where('status', 0)->count();
 
         if ($course_teacher_check === 1)
         {

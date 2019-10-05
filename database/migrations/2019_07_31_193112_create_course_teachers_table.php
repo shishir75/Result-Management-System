@@ -20,6 +20,7 @@ class CreateCourseTeachersTable extends Migration
             $table->string('code');
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('teacher_id');
+            $table->boolean('status')->default(0);
             $table->timestamps();
             $table->foreign('dept_id')->references('id')->on('depts')->onDelete('cascade');
             $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');

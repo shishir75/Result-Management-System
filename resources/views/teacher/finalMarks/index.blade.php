@@ -83,9 +83,13 @@
                                             </td>
                                             <td>{{ $course_teacher->course->final_marks  }}</td>
                                             <td>
-                                                <a href="{{ route('teacher.final-marks.create', [$course_teacher->session->id, $course_teacher->course->id]) }}" class="btn btn-info">
-                                                    <i class="fa fa-plus-square" aria-hidden="true"></i>
-                                                </a>
+                                                @if($course_teacher->status == 0)
+                                                    <a href="{{ route('teacher.final-marks.create', [$course_teacher->session->id, $course_teacher->course->id]) }}" class="btn btn-info">
+                                                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <span class="badge badge-success">Given</span>
+                                                @endif
                                             </td>
                                             <td>
                                                 <a href="{{ route('teacher.final-marks.show', [$course_teacher->session->id, $course_teacher->course->id]) }}" class="btn btn-success">
