@@ -45,8 +45,9 @@
                                 </div>
                             </div>
 
-                            <!-- form start -->
-                            <form role="form" action="{{ route('teacher.third-examiner.store', [$session->id, $course->id]) }}" method="post" enctype="multipart/form-data">
+                            @if(count($students) >= 1)
+                                <!-- form start -->
+                                <form role="form" action="{{ route('teacher.third-examiner.store', [$session->id, $course->id]) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped text-center">
@@ -68,30 +69,31 @@
                                         </tfoot>
                                         <tbody>
 
-                                        @php
-                                            $i = 0;
-                                        @endphp
+                                            @php
+                                                $i = 0;
+                                            @endphp
 
-                                        @foreach($students as $key => $student)
-                                            @if($student->teacher_1_marks - $student->teacher_2_marks >= 12 | $student->teacher_2_marks - $student->teacher_1_marks >= 12)
-                                                @php
-                                                    $i++;
-                                                @endphp
-                                                <tr>
-                                                    <td>{{ $i }}</td>
-                                                    <td>{{ $student->reg_no }}</td>
-                                                    <td>{{ $student->exam_roll }}</td>
-                                                    <td>
-                                                        <div class="form-group" style="margin-bottom: 0px">
-                                                            <input type="number" name="teacher_3_marks[{{ $student->exam_roll }}]" step="0.01" class="form-control" placeholder="Enter Third Examiner Marks" required>
-                                                        </div>
-                                                    </td>
+                                            @foreach($students as $key => $student)
+                                                @if($student->teacher_1_marks - $student->teacher_2_marks >= 12 | $student->teacher_2_marks - $student->teacher_1_marks >= 12)
+                                                    @php
+                                                        $i++;
+                                                    @endphp
+                                                    <tr>
+                                                        <td>{{ $i }}</td>
+                                                        <td>{{ $student->reg_no }}</td>
+                                                        <td>{{ $student->exam_roll }}</td>
+                                                        <td>
+                                                            <div class="form-group" style="margin-bottom: 0px">
+                                                                <input type="number" name="teacher_3_marks[{{ $student->exam_roll }}]" step="0.01" class="form-control" placeholder="Enter Third Examiner Marks" required>
+                                                            </div>
+                                                        </td>
 
-                                                </tr>
-                                            @else
-                                                @continue
-                                            @endif
-                                        @endforeach
+                                                    </tr>
+                                                @else
+                                                    @continue
+                                                @endif
+                                            @endforeach
+
                                         </tbody>
 
                                     </table>
@@ -102,6 +104,9 @@
                                     <button type="submit" class="btn btn-primary float-md-right">Add Third Examiner Marks</button>
                                 </div>
                             </form>
+                            @else
+                                <h4 class="text-center text-danger my-5">No Student Found</h4>
+                            @endif
                         </div>
                         <!-- /.card -->
                     </div>

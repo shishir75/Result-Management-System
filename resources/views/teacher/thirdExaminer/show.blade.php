@@ -47,10 +47,12 @@
                                 </div>
 
                                 <a href="{{ route('teacher.third-examiner.index') }}" class="btn btn-info mb-4">View All Courses</a>
-                                <a target="_blank" href="{{ route('teacher.third-examiner.download', [$session->id, $course->id]) }}" class="btn btn-success float-right mb-4">Download PDF</a>
+                                @if(count($third_examiner_marks) >= 1)
+                                    <a target="_blank" href="{{ route('teacher.third-examiner.download', [$session->id, $course->id]) }}" class="btn btn-success float-right mb-4">Download PDF</a>
+                                @endif
 
-
-                                <table id="example1" class="table table-bordered table-striped text-center">
+                                @if(count($third_examiner_marks) >= 1)
+                                    <table id="example1" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
@@ -85,6 +87,9 @@
                                     </tbody>
 
                                 </table>
+                                @else
+                                    <h4 class="text-center text-danger my-5">No Student Found</h4>
+                                @endif
                             </div>
                             <!-- /.card-body -->
 
