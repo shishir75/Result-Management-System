@@ -122,6 +122,7 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::post('final-marks/{session_id}/{course_id}', 'FinalMarksController@store')->name('final-marks.store');
     Route::get('final-marks/{session_id}/{course_id}', 'FinalMarksController@show')->name('final-marks.show');
     Route::get('final-marks/{session_id}/{course_id}/download', 'FinalMarksController@download')->name('final-marks.download');
+    Route::put('final-marks/{id}/approved', 'FinalMarksController@approved')->name('final-marks.approved');
 
     Route::get('second-examiner', 'SecondExaminerController@index')->name('second-examiner.index');
     Route::get('second-examiner/create/{session_id}/{course_id}', 'SecondExaminerController@create')->name('second-examiner.create');
