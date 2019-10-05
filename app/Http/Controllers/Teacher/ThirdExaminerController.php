@@ -276,10 +276,10 @@ class ThirdExaminerController extends Controller
 
                     if ($check_marks_exists > 0)
                     {
-                        $course->external_1_status = 1;
+                        $course->external_2_status = 1;
                         $course->save();
 
-                        Toastr::success('Course Marks Submitted Successfully!', 'Success');
+                        Toastr::success('Third Examiner Marks Submitted Successfully!', 'Success');
                         return redirect()->back();
 
                     } else {
