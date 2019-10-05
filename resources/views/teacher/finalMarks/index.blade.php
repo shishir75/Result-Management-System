@@ -99,14 +99,20 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <button class="btn btn-warning" type="button" onclick="approvedItem({{ $course_teacher->id }})">
-                                                    <i class="fa fa-question" aria-hidden="true"></i>
-                                                </button>
-                                                <form id="approved-form-{{ $course_teacher->id }}" action="{{ route('teacher.final-marks.approved', [$course_teacher->id]) }}" method="post"
-                                                      style="display:none;">
-                                                    @csrf
-                                                    @method('PUT')
-                                                </form>
+                                                @if($course_teacher->status == 0)
+                                                    <button class="btn btn-warning" type="button" onclick="approvedItem({{ $course_teacher->id }})">
+                                                        <i class="fa fa-question" aria-hidden="true"></i>
+                                                    </button>
+                                                    <form id="approved-form-{{ $course_teacher->id }}" action="{{ route('teacher.final-marks.approved', [$course_teacher->id]) }}" method="post"
+                                                          style="display:none;">
+                                                        @csrf
+                                                        @method('PUT')
+                                                    </form>
+                                                @else
+                                                    <button class="btn btn-success" type="button">
+                                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                                    </button>
+                                                @endif
                                             </td>
 
 
