@@ -68,76 +68,91 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
+                                    @php
+                                        $i = 0;
+                                    @endphp
+
                                     @foreach($third_examiner_courses as $key => $third_examiner_course)
 
                                         @php
-                                            if ($third_examiner_course->dept->is_semester == 1)
-                                            {
-                                                $code = explode('-', $third_examiner_course->course->course_code);
-                                                $year = substr($code[1], 0, 1);
-                                                $semester = substr($code[1], 1, 1);
+                                            $third_examiner_student_check = App\Models\FinalMarks::where('session_id', $third_examiner_course->session_id)->where('dept_id', $third_examiner_course->dept_id)->where('course_id', $third_examiner_course->course_id)->count();
 
-                                            } else {
-                                                $code = explode('-', $third_examiner_course->course->course_code);
-                                                $year = substr($code[1], 0, 1);
-                                            }
+                                           if ($third_examiner_course->dept->is_semester == 1)
+                                           {
+                                               $code = explode('-', $third_examiner_course->course->course_code);
+                                               $year = substr($code[1], 0, 1);
+                                               $semester = substr($code[1], 1, 1);
+
+                                           } else {
+                                               $code = explode('-', $third_examiner_course->course->course_code);
+                                               $year = substr($code[1], 0, 1);
+                                           }
                                         @endphp
 
+                                        @if($third_examiner_student_check >= 1)
+                                            @php
+                                                $i++;
+                                            @endphp
+                                            <tr>
+                                                <td>{{ $i }}</td>
+                                                <td>{{ $third_examiner_course->session->name }}</td>
+                                                <td>{{ $third_examiner_course->course->course_code .' - '. $third_examiner_course->course->course_title }}</td>
 
-                                        <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $third_examiner_course->session->name }}</td>
-                                            <td>{{ $third_examiner_course->course->course_code .' - '. $third_examiner_course->course->course_title }}</td>
+                                                <td>
+                                                    @if($third_examiner_course->dept->is_semester == 1)
+                                                        {{ $year . ' - ' . $semester }}
+                                                    @else
+                                                        {{ $year }}
+                                                    @endif
+                                                </td>
 
-                                            <td>
-                                                @if($third_examiner_course->dept->is_semester == 1)
-                                                    {{ $year . ' - ' . $semester }}
-                                                @else
-                                                    {{ $year }}
-                                                @endif
-                                            </td>
-
-                                            <td>{{ number_format($third_examiner_course->course->credit_hour, 1) }}</td>
-                                            <td>
-                                                @if($third_examiner_course->course->is_lab == true)
-                                                    <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
-                                                @else
-                                                    <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
-                                                @endif
-                                            </td>
-                                            <td>{{ $third_examiner_course->course->final_marks  }}</td>
-                                            <td>
-                                                @if($third_examiner_course->external_2_status == 0)
-                                                    <a href="{{ route('teacher.third-examiner.create', [$third_examiner_course->session->id, $third_examiner_course->course->id]) }}" class="btn btn-info">
-                                                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                                <td>{{ number_format($third_examiner_course->course->credit_hour, 1) }}</td>
+                                                <td>
+                                                    @if($third_examiner_course->course->is_lab == true)
+                                                        <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
+                                                    @else
+                                                        <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
+                                                    @endif
+                                                </td>
+                                                <td>{{ $third_examiner_course->course->final_marks  }}</td>
+                                                <td>
+                                                    @if($third_examiner_course->external_2_status == 0)
+                                                        <a href="{{ route('teacher.third-examiner.create', [$third_examiner_course->session->id, $third_examiner_course->course->id]) }}" class="btn btn-info">
+                                                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                                        </a>
+                                                    @else
+                                                        <span class="badge badge-success">Submitted</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('teacher.third-examiner.show', [$third_examiner_course->session->id, $third_examiner_course->course->id]) }}" class="btn btn-success">
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
                                                     </a>
-                                                @else
-                                                   <span class="badge badge-success">Submitted</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('teacher.third-examiner.show', [$third_examiner_course->session->id, $third_examiner_course->course->id]) }}" class="btn btn-success">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @if($third_examiner_course->external_2_status == 0)
-                                                    <button class="btn btn-warning" type="button" onclick="approvedItem({{ $third_examiner_course->id }})">
-                                                        <i class="fa fa-question" aria-hidden="true"></i>
-                                                    </button>
-                                                    <form id="approved-form-{{ $third_examiner_course->id }}" action="{{ route('teacher.third-examiner.approved', [$third_examiner_course->id]) }}" method="post"
-                                                          style="display:none;">
-                                                        @csrf
-                                                        @method('PUT')
-                                                    </form>
-                                                @else
-                                                    <button class="btn btn-success" type="button">
-                                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                                    </button>
-                                                @endif
-                                            </td>
+                                                </td>
+                                                <td>
+                                                    @if($third_examiner_course->external_2_status == 0)
+                                                        <button class="btn btn-warning" type="button" onclick="approvedItem({{ $third_examiner_course->id }})">
+                                                            <i class="fa fa-question" aria-hidden="true"></i>
+                                                        </button>
+                                                        <form id="approved-form-{{ $third_examiner_course->id }}" action="{{ route('teacher.third-examiner.approved', [$third_examiner_course->id]) }}" method="post"
+                                                              style="display:none;">
+                                                            @csrf
+                                                            @method('PUT')
+                                                        </form>
+                                                    @else
+                                                        <button class="btn btn-success" type="button">
+                                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                                        </button>
+                                                    @endif
+                                                </td>
 
-                                        </tr>
+                                            </tr>
+                                        @else
+                                            @continue
+                                        @endif
+
+
+
                                     @endforeach
                                     </tbody>
 

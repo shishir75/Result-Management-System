@@ -132,7 +132,16 @@ class ThirdExaminerController extends Controller
 
             $check_submit = External::where('session_id', $third_examiner_marks[0]->session_id)->where('dept_id', $third_examiner_marks[0]->dept_id)->where('course_id', $third_examiner_marks[0]->course_id)->where('external_2', $teacher->id)->first();
 
-            return view('teacher.thirdExaminer.show', compact('course', 'session', 'third_examiner_marks', 'check_submit'));
+            if (isset($check_submit))
+            {
+                return view('teacher.thirdExaminer.show', compact('course', 'session', 'third_examiner_marks', 'check_submit'));
+
+            } else {
+
+                return view('teacher.thirdExaminer.show', compact('course', 'session', 'third_examiner_marks'));
+            }
+
+
 
         } else {
             Toastr::error('Unauthorized Access Denied!', 'Error');

@@ -59,8 +59,10 @@
                                         <th>Registration No</th>
                                         <th>Exam Roll</th>
                                         <th>Marks</th>
-                                        @if($check_submit->external_2_status == 0)
-                                            <th>Update</th>
+                                        @if(isset($check_submit))
+                                            @if($check_submit->external_2_status == 0)
+                                                <th>Update</th>
+                                            @endif
                                         @endif
                                     </tr>
                                     </thead>
@@ -79,12 +81,14 @@
                                                     <td>{{ $third_examiner_mark->exam_roll }}</td>
                                                     <td>{{ number_format(round($third_examiner_mark->teacher_3_marks), 2) }}</td>
 
-                                                    @if($check_submit->external_2_status == 0)
-                                                        <td>
-                                                            <a href="{{ route('teacher.third-examiner.edit', [$third_examiner_mark->session_id, $third_examiner_mark->course_id, $third_examiner_mark->exam_roll]) }}" class="btn btn-success">
-                                                                <i class="fa fa-eye" aria-hidden="true"></i>
-                                                            </a>
-                                                        </td>
+                                                    @if(isset($check_submit))
+                                                        @if($check_submit->external_2_status == 0)
+                                                            <td>
+                                                                <a href="{{ route('teacher.third-examiner.edit', [$third_examiner_mark->session_id, $third_examiner_mark->course_id, $third_examiner_mark->exam_roll]) }}" class="btn btn-success">
+                                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                </a>
+                                                            </td>
+                                                        @endif
                                                     @endif
                                                 </tr>
                                             @endif
