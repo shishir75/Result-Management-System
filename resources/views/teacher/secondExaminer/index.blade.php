@@ -105,9 +105,13 @@
                                             </td>
                                             <td>{{ $second_examiner_course->course->final_marks  }}</td>
                                             <td>
-                                                <a href="{{ route('teacher.second-examiner.create', [$second_examiner_course->session->id, $second_examiner_course->course->id]) }}" class="btn btn-info">
-                                                    <i class="fa fa-plus-square" aria-hidden="true"></i>
-                                                </a>
+                                                @if($second_examiner_course->external_1_status == 0)
+                                                    <a href="{{ route('teacher.second-examiner.create', [$second_examiner_course->session->id, $second_examiner_course->course->id]) }}" class="btn btn-info">
+                                                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <span class="badge badge-success">Submitted</span>
+                                                @endif
                                             </td>
                                             <td>
                                                 <a href="{{ route('teacher.second-examiner.show', [$second_examiner_course->session->id, $second_examiner_course->course->id]) }}" class="btn btn-success">

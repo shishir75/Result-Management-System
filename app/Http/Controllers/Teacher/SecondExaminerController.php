@@ -43,7 +43,7 @@ class SecondExaminerController extends Controller
 
         $teacher = Teacher::where('name', Auth::user()->name)->first();
 
-        $second_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_1', $teacher->id)->count();
+        $second_examiner_check = External::where('session_id', $session_id)->where('dept_id', $course->dept->id)->where('course_id', $course_id)->where('external_1', $teacher->id)->where('external_1_status', 0)->count();
 
         if ($second_examiner_check === 1)
         {

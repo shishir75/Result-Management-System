@@ -20,6 +20,8 @@ class CreateExternalsTable extends Migration
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('external_1');
             $table->unsignedBigInteger('external_2');
+            $table->boolean('external_1_status')->default(0);
+            $table->boolean('external_2_status')->default(0);
             $table->timestamps();
             $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');
             $table->foreign('dept_id')->references('id')->on('depts')->onDelete('cascade');

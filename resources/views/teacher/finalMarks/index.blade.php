@@ -88,7 +88,7 @@
                                                         <i class="fa fa-plus-square" aria-hidden="true"></i>
                                                     </a>
                                                 @else
-                                                    <span class="badge badge-success">Given</span>
+                                                    <span class="badge badge-success">Submitted</span>
                                                 @endif
                                             </td>
                                             <td>
