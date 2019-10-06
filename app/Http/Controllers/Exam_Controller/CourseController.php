@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Exam_Controller;
 
+use App\Models\Dept;
 use App\Models\FinalMarks;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,20 +15,35 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function session($slug)
     {
-       $courses = FinalMarks::with('session', 'dept', 'course')->where('teacher_1_marks', '!=', null)->where('teacher_2_marks', '!=', null)->distinct()->get(['course_id', 'session_id', 'dept_id']);
-       return view('exam_controller.course.index', compact('courses'));
+        $dept = Dept::where('slug', $slug)->first();
+        if (isset($dept))
+        {
+            $courses = FinalMarks::with('session', 'dept')->where('dept_id', $dept->id)->where('teacher_1_marks', '!=', null)->where('teacher_2_marks', '!=', null)->distinct()->get(['session_id', 'dept_id']);
+            return view('exam_controller.session.index', compact('courses', 'dept'));
+
+        } else {
+            Toastr::error('Invalid URL!', 'Error');
+            return redirect()->back();
+        }
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function year_semester($slug, $session_id)
     {
-        //
+        $dept = Dept::where('slug', $slug)->first();
+
+        if (isset($dept) && isset($session_id))
+        {
+            $courses = FinalMarks::with('session', 'dept', 'course')->where('dept_id', $dept->id)->where('session_id', $session_id)->where('teacher_1_marks', '!=', null)->where('teacher_2_marks', '!=', null)->distinct()->get(['session_id', 'dept_id', 'course_id']);
+            return view('exam_controller.year_semester.index', compact('courses', 'dept'));
+
+        } else {
+            Toastr::error('Invalid URL!', 'Error');
+            return redirect()->back();
+        }
+
     }
 
     /**

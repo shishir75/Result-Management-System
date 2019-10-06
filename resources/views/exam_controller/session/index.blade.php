@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Courses')
+@section('title', 'Sessions')
 
 @push('css')
     <!-- DataTables -->
@@ -18,7 +18,7 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Courses</li>
+                            <li class="breadcrumb-item active">Sessions</li>
                         </ol>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ strtoupper('Course') }}</h3>
+                                <h3 class="card-title">{{ strtoupper('Sessions list of ' . $dept->name) }}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -42,48 +42,26 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Dept Name</th>
                                         <th>Session</th>
-                                        <th>Course Title</th>
-                                        <th>Year / Semester</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>Actions</th>
+                                        <th>Year / Semester List</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Dept Name</th>
                                         <th>Session</th>
-                                        <th>Course Title</th>
-                                        <th>Year / Semester</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>Actions</th>
+                                        <th>Year / Semester List</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
                                     @foreach($courses as $key => $course)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $course->dept->name  }}</td>
                                             <td>{{ $course->session->name }}</td>
-                                            <td>{{ $course->course->course_code .' - '. $course->course->course_title }}</td>
-                                            <td>Blank</td>
-
-                                            <td>{{ number_format($course->course->credit_hour, 1) }}</td>
-                                            <td>
-                                                @if($course->course->is_lab == true)
-                                                    <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
-                                                @else
-                                                    <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
-                                                @endif
-                                            </td>
 
                                             <td>
-                                                <a href="#" class="btn btn-success">
-                                                    <i class="fa fa-male" aria-hidden="true"></i>
+                                                <a href="{{ route('exam_controller.year_semester.index', [$course->dept->slug, $course->session_id]) }}" class="btn btn-info">
+                                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
                                                 </a>
                                             </td>
 

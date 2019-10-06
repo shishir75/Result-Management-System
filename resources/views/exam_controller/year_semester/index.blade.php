@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Departments')
+@section('title', 'Courses')
 
 @push('css')
     <!-- DataTables -->
@@ -18,7 +18,7 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Departments</li>
+                            <li class="breadcrumb-item active">Courses</li>
                         </ol>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ strtoupper('Departments') }}</h3>
+                                <h3 class="card-title">{{ strtoupper('Year / Semester list of Session ' . $courses[0]->session->name) }}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -42,25 +42,26 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Dept Name</th>
-                                        <th>Sessions List</th>
+                                        <th>Semester</th>
+                                        <th>Course List</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Dept Name</th>
-                                        <th>Sessions List</th>
+                                        <th>Semester</th>
+                                        <th>Course List</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($depts as $key => $dept)
+                                    @foreach($courses as $key => $course)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $dept->name  }}</td>
+                                            <td>{{ $course->course->course_code }}</td>
+
                                             <td>
-                                                <a href="{{ route('exam_controller.session.index', $dept->slug) }}" class="btn btn-info">
-                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                <a href="#" class="btn btn-info">
+                                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
                                                 </a>
                                             </td>
 
