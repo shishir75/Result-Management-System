@@ -75,7 +75,19 @@
                                                     <i class="fa fa-times text-danger" aria-hidden="true"></i>
                                                 @endif
                                             </td>
-                                            <td>Status</td>
+                                            @php
+                                                $course_teacher_status_check = \App\Models\CourseTeacher::where('dept_id', $course->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->where('status', 1)->get();
+
+                                                $second_examiner_status_check = \App\Models\External::where('dept_id', $course->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->where('external_1_status', 1)->get();
+                                            @endphp
+
+                                            <td>
+                                                @if(count($course_teacher_status_check) == 1 && count($second_examiner_status_check) == 1)
+                                                    <span class="badge badge-info">Submitted</span>
+                                                @else
+                                                    <span class="badge badge-warning">Not Submitted</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a href="#" class="btn btn-info">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
