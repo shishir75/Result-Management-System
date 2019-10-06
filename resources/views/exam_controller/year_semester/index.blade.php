@@ -65,7 +65,7 @@
                                                     <td>{{ $semester->name }}</td>
 
                                                     <td>
-                                                        <a href="{{ route('exam_controller.course.index', [$courses[0]->dept->slug, $semester->id]) }}" class="btn btn-info">
+                                                        <a href="{{ route('exam_controller.course.index', [$courses[0]->dept->slug, $courses[0]->session->id, $semester->id]) }}" class="btn btn-info">
                                                             <i class="fa fa-info-circle" aria-hidden="true"></i>
                                                         </a>
                                                     </td>
@@ -78,7 +78,7 @@
                                                     <td>{{ $year->name }}</td>
 
                                                     <td>
-                                                        <a href="{{ route('exam_controller.course.index', [$courses[0]->dept->slug, $year->id]) }}" class="btn btn-info">
+                                                        <a href="{{ route('exam_controller.course.index', [$courses[0]->dept->slug, $courses[0]->session->id, $year->id]) }}" class="btn btn-info">
                                                             <i class="fa fa-info-circle" aria-hidden="true"></i>
                                                         </a>
                                                     </td>

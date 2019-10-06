@@ -52,7 +52,7 @@ Route::group(['as'=>'exam_controller.','prefix' => 'exam-controller', 'namespace
     Route::get('dept', 'DeptController@index')->name('dept.index');
     Route::get('dept/{slug}/session', 'CourseController@session')->name('session.index');
     Route::get('dept/{slug}/session/{session_id}/year_semester', 'CourseController@year_semester')->name('year_semester.index');
-    Route::get('dept/{slug}/{year_semester_id}/course', 'CourseController@course')->name('course.index');
+    Route::get('dept/{slug}/{session_id}/{year_semester_id}/course', 'CourseController@course')->name('course.index');
 
 });
 

@@ -34,7 +34,10 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ strtoupper('Courses') }}</h3>
+                                <h3 class="card-title">
+                                    COURSE LIST OF  {{ strtoupper($courses[0]->dept->is_semester == 1 ? $semester->name : $year->name ) }} OF SESSION {{ $session->name }}
+                                    <span class="float-right">DEPT : {{ strtoupper($courses[0]->dept->name) }}</span>
+                                </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -45,6 +48,7 @@
                                         <th>Course Code</th>
                                         <th>Course Title</th>
                                         <th>Is Lab / Viva</th>
+                                        <th>Status</th>
                                         <th>Marks</th>
                                     </tr>
                                     </thead>
@@ -54,6 +58,7 @@
                                         <th>Course Code</th>
                                         <th>Course Title</th>
                                         <th>Is Lab / Viva</th>
+                                        <th>Status</th>
                                         <th>Marks</th>
                                     </tr>
                                     </tfoot>
@@ -63,10 +68,17 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $course->course_code  }}</td>
                                             <td>{{ $course->course_title  }}</td>
-                                            <td>{{ $course->is_lab  }}</td>
+                                            <td>
+                                                @if($course->is_lab == 1)
+                                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
+                                                @else
+                                                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                                                @endif
+                                            </td>
+                                            <td>Status</td>
                                             <td>
                                                 <a href="#" class="btn btn-info">
-                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                             </td>
 

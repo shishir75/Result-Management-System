@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Dept;
 use App\Models\FinalMarks;
 use App\Models\Semester;
+use App\Models\Session;
 use App\Models\Year;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -68,18 +69,28 @@ class CourseController extends Controller
 
     }
 
-    public function course($slug, $year_semester_id)
+    public function course($slug,$session_id, $year_semester_id)
     {
         $dept = Dept::where('slug', $slug)->first();
-        if (isset($dept) && isset($year_semester_id))
+        $session = Session::findOrFail($session_id);
+        if (isset($dept) && isset($year_semester_id) && isset($session))
         {
             $courses = Course::with('dept')->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->get();
 
             if (count($courses) >= 1)
             {
-                return view('exam_controller.course.index', compact('courses'));
+                $semester = Semester::findOrFail($year_semester_id);
+                $year = Year::findOrFail($year_semester_id);
+                return view('exam_controller.course.index', compact('courses', 'semester', 'year', 'session'));
+
+            }  else {
+                Toastr::error('Unauthorized Access Denied!', 'Error');
+                return redirect()->back();
             }
 
+        } else {
+            Toastr::error('Invalid URL!', 'Error');
+            return redirect()->back();
         }
     }
 }
