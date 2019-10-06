@@ -43,14 +43,14 @@
                                     <tr>
                                         <th>Serial</th>
                                         <th>Session</th>
-                                        <th>Year / Semester List</th>
+                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}  List </th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
                                         <th>Session</th>
-                                        <th>Year / Semester List</th>
+                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }} List  </th>
                                     </tr>
                                     </tfoot>
                                     <tbody>

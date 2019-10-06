@@ -34,7 +34,10 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ strtoupper('Year / Semester list of Session ' . $courses[0]->session->name) }}</h3>
+                                <h3 class="card-title">
+                                    {{ $courses[0]->dept->is_semester == 1 ? 'SEMESTER' : 'YEAR' }} {{ strtoupper(' list of Session ' . $courses[0]->session->name) }}
+                                    <span class="float-right">Dept: {{ $courses[0]->dept->name }}</span>
+                                </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -42,14 +45,14 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Semester</th>
+                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}   </th>
                                         <th>Course List</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Semester</th>
+                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}   </th>
                                         <th>Course List</th>
                                     </tr>
                                     </tfoot>
