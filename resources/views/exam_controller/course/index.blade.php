@@ -34,10 +34,7 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">
-                                    {{ $courses[0]->dept->is_semester == 1 ? 'SEMESTER' : 'YEAR' }} {{ strtoupper(' list of Session ' . $courses[0]->session->name) }}
-                                    <span class="float-right">Dept: {{ $courses[0]->dept->name }}</span>
-                                </h3>
+                                <h3 class="card-title">{{ strtoupper('Courses') }}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -45,46 +42,36 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}   </th>
-                                        <th>Course List</th>
+                                        <th>Course Code</th>
+                                        <th>Course Title</th>
+                                        <th>Is Lab / Viva</th>
+                                        <th>Marks</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}   </th>
-                                        <th>Course List</th>
+                                        <th>Course Code</th>
+                                        <th>Course Title</th>
+                                        <th>Is Lab / Viva</th>
+                                        <th>Marks</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
+                                    @foreach($courses as $key => $course)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $course->course_code  }}</td>
+                                            <td>{{ $course->course_title  }}</td>
+                                            <td>{{ $course->is_lab  }}</td>
+                                            <td>
+                                                <a href="#" class="btn btn-info">
+                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
 
-                                        @if($courses[0]->dept->is_semester == 1)
-                                            @foreach($semesters as $key => $semester)
-                                                <tr>
-                                                    <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $semester->name }}</td>
-
-                                                    <td>
-                                                        <a href="{{ route('exam_controller.course.index', [$courses[0]->dept->slug, $semester->id]) }}" class="btn btn-info">
-                                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @else
-                                            @foreach($years as $key => $year)
-                                                <tr>
-                                                    <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $year->name }}</td>
-
-                                                    <td>
-                                                        <a href="{{ route('exam_controller.course.index', [$courses[0]->dept->slug, $year->id]) }}" class="btn btn-info">
-                                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
+                                        </tr>
+                                    @endforeach
                                     </tbody>
 
                                 </table>

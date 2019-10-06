@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/exam_controller/course/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Exam_Controller/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Exam_Controller/CourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dept_office/external/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dept_office/external/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/exam_controller/dept/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exam_controller/dept/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/exam_controller/year_semester/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exam_controller/year_semester/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -150,17 +150,17 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\year_semester" />
-      <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\session" />
-      <recent name="E:\xampp\htdocs\ju_rms\app/Models" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\course" />
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller" />
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher\thirdExaminer" />
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher" />
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher\finalMarks" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\year_semester" />
+      <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\session" />
+      <recent name="E:\xampp\htdocs\ju_rms\app/Models" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -225,7 +225,8 @@
       <workItem from="1570209681591" duration="3299000" />
       <workItem from="1570260614944" duration="5305000" />
       <workItem from="1570290719267" duration="6719000" />
-      <workItem from="1570347080276" duration="10496000" />
+      <workItem from="1570347080276" duration="10769000" />
+      <workItem from="1570379852095" duration="2092000" />
     </task>
     <servers />
   </component>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Exam_Controller;
 
+use App\Models\Course;
 use App\Models\Dept;
 use App\Models\FinalMarks;
 use App\Models\Semester;
@@ -51,7 +52,14 @@ class CourseController extends Controller
             $semesters = Semester::all();
             $years = Year::all();
 
-            return view('exam_controller.year_semester.index', compact('courses', 'dept', 'semesters', 'years'));
+            if (count($courses) > 0)
+            {
+                return view('exam_controller.year_semester.index', compact('courses', 'dept', 'semesters', 'years'));
+
+            } else {
+                Toastr::error('Unauthorized Access Denied!', 'Error');
+                return redirect()->back();
+            }
 
         } else {
             Toastr::error('Invalid URL!', 'Error');
@@ -60,59 +68,18 @@ class CourseController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function course($slug, $year_semester_id)
     {
-        //
-    }
+        $dept = Dept::where('slug', $slug)->first();
+        if (isset($dept) && isset($year_semester_id))
+        {
+            $courses = Course::with('dept')->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->get();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+            if (count($courses) >= 1)
+            {
+                return view('exam_controller.course.index', compact('courses'));
+            }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        }
     }
 }
