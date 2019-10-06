@@ -148,10 +148,10 @@
                     </li>
 
                     <li class="nav-item has-treeview">
-                        <a href="{{ route('exam_controller.course.index') }}" class="nav-link {{ Request::is('exam-controller/course*') ? 'active' : '' }}">
+                        <a href="{{ route('exam_controller.dept.index') }}" class="nav-link {{ Request::is('exam-controller/dept*') ? 'active' : '' }}">
                             <i class="nav-icon fa fa-dashboard"></i>
                             <p>
-                                Courses
+                                Departments
                             </p>
                         </a>
                     </li>
