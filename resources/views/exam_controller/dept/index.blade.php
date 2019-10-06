@@ -42,14 +42,14 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Dept Name</th>
+                                        <th>Department Name</th>
                                         <th>Sessions List</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Dept Name</th>
+                                        <th>Department Name</th>
                                         <th>Sessions List</th>
                                     </tr>
                                     </tfoot>

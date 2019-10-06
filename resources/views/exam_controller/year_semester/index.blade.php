@@ -57,19 +57,34 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($courses as $key => $course)
-                                        <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $course->course->course_code }}</td>
 
-                                            <td>
-                                                <a href="#" class="btn btn-info">
-                                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
+                                        @if($courses[0]->dept->is_semester == 1)
+                                            @foreach($semesters as $key => $semester)
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $semester->name }}</td>
 
-                                        </tr>
-                                    @endforeach
+                                                    <td>
+                                                        <a href="#" class="btn btn-info">
+                                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            @foreach($years as $key => $year)
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $year->name }}</td>
+
+                                                    <td>
+                                                        <a href="#" class="btn btn-info">
+                                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
 
                                 </table>

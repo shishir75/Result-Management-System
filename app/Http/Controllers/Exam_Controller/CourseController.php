@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Exam_Controller;
 
 use App\Models\Dept;
 use App\Models\FinalMarks;
+use App\Models\Semester;
+use App\Models\Year;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,7 +23,15 @@ class CourseController extends Controller
         if (isset($dept))
         {
             $courses = FinalMarks::with('session', 'dept')->where('dept_id', $dept->id)->where('teacher_1_marks', '!=', null)->where('teacher_2_marks', '!=', null)->distinct()->get(['session_id', 'dept_id']);
-            return view('exam_controller.session.index', compact('courses', 'dept'));
+
+            if (count($courses) >= 1)
+            {
+                return view('exam_controller.session.index', compact('courses', 'dept'));
+
+            } else {
+                Toastr::error('No Data Available Right Now!', 'Error');
+                return redirect()->back();
+            }
 
         } else {
             Toastr::error('Invalid URL!', 'Error');
@@ -37,7 +47,11 @@ class CourseController extends Controller
         if (isset($dept) && isset($session_id))
         {
             $courses = FinalMarks::with('session', 'dept', 'course')->where('dept_id', $dept->id)->where('session_id', $session_id)->where('teacher_1_marks', '!=', null)->where('teacher_2_marks', '!=', null)->distinct()->get(['session_id', 'dept_id', 'course_id']);
-            return view('exam_controller.year_semester.index', compact('courses', 'dept'));
+
+            $semesters = Semester::all();
+            $years = Year::all();
+
+            return view('exam_controller.year_semester.index', compact('courses', 'dept', 'semesters', 'years'));
 
         } else {
             Toastr::error('Invalid URL!', 'Error');

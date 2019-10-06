@@ -87,7 +87,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $external->session->name }}</td>
-                                            <td>{{ $dept->is_semester == 1 ? $year ." - ". $semester : $semester }}</td>
+                                            <td>{{ $dept->is_semester == 1 ? $year ." - ". $semester : $year }}</td>
                                             <td>{{ $external->course->course_code .' - '. $external->course->course_title }}</td>
                                             <td>{{ $external_1->name }}</td>
                                             <td>{{ $external_2->name }}</td>
