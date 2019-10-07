@@ -76,7 +76,11 @@
                                             <td>{{ $mark->teacher_2_marks  }}</td>
                                             <td>
                                                 @if( $mark->teacher_1_marks - $mark->teacher_2_marks >= 12 | $mark->teacher_2_marks - $mark->teacher_1_marks >= 12 )
-                                                    {{ $mark->teacher_3_marks  }}
+                                                    @if($mark->teacher_3_marks != null)
+                                                        {{ $mark->teacher_3_marks  }}
+                                                    @else
+                                                       <span class="badge badge-warning">Not Found</span>
+                                                    @endif
                                                 @else
                                                     <span class="badge badge-info">No Applicable</span>
                                                 @endif
