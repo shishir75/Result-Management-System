@@ -98,7 +98,6 @@
 
                                                     $final_marks = ($mark1 + $mark2) / 2;
                                                 }
-
                                             @endphp
 
                                             <td>{{ $final_marks }}</td>
