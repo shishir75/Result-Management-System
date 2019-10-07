@@ -93,4 +93,28 @@ class CourseController extends Controller
             return redirect()->back();
         }
     }
+
+    public function marks($slug,$session_id, $year_semester_id, $course_id)
+    {
+        $dept = Dept::where('slug', $slug)->first();
+
+        if (isset($dept) && isset($session_id) && isset($course_id))
+        {
+            $marks = FinalMarks::with('session', 'dept', 'course')->where('session_id', $session_id)->where('dept_id', $dept->id)->where('course_id', $course_id)->get();
+
+            if (count($marks) > 0) {
+
+                $semester = Semester::findOrFail($year_semester_id);
+                $year = Year::findOrFail($year_semester_id);
+                return view('exam_controller.marks.index', compact('marks', 'year', 'semester'));
+
+            } else {
+                Toastr::error('No Marks Submitted yet!', 'Error');
+                return redirect()->back();
+            }
+        }
+
+    }
+
+
 }

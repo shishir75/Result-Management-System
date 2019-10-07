@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/exam_controller/marks/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Exam_Controller/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Exam_Controller/CourseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/exam_controller/course/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exam_controller/course/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -140,24 +143,24 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/exam_controller/course" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/exam_controller" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\course" />
-      <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller" />
-      <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher\thirdExaminer" />
-      <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher" />
-      <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher\finalMarks" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\year_semester" />
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\session" />
       <recent name="E:\xampp\htdocs\ju_rms\app/Models" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller" />
+      <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\course" />
+      <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher\thirdExaminer" />
+      <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher" />
+      <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher\finalMarks" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -223,7 +226,8 @@
       <workItem from="1570260614944" duration="5305000" />
       <workItem from="1570290719267" duration="6719000" />
       <workItem from="1570347080276" duration="10769000" />
-      <workItem from="1570379852095" duration="6493000" />
+      <workItem from="1570379852095" duration="8128000" />
+      <workItem from="1570451369587" duration="1656000" />
     </task>
     <servers />
   </component>

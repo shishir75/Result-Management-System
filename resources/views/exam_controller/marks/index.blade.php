@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Courses')
+@section('title', 'Marks')
 
 @push('css')
     <!-- DataTables -->
@@ -18,7 +18,7 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Courses</li>
+                            <li class="breadcrumb-item active">Marks</li>
                         </ol>
                     </div>
                 </div>
@@ -35,9 +35,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    COURSE LIST OF  {{ strtoupper($courses[0]->dept->is_semester == 1 ? $semester->name : $year->name ) }} OF SESSION {{ $session->name }}
-                                    <span class="float-right"><button class="btn btn-sm btn-info">Approve Me</button></span>
-                                    <span class="ml-5">DEPT : {{ strtoupper($courses[0]->dept->name) }}</span>
+                                    MARKS LIST OF  {{ strtoupper($marks[0]->dept->is_semester == 1 ? $semester->name : $year->name ) }} OF SESSION {{ $marks[0]->session->name }}
+                                    <span class="float-right text-info">COURSE : {{ $marks[0]->course->course_code }} - {{ strtoupper($marks[0]->course->course_title) }}</span>
+                                    <span class="ml-5">DEPT : {{ strtoupper($marks[0]->dept->name) }}</span>
 
                                 </h3>
                             </div>
@@ -47,63 +47,35 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Course Code</th>
-                                        <th>Course Title</th>
-                                        <th>Is Lab / Viva</th>
-                                        <th>Status</th>
-                                        <th>Marks</th>
+                                        <th>Reg No</th>
+                                        <th>Exam Roll</th>
+                                        <th>1st Examiner Marks</th>
+                                        <th>2nd Examiner Marks</th>
+                                        <th>3rd Examiner Marks</th>
+                                        <th>Final Marks</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Course Code</th>
-                                        <th>Course Title</th>
-                                        <th>Is Lab / Viva</th>
-                                        <th>Status</th>
-                                        <th>Marks</th>
+                                        <th>Reg No</th>
+                                        <th>Exam Roll</th>
+                                        <th>1st Examiner Marks</th>
+                                        <th>2nd Examiner Marks</th>
+                                        <th>3rd Examiner Marks</th>
+                                        <th>Final Marks</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($courses as $key => $course)
+                                    @foreach($marks as $key => $mark)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $course->course_code  }}</td>
-                                            <td>{{ $course->course_title  }}</td>
-                                            <td>
-                                                @if($course->is_lab == 1)
-                                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
-                                                @else
-                                                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                                                @endif
-                                            </td>
-                                            @php
-                                                $course_teacher_status_check = \App\Models\CourseTeacher::where('dept_id', $course->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->where('status', 1)->get();
-
-                                                $second_examiner_status_check = \App\Models\External::where('dept_id', $course->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->where('external_1_status', 1)->get();
-                                            @endphp
-
-                                            <td>
-                                                @if(count($course_teacher_status_check) == 1 && count($second_examiner_status_check) == 1)
-                                                    <span class="badge badge-info">Submitted</span>
-                                                @else
-                                                    <span class="badge badge-warning">Not Submitted</span>
-                                                @endif
-                                            </td>
-                                            <td>
-
-                                                @if(count($course_teacher_status_check) == 1 && count($second_examiner_status_check) == 1)
-                                                    <a href="{{ route('exam_controller.marks.index', [$course->dept->slug, $session->id, $course->year_semester_id, $course->id ]) }}" class="btn btn-success">
-                                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                                    </a>
-                                                @else
-                                                    <a href="#" class="btn btn-outline-danger">
-                                                        <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                                                    </a>
-                                                @endif
-
-                                            </td>
-
+                                            <td>{{ $mark->reg_no  }}</td>
+                                            <td>{{ $mark->exam_roll  }}</td>
+                                            <td>{{ $mark->teacher_1_marks  }}</td>
+                                            <td>{{ $mark->teacher_2_marks  }}</td>
+                                            <td>{{ $mark->teacher_3_marks  }}</td>
+                                            <td>Final Marks</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
