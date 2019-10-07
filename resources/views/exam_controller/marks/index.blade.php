@@ -74,8 +74,20 @@
                                             <td>{{ $mark->exam_roll  }}</td>
                                             <td>{{ $mark->teacher_1_marks  }}</td>
                                             <td>{{ $mark->teacher_2_marks  }}</td>
-                                            <td>{{ $mark->teacher_3_marks  }}</td>
-                                            <td>Final Marks</td>
+                                            <td>
+                                                @if( $mark->teacher_1_marks - $mark->teacher_2_marks >= 12 | $mark->teacher_2_marks - $mark->teacher_1_marks >= 12 )
+                                                    {{ $mark->teacher_3_marks  }}
+                                                @else
+                                                    <span class="badge badge-info">No Applicable</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if( $mark->teacher_1_marks - $mark->teacher_2_marks < 12 | $mark->teacher_2_marks - $mark->teacher_1_marks < 12 )
+                                                    {{ ($mark->teacher_1_marks + $mark->teacher_2_marks) / 2 }}
+                                                @else
+                                                    <span class="badge badge-info">No Applicable</span>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
