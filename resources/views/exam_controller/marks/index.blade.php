@@ -81,13 +81,27 @@
                                                     <span class="badge badge-info">No Applicable</span>
                                                 @endif
                                             </td>
-                                            <td>
-                                                @if( $mark->teacher_1_marks - $mark->teacher_2_marks < 12 | $mark->teacher_2_marks - $mark->teacher_1_marks < 12 )
-                                                    {{ ($mark->teacher_1_marks + $mark->teacher_2_marks) / 2 }}
-                                                @else
-                                                    <span class="badge badge-info">No Applicable</span>
-                                                @endif
-                                            </td>
+
+                                            @php
+                                                $mark1 = $mark->teacher_1_marks;
+                                                $mark2 = $mark->teacher_2_marks;
+                                                $mark3 = $mark->teacher_3_marks;
+
+                                                if( ($mark1 - $mark2) >= 12 | ($mark2 - $mark1) >= 12 )
+                                                {
+                                                    $numbers = array($mark1, $mark2, $mark3);
+                                                    rsort($numbers);
+
+                                                    $final_marks = ($numbers[0] + $numbers[1]) / 2;
+
+                                                } else {
+
+                                                    $final_marks = ($mark1 + $mark2) / 2;
+                                                }
+
+                                            @endphp
+
+                                            <td>{{ $final_marks }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
