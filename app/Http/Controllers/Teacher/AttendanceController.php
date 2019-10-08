@@ -96,7 +96,16 @@ class AttendanceController extends Controller
     {
         $attendances = Attendance::with('session', 'course', 'teacher')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->orderBy('attend_date', 'desc')->get(['attend_date', 'session_id', 'course_id', 'teacher_id']);
 
-        return view('teacher.attendance.show_all', compact('attendances'));
+        if (count($attendances) < 1)
+        {
+            Toastr::error("No Attendance added! Please Add Attendance!!", "Error");
+            return redirect()->back();
+            
+        } else {
+            return view('teacher.attendance.show_all', compact('attendances'));
+        }
+
+
     }
 
     public function show_all_attend($session_id,$course_id, $teacher_id)
@@ -104,9 +113,24 @@ class AttendanceController extends Controller
         $dates = Attendance::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('attend_date');
         $students_data = Attendance::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
 
-        $check_submit = CourseTeacher::where('course_id', $course_id)->where('session_id', $session_id)->where('dept_id', $students_data[0]->course->dept_id)->first();
+        if (count($students_data) < 1)
+        {
+            Toastr::error("No Attendance added! Please Add Attendance!!", "Error");
+            return redirect()->back();
 
-        return view('teacher.attendance.show_all_attend', compact('students_data', 'dates', 'session_id', 'course_id', 'teacher_id', 'check_submit'));
+        } else {
+
+            $check_submit = CourseTeacher::where('course_id', $course_id)->where('session_id', $session_id)->where('dept_id', $students_data[0]->course->dept_id)->first();
+
+            if (count($dates) < 1)
+            {
+                Toastr::error("No Attendance added! Please Add Attendance!!", "Error");
+                return redirect()->back();
+            } else {
+                return view('teacher.attendance.show_all_attend', compact('students_data', 'dates', 'session_id', 'course_id', 'teacher_id', 'check_submit'));
+            }
+
+        }
 
     }
 
