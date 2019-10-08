@@ -34,7 +34,10 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ strtoupper('Course list of '. $year->name ) }}</h3>
+                                <h3 class="card-title">
+                                    {{ strtoupper('Course list of '. $year->name ) }}
+                                    <span class="float-right">SESSION : {{ $session->name }}</span>
+                                </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -48,6 +51,8 @@
                                         <th>Lab / Viva</th>
                                         <th>In-course Marks</th>
                                         <th>Final Marks</th>
+                                        <th>Submitted</th>
+                                        <th>Approval</th>
                                         <th>Marks</th>
                                     </tr>
                                     </thead>
@@ -60,6 +65,8 @@
                                         <th>Lab / Viva</th>
                                         <th>In-course Marks</th>
                                         <th>Final Marks</th>
+                                        <th>Submitted</th>
+                                        <th>Approval</th>
                                         <th>Marks</th>
                                     </tr>
                                     </tfoot>
@@ -97,9 +104,25 @@
                                                 </td>
                                                 <td>{{ $course->incourse_marks }}</td>
                                                 <td>{{ $course->final_marks  }}</td>
+
+                                                @php
+                                                    $course_teacher_approval = \App\Models\CourseTeacher::where('dept_id', $course->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->first();
+                                                    $second_examiner_approval = \App\Models\External::where('dept_id', $course->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->first();
+                                                @endphp
+
                                                 <td>
-                                                    <a href="#" class="btn btn-success">
-                                                        <i class="fa fa-male" aria-hidden="true"></i>
+                                                    @if($course_teacher_approval->status == 1 && $second_examiner_approval->external_1_status)
+                                                        <span class="badge badge-success">Submitted</span>
+                                                    @else
+                                                        <span class="badge badge-warning">Not Submitted</span>
+                                                    @endif
+
+
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info">
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
                                                     </a>
                                                 </td>
                                             </tr>
