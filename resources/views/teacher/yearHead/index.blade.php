@@ -34,7 +34,7 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ strtoupper('Course list of '.$teacher->name ) }}</h3>
+                                <h3 class="card-title">{{ strtoupper('Session list of '.$years[0]->teacher->name ) }} FOR YEAR HEAD</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -43,94 +43,30 @@
                                     <tr>
                                         <th>Serial</th>
                                         <th>Session</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $teacher->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>In-course Marks</th>
-                                        <th>Final Marks</th>
-                                        <th>Attend</th>
-                                        <th>Tutorial</th>
-                                        <th>Assignment</th>
-                                        <th>Report</th>
-                                        <th>Quiz/Viva</th>
-                                        <th>Marks</th>
+                                        <th>Year</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
                                         <th>Session</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $teacher->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>In-course Marks</th>
-                                        <th>Final Marks</th>
-                                        <th>Attend</th>
-                                        <th>Tutorial</th>
-                                        <th>Assignment</th>
-                                        <th>Report</th>
-                                        <th>Quiz/Viva</th>
-                                        <th>Marks</th>
+                                        <th>Year</th>
+                                        <th>Action</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($course_teachers as $key => $course_teacher)
+                                    @foreach($years as $key => $year)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $course_teacher->session->name }}</td>
-                                            <td>{{ $course_teacher->course->course_code .' - '. $course_teacher->course->course_title }}</td>
-                                            <td>{{ $course_teacher->code }}</td>
-
-                                            <td>{{ number_format($course_teacher->course->credit_hour, 1) }}</td>
+                                            <td>{{ $year->session->name }}</td>
+                                            <td>{{ $year->year->name }}</td>
                                             <td>
-                                                @if($course_teacher->course->is_lab == true)
-                                                    <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
-                                                @else
-                                                    <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
-                                                @endif
-                                            </td>
-                                            <td>{{ $course_teacher->course->incourse_marks }}</td>
-                                            <td>{{ $course_teacher->course->final_marks  }}</td>
-                                            <td>
-                                                <a href="{{ route('teacher.attendance.create', $course_teacher->id) }}" class="btn btn-success">
+                                                <a href="#" class="btn btn-success">
                                                     <i class="fa fa-male" aria-hidden="true"></i>
                                                 </a>
                                             </td>
-                                            <td>
-                                                <a href="{{ route('teacher.tutorial.create', $course_teacher->id) }}" class="btn btn-info">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('teacher.assignment.create', $course_teacher->id) }}" class="btn btn-primary">
-                                                    <i class="fa fa-bars" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @if($course_teacher->course->is_lab == 1)
-                                                    <a href="{{ route('teacher.report.create', $course_teacher->id) }}" class="btn btn-success">
-                                                        <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                                                    </a>
-                                                @else
-                                                    <i class="fa fa-times-circle btn btn-outline-danger" aria-hidden="true"></i>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($course_teacher->course->is_lab == 1)
-                                                    <a href="{{ route('teacher.quiz.create', $course_teacher->id) }}" class="btn btn-info">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                                    </a>
-                                                @else
-                                                    <i class="fa fa-times-circle btn btn-outline-danger" aria-hidden="true"></i>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('teacher.marks.index', $course_teacher->id) }}" class="btn btn-success">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
+
                                         </tr>
                                     @endforeach
                                     </tbody>

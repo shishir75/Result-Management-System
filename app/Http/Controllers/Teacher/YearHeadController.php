@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Models\Teacher;
+use App\Models\YearHead;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class YearHeadController extends Controller
 {
@@ -14,7 +18,16 @@ class YearHeadController extends Controller
      */
     public function index()
     {
-        return 'ok';
+        $teacher = Teacher::where('name', Auth::user()->name)->first();
+        $years = YearHead::with('session', 'dept', 'year', 'teacher')->where('dept_id', $teacher->dept_id)->where('teacher_id', $teacher->id)->get();
+        if (count($years) > 0)
+        {
+            return view('teacher.yearHead.index', compact('years'));
+
+        } else {
+            Toastr::error('You are not appointed for any year head for any session!', 'Error');
+            return redirect()->back();
+        }
     }
 
     /**

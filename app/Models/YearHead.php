@@ -11,6 +11,11 @@ class YearHead extends Model
         return $this->belongsTo(Session::class);
     }
 
+    public function dept()
+    {
+        return $this->belongsTo(Dept::class);
+    }
+
     public function year()
     {
         return $this->belongsTo(Year::class);
