@@ -98,12 +98,25 @@ class ReportController extends Controller
     {
         $report_nos = Report::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('report_no');
         $students_data = Report::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
-        if (count($report_nos) < 1)
+
+        if (count($students_data) < 1)
         {
             Toastr::error("No Report Marks added! Please Add Report Marks!!", "Error");
             return redirect()->back();
+
+        } else {
+
+            $check_submit = CourseTeacher::where('course_id', $course_id)->where('session_id', $session_id)->where('dept_id', $students_data[0]->course->dept_id)->first();
+
+            if (count($report_nos) < 1)
+            {
+                Toastr::error("No Report Marks added! Please Add Report Marks!!", "Error");
+                return redirect()->back();
+            } else {
+                return view('teacher.report.show', compact('students_data', 'report_nos', 'session_id', 'course_id', 'teacher_id', 'check_submit'));
+            }
+
         }
-        return view('teacher.report.show', compact('students_data', 'report_nos', 'session_id', 'course_id', 'teacher_id'));
     }
 
 
