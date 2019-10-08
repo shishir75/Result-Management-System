@@ -54,7 +54,7 @@ class YearHeadController extends Controller
             Toastr::error('Invalid URL!', 'Error');
             return redirect()->back();
         }
-        
+
     }
 
 }

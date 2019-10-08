@@ -64,29 +64,52 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
+
+                                    @php
+                                        $i = 0;
+                                    @endphp
+
                                     @foreach($courses as $key => $course)
-                                        <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $course->course_code .' - '. $course->course_title }}</td>
-                                            <td>aaa</td>
 
-                                            <td>{{ number_format($course->credit_hour, 1) }}</td>
-                                            <td>
-                                                @if($course->is_lab == true)
-                                                    <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
-                                                @else
-                                                    <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
-                                                @endif
-                                            </td>
-                                            <td>{{ $course->incourse_marks }}</td>
-                                            <td>{{ $course->final_marks  }}</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success">
-                                                    <i class="fa fa-male" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
+                                        @php
+                                            $code = explode('-', $course->course_code);
+                                            $year_id = substr($code[1], 0, 1);
+                                            $semester_id = substr($code[1], 1, 1);
+                                        @endphp
 
-                                        </tr>
+                                        @if($year_id == $year->code)
+                                            @php
+                                                $i++;
+                                            @endphp
+
+                                            <tr>
+                                                <td>{{ $i }}</td>
+                                                <td>{{ $course->course_code .' - '. $course->course_title }}</td>
+                                                <td>{{ $courses[0]->dept->is_semester == 1 ? $year_id .' - '. $semester_id : $year_id }}</td>
+
+                                                <td>{{ number_format($course->credit_hour, 1) }}</td>
+                                                <td>
+                                                    @if($course->is_lab == true)
+                                                        <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
+                                                    @else
+                                                        <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
+                                                    @endif
+                                                </td>
+                                                <td>{{ $course->incourse_marks }}</td>
+                                                <td>{{ $course->final_marks  }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-success">
+                                                        <i class="fa fa-male" aria-hidden="true"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @else
+                                           @continue
+                                        @endif
+
+
+
+
                                     @endforeach
                                     </tbody>
 
