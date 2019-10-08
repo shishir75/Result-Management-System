@@ -84,40 +84,70 @@
                                             <td>{{ number_format($course_teacher->course->credit_hour, 1) }}</td>
                                             <td>
                                                 @if($course_teacher->course->is_lab == true)
-                                                    <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
+                                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
                                                 @else
-                                                    <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
+                                                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('teacher.attendance.create', $course_teacher->id) }}" class="btn btn-success">
-                                                    <i class="fa fa-male" aria-hidden="true"></i>
-                                                </a>
+                                                @if($course_teacher->incourse_submit == 0)
+                                                    <a href="{{ route('teacher.attendance.create', $course_teacher->id) }}" class="btn btn-success">
+                                                        <i class="fa fa-male" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('teacher.attendance.show_all_attend', [$course_teacher->session_id, $course_teacher->course_id, $course_teacher->teacher_id]) }}" class="btn btn-outline-success">
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('teacher.tutorial.create', $course_teacher->id) }}" class="btn btn-info">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                </a>
+                                                @if($course_teacher->incourse_submit == 0)
+                                                    <a href="{{ route('teacher.tutorial.create', $course_teacher->id) }}" class="btn btn-info">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('teacher.tutorial.show', [$course_teacher->session_id, $course_teacher->course_id, $course_teacher->teacher_id]) }}" class="btn btn-outline-info">
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('teacher.assignment.create', $course_teacher->id) }}" class="btn btn-primary">
-                                                    <i class="fa fa-bars" aria-hidden="true"></i>
-                                                </a>
+                                                @if($course_teacher->incourse_submit == 0)
+                                                    <a href="{{ route('teacher.assignment.create', $course_teacher->id) }}" class="btn btn-primary">
+                                                        <i class="fa fa-bars" aria-hidden="true"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('teacher.assignment.show', [$course_teacher->session_id, $course_teacher->course_id, $course_teacher->teacher_id]) }}" class="btn btn-outline-primary">
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                             <td>
                                                 @if($course_teacher->course->is_lab == 1)
-                                                    <a href="{{ route('teacher.report.create', $course_teacher->id) }}" class="btn btn-success">
-                                                        <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                                                    </a>
+                                                    @if($course_teacher->incourse_submit == 0)
+                                                        <a href="{{ route('teacher.report.create', $course_teacher->id) }}" class="btn btn-success">
+                                                            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('teacher.report.show', [$course_teacher->session_id, $course_teacher->course_id, $course_teacher->teacher_id]) }}" class="btn btn-outline-success">
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </a>
+                                                    @endif
                                                 @else
                                                     <i class="fa fa-times-circle btn btn-outline-danger" aria-hidden="true"></i>
                                                 @endif
                                             </td>
                                             <td>
                                                 @if($course_teacher->course->is_lab == 1)
-                                                    <a href="{{ route('teacher.quiz.create', $course_teacher->id) }}" class="btn btn-info">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                                    </a>
+                                                    @if($course_teacher->incourse_submit == 0)
+                                                        <a href="{{ route('teacher.quiz.create', $course_teacher->id) }}" class="btn btn-info">
+                                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('teacher.quiz.show', [$course_teacher->session_id, $course_teacher->course_id, $course_teacher->teacher_id]) }}" class="btn btn-outline-info">
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </a>
+                                                    @endif
                                                 @else
                                                     <i class="fa fa-times-circle btn btn-outline-danger" aria-hidden="true"></i>
                                                 @endif
@@ -142,8 +172,6 @@
                                                         <i class="fa fa-check" aria-hidden="true"></i>
                                                     </button>
                                                 @endif
-
-
                                             </td>
                                         </tr>
                                     @endforeach
