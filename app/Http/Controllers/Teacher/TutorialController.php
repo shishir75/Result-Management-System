@@ -94,14 +94,29 @@ class TutorialController extends Controller
 
     public function show($session_id,$course_id, $teacher_id)
     {
-        $tutorial_nos = Tutorial::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('tutorial_no');
         $students_data = Tutorial::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
-        if (count($tutorial_nos) < 1)
+
+        $tutorial_nos = Tutorial::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('tutorial_no');
+
+        if (count($students_data) < 1)
         {
             Toastr::error("No Tutorial Marks added! Please Add Tutorial Marks!!", "Error");
             return redirect()->back();
+
+        } else {
+
+            $check_submit = CourseTeacher::where('course_id', $course_id)->where('session_id', $session_id)->where('dept_id', $students_data[0]->course->dept_id)->first();
+
+            if (count($tutorial_nos) < 1)
+            {
+                Toastr::error("No Tutorial Marks added! Please Add Tutorial Marks!!", "Error");
+                return redirect()->back();
+            } else {
+                return view('teacher.tutorial.show', compact('students_data', 'tutorial_nos', 'session_id', 'course_id', 'teacher_id', 'check_submit'));
+            }
+
         }
-        return view('teacher.tutorial.show', compact('students_data', 'tutorial_nos', 'session_id', 'course_id', 'teacher_id'));
+
     }
 
 
