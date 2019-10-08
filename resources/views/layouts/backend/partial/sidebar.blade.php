@@ -340,6 +340,15 @@
                     </a>
                 </li>
 
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('teacher.year-head.index') }}" class="nav-link {{ Request::is('teacher/year-head*') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-dashboard"></i>
+                        <p>
+                            Year Head
+                        </p>
+                    </a>
+                </li>
+
 			@elseif(Request::is('student*')))
 				<li class="nav-item has-treeview">
 					<a href="{{ route('student.dashboard') }}" class="nav-link {{ Request::is('student/course*') ? 'active' : '' }}">
