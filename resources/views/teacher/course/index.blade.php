@@ -168,7 +168,7 @@
                                                         @method('PUT')
                                                     </form>
                                                 @else
-                                                    <button class="btn btn-success" type="button">
+                                                    <button class="btn btn-outline-success" type="button">
                                                         <i class="fa fa-check" aria-hidden="true"></i>
                                                     </button>
                                                 @endif
