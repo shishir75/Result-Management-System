@@ -51,7 +51,7 @@
                                         <th>Lab / Viva</th>
                                         <th>In-course Marks</th>
                                         <th>Final Marks</th>
-                                        <th>Submitted</th>
+                                        <th>In-Course Submitted</th>
                                         <th>Approval</th>
                                         <th>Marks</th>
                                     </tr>
@@ -65,7 +65,7 @@
                                         <th>Lab / Viva</th>
                                         <th>In-course Marks</th>
                                         <th>Final Marks</th>
-                                        <th>Submitted</th>
+                                        <th>In-Course Submitted</th>
                                         <th>Approval</th>
                                         <th>Marks</th>
                                     </tr>
@@ -114,7 +114,7 @@
                                                     @if($course_teacher_approval->status == 1 && $second_examiner_approval->external_1_status)
                                                         <span class="badge badge-success">Submitted</span>
                                                     @else
-                                                        <span class="badge badge-warning">Not Submitted</span>
+                                                        <span class="badge badge-danger">Not Submitted</span>
                                                     @endif
 
 
