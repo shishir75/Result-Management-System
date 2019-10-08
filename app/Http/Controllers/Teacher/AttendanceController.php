@@ -104,7 +104,9 @@ class AttendanceController extends Controller
         $dates = Attendance::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('attend_date');
         $students_data = Attendance::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
 
-        return view('teacher.attendance.show_all_attend', compact('students_data', 'dates', 'session_id', 'course_id', 'teacher_id'));
+        $check_submit = CourseTeacher::where('course_id', $course_id)->where('session_id', $session_id)->where('dept_id', $students_data[0]->course->dept_id)->first();
+
+        return view('teacher.attendance.show_all_attend', compact('students_data', 'dates', 'session_id', 'course_id', 'teacher_id', 'check_submit'));
 
     }
 

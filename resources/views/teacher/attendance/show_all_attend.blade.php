@@ -46,7 +46,9 @@
                                         <h5>Teacher Name : {{ $students_data[0]->teacher->name }}</h5>
                                     </div>
 
-                                    <a href="{{ route('teacher.attendance.show_all',[$students_data[0]->session->id,$students_data[0]->course->id, $students_data[0]->teacher->id] ) }}" class="btn btn-info float-right mb-4">View By Date</a>
+                                    @if($check_submit->incourse_submit == 0)
+                                        <a href="{{ route('teacher.attendance.show_all',[$students_data[0]->session->id,$students_data[0]->course->id, $students_data[0]->teacher->id] ) }}" class="btn btn-info float-right mb-4">View By Date</a>
+                                    @endif
 
                                     <table id="example1" class="table table-bordered table-striped text-center">
                                         <thead>
