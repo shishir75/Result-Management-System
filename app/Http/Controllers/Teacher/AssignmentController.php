@@ -96,12 +96,25 @@ class AssignmentController extends Controller
     {
         $assignment_nos = Assignment::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('assignment_no');
         $students_data = Assignment::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
-        if (count($assignment_nos) < 1)
+
+        if (count($students_data) < 1)
         {
-            Toastr::error("No assignment Marks added! Please Add assignment Marks!!", "Error");
+            Toastr::error("No Assignment Marks added! Please Add Assignment Marks!!", "Error");
             return redirect()->back();
+
+        } else {
+
+            $check_submit = CourseTeacher::where('course_id', $course_id)->where('session_id', $session_id)->where('dept_id', $students_data[0]->course->dept_id)->first();
+
+            if (count($assignment_nos) < 1)
+            {
+                Toastr::error("No Assignment Marks added! Please Add Tutorial Marks!!", "Error");
+                return redirect()->back();
+            } else {
+                return view('teacher.assignment.show', compact('students_data', 'assignment_nos', 'session_id', 'course_id', 'teacher_id', 'check_submit'));
+            }
+
         }
-        return view('teacher.assignment.show', compact('students_data', 'assignment_nos', 'session_id', 'course_id', 'teacher_id'));
     }
 
 
@@ -112,7 +125,7 @@ class AssignmentController extends Controller
 
         if (count($assignment_nos) < 1)
         {
-            Toastr::error("No Tutorial Marks added! Please Add Tutorial Marks!!", "Error");
+            Toastr::error("No Assignment Marks added! Please Add Assignment Marks!!", "Error");
             return redirect()->back();
         }
         return view('teacher.assignment.show_all', compact('assignments'));
