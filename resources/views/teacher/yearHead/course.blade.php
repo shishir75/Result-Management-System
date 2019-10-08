@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Year Head')
+@section('title', 'Course')
 
 @push('css')
     <!-- DataTables -->
@@ -18,7 +18,7 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Year Head</li>
+                            <li class="breadcrumb-item active">Course</li>
                         </ol>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ strtoupper('Session list of '.$years[0]->teacher->name ) }} FOR YEAR HEAD</h3>
+                                <h3 class="card-title">{{ strtoupper('Course list of '. $year->name ) }}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -42,28 +42,47 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Session</th>
-                                        <th>Year</th>
-                                        <th>Courses</th>
+                                        <th>Course Title</th>
+                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
+                                        <th>Credit Hour</th>
+                                        <th>Lab / Viva</th>
+                                        <th>In-course Marks</th>
+                                        <th>Final Marks</th>
+                                        <th>Marks</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Session</th>
-                                        <th>Year</th>
-                                        <th>Courses</th>
+                                        <th>Course Title</th>
+                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
+                                        <th>Credit Hour</th>
+                                        <th>Lab / Viva</th>
+                                        <th>In-course Marks</th>
+                                        <th>Final Marks</th>
+                                        <th>Marks</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($years as $key => $year)
+                                    @foreach($courses as $key => $course)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $year->session->name }}</td>
-                                            <td>{{ $year->year->name }}</td>
+                                            <td>{{ $course->course_code .' - '. $course->course_title }}</td>
+                                            <td>aaa</td>
+
+                                            <td>{{ number_format($course->credit_hour, 1) }}</td>
                                             <td>
-                                                <a href="{{ route('teacher.year-head.course', [$year->session->id, $year->year_id]) }}" class="btn btn-info">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                @if($course->is_lab == true)
+                                                    <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
+                                                @else
+                                                    <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
+                                                @endif
+                                            </td>
+                                            <td>{{ $course->incourse_marks }}</td>
+                                            <td>{{ $course->final_marks  }}</td>
+                                            <td>
+                                                <a href="#" class="btn btn-success">
+                                                    <i class="fa fa-male" aria-hidden="true"></i>
                                                 </a>
                                             </td>
 

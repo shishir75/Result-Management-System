@@ -145,6 +145,7 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::put('third-examiner/{id}/approved', 'ThirdExaminerController@approved')->name('third-examiner.approved');
 
     Route::get('year-head', 'YearHeadController@index')->name('year-head.index');
+    Route::get('year-head/{session_id}/{year_id}/course', 'YearHeadController@course')->name('year-head.course');
 
 });
 

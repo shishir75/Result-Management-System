@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/teacher/yearHead/course.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teacher/YearHeadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teacher/YearHeadController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/YearHead.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/YearHead.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/teacher/yearHead/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teacher/yearHead/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -142,7 +143,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/teacher" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/teacher/yearHead" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -150,11 +151,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher\yearHead" />
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher" />
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller" />
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\course" />
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher\thirdExaminer" />
-      <recent name="I:\xampp\htdocs\ju_rms\resources\views\teacher\finalMarks" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="I:\xampp\htdocs\ju_rms\resources\views\exam_controller\year_semester" />
@@ -228,7 +229,7 @@
       <workItem from="1570379852095" duration="8128000" />
       <workItem from="1570451369587" duration="4857000" />
       <workItem from="1570460022136" duration="6283000" />
-      <workItem from="1570496968428" duration="2333000" />
+      <workItem from="1570496968428" duration="5610000" />
     </task>
     <servers />
   </component>
