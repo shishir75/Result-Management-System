@@ -8,6 +8,7 @@ use App\Models\Report;
 use App\Models\Session;
 use App\Models\Student;
 use App\Models\Tutorial;
+use Brian2694\Toastr\Facades\Toastr;
 
 if (!function_exists('incourse_marks')) {
 
@@ -19,11 +20,13 @@ if (!function_exists('incourse_marks')) {
 
         $present_count = Attendance::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->where('attend', 'P')->count();
         $total_count = Attendance::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->count();
+
         if ($total_count > 0)
         {
             $attendance = ($present_count/$total_count)*10;
         } else {
-            $attendance = 0;
+            Toastr::error('No attendance data found', 'Error');
+            return false;
         }
 
         $tutorials_best_two = Tutorial::where('course_id', $course->id)->where('session_id', $session->id)->where('student_id', $student->id)->orderBy('marks', 'desc')->take(2)->get();
@@ -36,10 +39,12 @@ if (!function_exists('incourse_marks')) {
             $tutorial_marks = ($tutorials_best_two[0]->marks + $tutorials_best_two[1]->marks )/2;
             if (!isset($tutorial_marks))
             {
-                $tutorial_marks = 0;
+                Toastr::error('Not enough tutorial data found', 'Error');
+                return false;
             }
         } else {
-            $tutorial_marks = 0;
+            Toastr::error('Not enough tutorial data found', 'Error');
+            return false;
         }
 
         if (count($assignments_best_two) >= 2)
@@ -47,32 +52,41 @@ if (!function_exists('incourse_marks')) {
             $assignment_marks = ($assignments_best_two[0]->marks + $assignments_best_two[1]->marks )/2;
             if (!isset($assignment_marks))
             {
-                $assignment_marks = 0;
+                Toastr::error('Not enough assignment data found', 'Error');
+                return false;
             }
         } else {
-            $assignment_marks = 0;
+            Toastr::error('Not enough assignment data found', 'Error');
+            return false;
         }
 
-        if (count($reports_best_two) >= 2)
+        if ($course->is_lab == 1)
         {
-            $report_marks = ($reports_best_two[0]->marks + $reports_best_two[1]->marks )/2;
-            if (!isset($report_marks))
+            if (count($reports_best_two) >= 2)
             {
-                $report_marks = 0;
+                $report_marks = ($reports_best_two[0]->marks + $reports_best_two[1]->marks )/2;
+                if (!isset($report_marks))
+                {
+                    Toastr::error('Not enough report data found', 'Error');
+                    return false;
+                }
+            } else {
+                Toastr::error('Not enough report data found', 'Error');
+                return false;
             }
-        } else {
-            $report_marks = 0;
-        }
 
-        if (count($quizzes_best_two) >= 2)
-        {
-            $quiz_marks = ($quizzes_best_two[0]->marks + $quizzes_best_two[1]->marks )/2;
-            if (!isset($quiz_marks))
+            if (count($quizzes_best_two) >= 2)
             {
-                $quiz_marks = 0;
+                $quiz_marks = ($quizzes_best_two[0]->marks + $quizzes_best_two[1]->marks )/2;
+                if (!isset($quiz_marks))
+                {
+                    Toastr::error('Not enough quiz data found', 'Error');
+                    return false;
+                }
+            } else {
+                Toastr::error('Not enough quiz data found', 'Error');
+                return false;
             }
-        } else {
-            $quiz_marks = 0;
         }
 
         if ($course->is_lab != 1)

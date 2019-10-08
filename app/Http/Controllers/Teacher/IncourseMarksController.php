@@ -33,13 +33,25 @@ class IncourseMarksController extends Controller
                 foreach ($students as $student)
                 {
                     $marks = new IncourseMark();
-                    $marks->session_id = $course->session_id;
-                    $marks->dept_id = $teacher->dept_id;
-                    $marks->course_id = $course->course_id;
-                    $marks->reg_no = $student->reg_no;
-                    $marks->exam_roll = $student->exam_roll;
-                    $marks->marks = incourse_marks($student->id, $course->course->id);
-                    $marks->save();
+
+                    $incourse_marks = incourse_marks($student->id, $course->course->id);
+
+                    if ($incourse_marks != false)
+                    {
+                        $marks->session_id = $course->session_id;
+                        $marks->dept_id = $teacher->dept_id;
+                        $marks->course_id = $course->course_id;
+                        $marks->reg_no = $student->reg_no;
+                        $marks->exam_roll = $student->exam_roll;
+                        $marks->marks = $incourse_marks;
+                        $marks->save();
+
+                    } else {
+                        return redirect()->back();
+                        break;
+                    }
+
+
                 }
 
 
