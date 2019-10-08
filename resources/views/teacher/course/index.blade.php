@@ -47,8 +47,6 @@
                                         <th>{{ $teacher->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
                                         <th>Credit Hour</th>
                                         <th>Lab / Viva</th>
-                                        <th>In-course Marks</th>
-                                        <th>Final Marks</th>
                                         <th>Attend</th>
                                         <th>Tutorial</th>
                                         <th>Assignment</th>
@@ -66,8 +64,6 @@
                                         <th>{{ $teacher->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
                                         <th>Credit Hour</th>
                                         <th>Lab / Viva</th>
-                                        <th>In-course Marks</th>
-                                        <th>Final Marks</th>
                                         <th>Attend</th>
                                         <th>Tutorial</th>
                                         <th>Assignment</th>
@@ -93,8 +89,6 @@
                                                     <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
                                                 @endif
                                             </td>
-                                            <td>{{ $course_teacher->course->incourse_marks }}</td>
-                                            <td>{{ $course_teacher->course->final_marks  }}</td>
                                             <td>
                                                 <a href="{{ route('teacher.attendance.create', $course_teacher->id) }}" class="btn btn-success">
                                                     <i class="fa fa-male" aria-hidden="true"></i>
@@ -135,10 +129,10 @@
                                             </td>
                                             <td>
                                                 @if($course_teacher->incourse_submit == 0)
-                                                    <button class="btn btn-warning" type="button" onclick="approvedItem({{ $course_teacher->id }})">
+                                                    <button class="btn btn-warning" type="button" onclick="approvedItem({{ $course_teacher->course->id }})">
                                                         <i class="fa fa-question" aria-hidden="true"></i>
                                                     </button>
-                                                    <form id="approved-form-{{ $course_teacher->id }}" action="{{ route('teacher.in-course.approved', [$course_teacher->id]) }}" method="post"
+                                                    <form id="approved-form-{{ $course_teacher->course->id }}" action="{{ route('teacher.in-course.approved', [$course_teacher->course->id]) }}" method="post"
                                                           style="display:none;">
                                                         @csrf
                                                         @method('PUT')
