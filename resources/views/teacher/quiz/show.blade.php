@@ -46,8 +46,9 @@
                                     <h5>Teacher Name : {{ $students_data[0]->teacher->name }}</h5>
                                 </div>
 
-                                <a href="{{ route('teacher.quiz.show_all', [$students_data[0]->session->id,$students_data[0]->course->id, $students_data[0]->teacher->id]) }}" class="btn btn-warning float-right mb-4">Edit Quiz/Viva Marks</a>
-
+                                @if($check_submit->incourse_submit == 0)
+                                    <a href="{{ route('teacher.quiz.show_all', [$students_data[0]->session->id,$students_data[0]->course->id, $students_data[0]->teacher->id]) }}" class="btn btn-warning float-right mb-4">Edit Quiz/Viva Marks</a>
+                                @endif
                                 <table id="example1" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>

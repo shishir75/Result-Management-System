@@ -98,12 +98,26 @@ class QuizController extends Controller
     {
         $quiz_nos = Quiz::where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get('quiz_no');
         $students_data = Quiz::with('student', 'course', 'teacher', 'session')->where('course_id', $course_id)->where('session_id', $session_id)->where('teacher_id', $teacher_id)->distinct()->get(['student_id', 'session_id', 'course_id', 'teacher_id']);
-        if (count($quiz_nos) < 1)
+
+        if (count($students_data) < 1)
         {
             Toastr::error("No Quiz / Viva Marks added! Please Add Quiz / Viva Marks!!", "Error");
             return redirect()->back();
+
+        } else {
+
+            $check_submit = CourseTeacher::where('course_id', $course_id)->where('session_id', $session_id)->where('dept_id', $students_data[0]->course->dept_id)->first();
+
+            if (count($quiz_nos) < 1)
+            {
+                Toastr::error("No Quiz / Viva Marks added! Please Add Quiz / Viva Marks!!", "Error");
+                return redirect()->back();
+            } else {
+                return view('teacher.quiz.show', compact('students_data', 'quiz_nos', 'session_id', 'course_id', 'teacher_id', 'check_submit'));
+            }
+
         }
-        return view('teacher.quiz.show', compact('students_data', 'quiz_nos', 'session_id', 'course_id', 'teacher_id'));
+
     }
 
 
