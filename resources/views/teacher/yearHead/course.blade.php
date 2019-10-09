@@ -119,8 +119,6 @@
                                                 </td>
                                                 @php
                                                     $check_approval = App\Models\YearHeadApproval::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->first();
-
-                                                    //dd($check_approval->approved);
                                                 @endphp
                                                 <td>
                                                     @if(isset($check_approval) && $check_approval->approved == 1)
@@ -128,8 +126,6 @@
                                                     @else
                                                         <span class="badge badge-danger">Not Approved</span>
                                                     @endif
-
-
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('teacher.year-head.marks', [$session->id, $course->id]) }}" class="btn btn-info">

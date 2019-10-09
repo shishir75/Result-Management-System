@@ -56,23 +56,6 @@
                                         <th>Submit</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Serial</th>
-                                        <th>Session</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $teacher->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>Attend</th>
-                                        <th>Tutorial</th>
-                                        <th>Assignment</th>
-                                        <th>Report</th>
-                                        <th>Quiz/Viva</th>
-                                        <th>Marks</th>
-                                        <th>Submit</th>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
                                     @foreach($course_teachers as $key => $course_teacher)
                                         <tr>

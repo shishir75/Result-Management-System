@@ -53,20 +53,6 @@
                                         <th>Submit</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Serial</th>
-                                        <th>Session</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $teacher->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>Written Marks</th>
-                                        <th>Add Written Marks</th>
-                                        <th>View Written Marks</th>
-                                        <th>Submit</th>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
                                     @php
                                         $i = 0;
@@ -116,9 +102,9 @@
                                                         <td>{{ number_format($third_examiner_course->course->credit_hour, 1) }}</td>
                                                         <td>
                                                             @if($third_examiner_course->course->is_lab == true)
-                                                                <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
+                                                                <i class="fa fa-check text-success" aria-hidden="true"></i>
                                                             @else
-                                                                <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
+                                                                <i class="fa fa-times text-danger" aria-hidden="true"></i>
                                                             @endif
                                                         </td>
                                                         <td>{{ $third_examiner_course->course->final_marks  }}</td>
@@ -147,7 +133,7 @@
                                                                     @method('PUT')
                                                                 </form>
                                                             @else
-                                                                <button class="btn btn-success" type="button">
+                                                                <button class="btn btn-outline-success" type="button">
                                                                     <i class="fa fa-check" aria-hidden="true"></i>
                                                                 </button>
                                                             @endif
