@@ -21,6 +21,7 @@ class CreateIncourseMarksTable extends Migration
             $table->integer('reg_no');
             $table->integer('exam_roll');
             $table->float('marks')->nullable();
+            $table->float('theory_marks')->nullable();
             $table->timestamps();
             $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');
             $table->foreign('dept_id')->references('id')->on('depts')->onDelete('cascade');
