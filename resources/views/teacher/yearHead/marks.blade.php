@@ -36,6 +36,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     {{ strtoupper('Total Marks of '. $final_marks[0]->course->course_code .' - '. $final_marks[0]->course->course_title ) }}
+                                    <span><a href="#" class="btn btn-sm btn-warning text-bold ml-5">Approve Me</a></span>
                                     <span class="float-right">SESSION : {{ $final_marks[0]->session->name }}</span>
                                 </h3>
                             </div>
