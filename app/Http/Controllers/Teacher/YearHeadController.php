@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Teacher;
 use App\Models\Course;
 use App\Models\CourseTeacher;
 use App\Models\FinalMarks;
+use App\Models\IncourseMark;
 use App\Models\Session;
+use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Year;
 use App\Models\YearHead;
@@ -111,6 +113,47 @@ class YearHeadController extends Controller
                     return redirect()->back();
 
                 } else {
+
+                    $students = Student::where('dept_id', $teacher->dept_id)->get();
+                    if (count($students) > 0)
+                    {
+                        foreach ($students as $student)
+                        {
+                            $marks = IncourseMark::where('session_id', $session->id)->where('dept_id', $teacher->dept_id)->where('course_id', $course->id)->where('reg_no', $student->reg_no)->where('exam_roll', $student->exam_roll)->first();
+
+                            $final_mark = FinalMarks::where('session_id', $session->id)->where('dept_id', $teacher->dept_id)->where('course_id', $course->id)->where('reg_no', $student->reg_no)->where('exam_roll', $student->exam_roll)->first();
+
+                            $numbers = array($final_mark->teacher_1_marks, $final_mark->teacher_2_marks, $final_mark->teacher_3_marks);
+                            rsort($numbers);
+
+                            if ($final_mark->teacher_1_marks - $final_mark->teacher_2_marks >= 12 | $final_mark->teacher_2_marks - $final_mark->teacher_1_marks >= 12)
+                            {
+                                if ($final_mark->teacher_2_marks != null)
+                                {
+                                    $final_marks_average = ($numbers[0] + $numbers[1]) / 2;
+
+                                } else {
+                                    $final_marks_average = ($final_mark->teacher_1_marks + $final_mark->teacher_2_marks) / 2;
+                                }
+
+                            } else {
+                                $final_marks_average = ($final_mark->teacher_1_marks + $final_mark->teacher_2_marks) / 2;
+                            }
+
+                            if (isset($marks))
+                            {
+                                $marks->theory_marks = $final_marks_average;
+                                $marks->save();
+
+                            } else {
+                                continue;
+                            }
+                        }
+
+                    } else {
+                        Toastr::error('No students Found!', 'Error');
+                        return redirect()->back();
+                    }
 
                     $year_head_approval = new YearHeadApproval();
                     $year_head_approval->session_id = $session->id;

@@ -112,7 +112,7 @@
 
                                                     @if( $marks->teacher_1_marks - $marks->teacher_2_marks >= 12 | $marks->teacher_2_marks - $marks->teacher_1_marks >= 12 )
                                                         @if($marks->teacher_3_marks != null)
-                                                            {{ number_format( $incourse_marks + $final_marks_average, 1 ) }}
+                                                            {{ number_format($final_marks_average, 1 ) }}
                                                         @else
                                                             <span class="badge badge-danger">3rd Examiner Marks Not Found</span>
                                                         @endif
