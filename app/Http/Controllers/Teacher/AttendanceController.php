@@ -100,7 +100,7 @@ class AttendanceController extends Controller
         {
             Toastr::error("No Attendance added! Please Add Attendance!!", "Error");
             return redirect()->back();
-            
+
         } else {
             return view('teacher.attendance.show_all', compact('attendances'));
         }
