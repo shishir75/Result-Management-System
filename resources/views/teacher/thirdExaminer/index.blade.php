@@ -142,7 +142,7 @@
                                                     </tr>
 
                                                 @else
-                                                    @continue
+                                                    @break
                                                 @endif
 
                                             @endforeach
