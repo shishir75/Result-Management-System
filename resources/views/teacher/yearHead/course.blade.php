@@ -97,9 +97,9 @@
                                                 <td>{{ number_format($course->credit_hour, 1) }}</td>
                                                 <td>
                                                     @if($course->is_lab == true)
-                                                        <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
+                                                        <i class="fa fa-check text-success" aria-hidden="true"></i>
                                                     @else
-                                                        <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
+                                                        <i class="fa fa-times text-danger" aria-hidden="true"></i>
                                                     @endif
                                                 </td>
                                                 <td>{{ $course->incourse_marks }}</td>
@@ -111,7 +111,7 @@
                                                 @endphp
 
                                                 <td>
-                                                    @if($course_teacher_approval->status == 1 && $second_examiner_approval->external_1_status)
+                                                    @if(isset($course_teacher_approval) && $course_teacher_approval->status == 1 && isset($second_examiner_approval) && $second_examiner_approval->external_1_status == 1)
                                                         <span class="badge badge-success">Submitted</span>
                                                     @else
                                                         <span class="badge badge-danger">Not Submitted</span>
