@@ -140,9 +140,9 @@
                                                         </td>
 
                                                     </tr>
-
-                                                @else
                                                     @break
+                                                @else
+                                                    @continue
                                                 @endif
 
                                             @endforeach

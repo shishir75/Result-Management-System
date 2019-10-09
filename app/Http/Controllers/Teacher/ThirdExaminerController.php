@@ -106,7 +106,7 @@ class ThirdExaminerController extends Controller
         }
 
         Toastr::success('Third Examiner Marks Added Successfully!', 'Success');
-        return redirect()->route('teacher.second-examiner.show', [$session_id, $course_id]);
+        return redirect()->route('teacher.third-examiner.show', [$session_id, $course_id]);
 
 
     }
