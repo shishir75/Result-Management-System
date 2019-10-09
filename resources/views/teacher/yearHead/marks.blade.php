@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Course')
+@section('title', 'Final Marks')
 
 @push('css')
     <!-- DataTables -->
@@ -18,7 +18,7 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Course</li>
+                            <li class="breadcrumb-item active">Final Marks</li>
                         </ol>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    {{ strtoupper('Course list of '. $year->name ) }}
-                                    <span class="float-right">SESSION : {{ $session->name }}</span>
+                                    {{ strtoupper('Course list of ' ) }}
+                                    <span class="float-right">SESSION : {{ $final_marks[0]->session->name }}</span>
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -45,95 +45,69 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
+                                        <th>Reg No</th>
+                                        <th>Exam Roll</th>
                                         <th>In-course Marks</th>
-                                        <th>Final Marks</th>
-                                        <th>In-Course Submitted</th>
-                                        <th>Approval</th>
-                                        <th>Marks</th>
+                                        <th>Teacher 1 Marks</th>
+                                        <th>Teacher 2 Marks</th>
+                                        <th>Teacher 3 Marks</th>
+                                        <th>Total Marks</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
+                                        <th>Reg No</th>
+                                        <th>Exam Roll</th>
                                         <th>In-course Marks</th>
-                                        <th>Final Marks</th>
-                                        <th>In-Course Submitted</th>
-                                        <th>Approval</th>
-                                        <th>Marks</th>
+                                        <th>Teacher 1 Marks</th>
+                                        <th>Teacher 2 Marks</th>
+                                        <th>Teacher 3 Marks</th>
+                                        <th>Total Marks</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
 
-                                    @php
-                                        $i = 0;
-                                    @endphp
-
-                                    @foreach($courses as $key => $course)
-
-                                        @php
-                                            $code = explode('-', $course->course_code);
-                                            $year_id = substr($code[1], 0, 1);
-                                            $semester_id = substr($code[1], 1, 1);
-                                        @endphp
-
-                                        @if($year_id == $year->code)
-                                            @php
-                                                $i++;
-                                            @endphp
-
+                                        @foreach($final_marks as $key => $marks)
                                             <tr>
-                                                <td>{{ $i }}</td>
-                                                <td>{{ $course->course_code .' - '. $course->course_title }}</td>
-                                                <td>{{ $courses[0]->dept->is_semester == 1 ? $year_id .' - '. $semester_id : $year_id }}</td>
-
-                                                <td>{{ number_format($course->credit_hour, 1) }}</td>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $marks->reg_no }}</td>
+                                                <td>{{ $marks->exam_roll }}</td>
+                                                <td>{{ number_format(0, 1) }}</td>
+                                                <td>{{ number_format($marks->teacher_1_marks, 1) }}</td>
+                                                <td>{{ number_format($marks->teacher_2_marks, 1) }}</td>
                                                 <td>
-                                                    @if($course->is_lab == true)
-                                                        <p class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></p>
+                                                    @if( $marks->teacher_1_marks - $marks->teacher_2_marks >= 12 | $marks->teacher_2_marks - $marks->teacher_1_marks >= 12 )
+                                                        @if($marks->teacher_3_marks != null)
+                                                            {{ number_format($marks->teacher_3_marks, 1) }}
+                                                        @else
+                                                            <span class="badge badge-danger">3rd Examiner Marks Not Found</span>
+                                                        @endif
                                                     @else
-                                                        <p class="btn btn-sm btn-warning"><i class="fa fa-times" aria-hidden="true"></i></p>
+                                                        <span class="badge badge-info">Not Applicable</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ $course->incourse_marks }}</td>
-                                                <td>{{ $course->final_marks  }}</td>
-
-                                                @php
-                                                    $course_teacher_approval = \App\Models\CourseTeacher::where('dept_id', $course->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->first();
-                                                    $second_examiner_approval = \App\Models\External::where('dept_id', $course->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->first();
-                                                @endphp
-
                                                 <td>
-                                                    @if($course_teacher_approval->status == 1 && $second_examiner_approval->external_1_status)
-                                                        <span class="badge badge-success">Submitted</span>
+                                                    @php
+                                                        $numbers = array($marks->teacher_1_marks, $marks->teacher_2_marks, $marks->teacher_3_marks);
+                                                        rsort($numbers);
+                                                    @endphp
+
+                                                    @if( $marks->teacher_1_marks - $marks->teacher_2_marks >= 12 | $marks->teacher_2_marks - $marks->teacher_1_marks >= 12 )
+                                                        @if($marks->teacher_3_marks != null)
+                                                            {{ number_format( ($numbers[0] + $numbers[1]) / 2, 1 ) }}
+                                                        @else
+                                                            <span class="badge badge-danger">3rd Examiner Marks Not Found</span>
+                                                        @endif
+
+
                                                     @else
-                                                        <span class="badge badge-danger">Not Submitted</span>
+                                                        {{ number_format( ($numbers[0] + $numbers[1]) / 2, 1 ) }}
                                                     @endif
-
-
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    <a href="{{ route('teacher.year-head.marks', [$session->id, $course->id]) }}" class="btn btn-info">
-                                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                                    </a>
                                                 </td>
                                             </tr>
-                                        @else
-                                           @continue
-                                        @endif
+                                        @endforeach
 
-
-
-
-                                    @endforeach
                                     </tbody>
 
                                 </table>

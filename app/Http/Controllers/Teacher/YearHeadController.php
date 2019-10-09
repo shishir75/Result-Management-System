@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Models\Course;
 use App\Models\CourseTeacher;
+use App\Models\FinalMarks;
 use App\Models\Session;
 use App\Models\Teacher;
 use App\Models\Year;
@@ -54,6 +55,35 @@ class YearHeadController extends Controller
             Toastr::error('Invalid URL!', 'Error');
             return redirect()->back();
         }
+
+    }
+
+
+    public function marks($session_id, $course_id)
+    {
+        $teacher = Teacher::where('name', Auth::user()->name)->first();
+        $session = Session::find($session_id);
+        $course = Course::find($course_id);
+
+        if (isset($session) && isset($course))
+        {
+            $final_marks = FinalMarks::with('session', 'dept', 'course')->where('session_id', $session->id)->where('dept_id', $teacher->dept_id)->where('course_id', $course->id)->get();
+
+            if (count($final_marks) > 0)
+            {
+                return view('teacher.yearHead.marks', compact('final_marks'));
+
+            } else {
+                Toastr::error('No Marks Submitted yet!', 'Error');
+                return redirect()->back();
+            }
+
+        } else {
+            Toastr::error('Invalid URL!', 'Error');
+            return redirect()->back();
+        }
+
+
 
     }
 
