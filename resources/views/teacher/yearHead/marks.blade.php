@@ -36,8 +36,10 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     {{ strtoupper('Total Marks of '. $final_marks[0]->course->course_code .' - '. $final_marks[0]->course->course_title ) }}
-                                    <span>
 
+                                    @if(isset($check_approval) && $check_approval->approved == 1)
+                                        <span class="btn btn-sm btn-success text-bold ml-5">Approved</span>
+                                    @else
                                         <button class="btn btn-sm btn-warning text-bold ml-5" type="button" onclick="approvedItem({{ $final_marks[0]->course->id }})">
                                             Approve Me
                                         </button>
@@ -46,9 +48,7 @@
                                             @csrf
                                             @method('PUT')
                                         </form>
-
-
-                                    </span>
+                                    @endif
                                     <span class="float-right">SESSION : {{ $final_marks[0]->session->name }}</span>
                                 </h3>
                             </div>

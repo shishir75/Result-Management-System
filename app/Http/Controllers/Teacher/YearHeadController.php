@@ -75,7 +75,9 @@ class YearHeadController extends Controller
 
             if (count($final_marks) > 0)
             {
-                return view('teacher.yearHead.marks', compact('final_marks'));
+                $check_approval = YearHeadApproval::where('session_id', $session->id)->where('dept_id', $teacher->dept_id)->where('course_id', $course->id)->first();
+
+                return view('teacher.yearHead.marks', compact('final_marks', 'check_approval'));
 
             } else {
                 Toastr::error('No Marks Submitted yet!', 'Error');
