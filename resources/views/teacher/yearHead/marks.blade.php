@@ -35,7 +35,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    {{ strtoupper('Course list of ' ) }}
+                                    {{ strtoupper('Total Marks of '. $final_marks[0]->course->course_code .' - '. $final_marks[0]->course->course_title ) }}
                                     <span class="float-right">SESSION : {{ $final_marks[0]->session->name }}</span>
                                 </h3>
                             </div>
@@ -48,32 +48,33 @@
                                         <th>Reg No</th>
                                         <th>Exam Roll</th>
                                         <th>In-course Marks</th>
-                                        <th>Teacher 1 Marks</th>
-                                        <th>Teacher 2 Marks</th>
-                                        <th>Teacher 3 Marks</th>
+                                        <th>Course Teacher Marks</th>
+                                        <th>2nd Examiner Marks</th>
+                                        <th>3rd Examiner Marks</th>
+                                        <th>Final Exam Marks</th>
                                         <th>Total Marks</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Serial</th>
-                                        <th>Reg No</th>
-                                        <th>Exam Roll</th>
-                                        <th>In-course Marks</th>
-                                        <th>Teacher 1 Marks</th>
-                                        <th>Teacher 2 Marks</th>
-                                        <th>Teacher 3 Marks</th>
-                                        <th>Total Marks</th>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
 
                                         @foreach($final_marks as $key => $marks)
+
+                                            @php
+                                                $incourse = \App\Models\IncourseMark::where('dept_id', $marks->dept_id)->where('session_id', $marks->session_id)->where('course_id', $marks->course_id)->where('reg_no', $marks->reg_no)->where('exam_roll', $marks->exam_roll)->first();
+                                                if (isset($incourse))
+                                                {
+                                                    $incourse_marks = $incourse->marks;
+                                                } else {
+                                                    $incourse_marks = 0;
+                                                }
+
+                                            @endphp
+
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $marks->reg_no }}</td>
                                                 <td>{{ $marks->exam_roll }}</td>
-                                                <td>{{ number_format(0, 1) }}</td>
+                                                <td>{{ number_format($incourse_marks, 1) }}</td>
                                                 <td>{{ number_format($marks->teacher_1_marks, 1) }}</td>
                                                 <td>{{ number_format($marks->teacher_2_marks, 1) }}</td>
                                                 <td>
@@ -91,21 +92,49 @@
                                                     @php
                                                         $numbers = array($marks->teacher_1_marks, $marks->teacher_2_marks, $marks->teacher_3_marks);
                                                         rsort($numbers);
+
+                                                        $final_marks_average = ($numbers[0] + $numbers[1]) / 2;
+
                                                     @endphp
 
                                                     @if( $marks->teacher_1_marks - $marks->teacher_2_marks >= 12 | $marks->teacher_2_marks - $marks->teacher_1_marks >= 12 )
                                                         @if($marks->teacher_3_marks != null)
-                                                            {{ number_format( ($numbers[0] + $numbers[1]) / 2, 1 ) }}
+                                                            {{ number_format( $incourse_marks + $final_marks_average, 1 ) }}
                                                         @else
                                                             <span class="badge badge-danger">3rd Examiner Marks Not Found</span>
                                                         @endif
 
 
                                                     @else
-                                                        {{ number_format( ($numbers[0] + $numbers[1]) / 2, 1 ) }}
+                                                        {{ number_format($final_marks_average, 1) }}
                                                     @endif
                                                 </td>
+
+                                                <td>
+                                                    @php
+                                                        $numbers = array($marks->teacher_1_marks, $marks->teacher_2_marks, $marks->teacher_3_marks);
+                                                        rsort($numbers);
+
+                                                        $final_marks_average = ($numbers[0] + $numbers[1]) / 2;
+
+                                                    @endphp
+
+                                                    @if( $marks->teacher_1_marks - $marks->teacher_2_marks >= 12 | $marks->teacher_2_marks - $marks->teacher_1_marks >= 12 )
+                                                        @if($marks->teacher_3_marks != null)
+                                                            {{ number_format( $incourse_marks + $final_marks_average, 1 ) }}
+                                                        @else
+                                                            <span class="badge badge-danger">3rd Examiner Marks Not Found</span>
+                                                        @endif
+
+
+                                                    @else
+                                                        {{ round($incourse_marks + $final_marks_average) }}
+                                                    @endif
+                                                </td>
+
                                             </tr>
+
+
                                         @endforeach
 
                                     </tbody>
