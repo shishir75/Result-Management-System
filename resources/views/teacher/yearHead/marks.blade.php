@@ -36,7 +36,19 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     {{ strtoupper('Total Marks of '. $final_marks[0]->course->course_code .' - '. $final_marks[0]->course->course_title ) }}
-                                    <span><a href="#" class="btn btn-sm btn-warning text-bold ml-5">Approve Me</a></span>
+                                    <span>
+
+                                        <button class="btn btn-sm btn-warning text-bold ml-5" type="button" onclick="approvedItem({{ $final_marks[0]->course->id }})">
+                                            Approve Me
+                                        </button>
+                                        <form id="approved-form-{{ $final_marks[0]->course->id }}" action="{{ route('teacher.year-head.approved', [$final_marks[0]->session->id, $final_marks[0]->course->id]) }}" method="post"
+                                              style="display:none;">
+                                            @csrf
+                                            @method('PUT')
+                                        </form>
+
+
+                                    </span>
                                     <span class="float-right">SESSION : {{ $final_marks[0]->session->name }}</span>
                                 </h3>
                             </div>
@@ -189,7 +201,7 @@
 
 
     <script type="text/javascript">
-        function deleteItem(id) {
+        function approvedItem(id) {
             const swalWithBootstrapButtons = swal.mixin({
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
@@ -201,20 +213,20 @@
                 text: "You won't be able to revert this!",
                 type: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
+                confirmButtonText: 'Yes, Approve!',
+                cancelButtonText: 'No, Cancel!',
                 reverseButtons: true
             }).then((result) => {
                 if (result.value) {
                     event.preventDefault();
-                    document.getElementById('delete-form-'+id).submit();
+                    document.getElementById('approved-form-'+id).submit();
                 } else if (
                     // Read more about handling dismissals
                     result.dismiss === swal.DismissReason.cancel
                 ) {
                     swalWithBootstrapButtons(
                         'Cancelled',
-                        'Your data is safe :)',
+                        'Your data is not Approved :)',
                         'error'
                     )
                 }

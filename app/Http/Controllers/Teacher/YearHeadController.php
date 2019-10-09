@@ -9,6 +9,7 @@ use App\Models\Session;
 use App\Models\Teacher;
 use App\Models\Year;
 use App\Models\YearHead;
+use App\Models\YearHeadApproval;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -84,6 +85,54 @@ class YearHeadController extends Controller
             return redirect()->back();
         }
 
+    }
+
+
+    public function approved($session_id, $course_id)
+    {
+        $teacher = Teacher::where('name', Auth::user()->name)->first();
+        $session = Session::find($session_id);
+        $course = Course::find($course_id);
+
+        if (isset($session) && isset($course))
+        {
+            $check_approval = YearHeadApproval::where('session_id', $session->id)->where('dept_id', $teacher->dept_id)->where('course_id', $course->id)->count();
+            if ($check_approval < 1)
+            {
+                $code = explode('-', $course->course_code);
+                $year_code = substr($code[1], 0, 1);
+
+                $year = Year::find($year_code);
+
+                $check_right_course_teacher = YearHead::where('session_id', $session->id)->where('dept_id', $teacher->dept_id)->where('year_id', $year->id)->where('teacher_id', $teacher->id)->count();
+                if ($check_right_course_teacher < 1)
+                {
+                    Toastr::error('Unauthorized Access Denied!', 'Error');
+                    return redirect()->back();
+
+                } else {
+
+                    $year_head_approval = new YearHeadApproval();
+                    $year_head_approval->session_id = $session->id;
+                    $year_head_approval->dept_id = $teacher->dept_id;
+                    $year_head_approval->course_id = $course->id;
+                    $year_head_approval->approved = 1;
+                    $year_head_approval->save();
+
+                    Toastr::success('Course Marks approved successfully!', 'Success');
+                    return redirect()->route('teacher.year-head.course', [$session->id, $year->id]);
+                }
+
+
+            } else {
+                Toastr::error('Course already approved!', 'Error');
+                return redirect()->back();
+            }
+
+        } else {
+            Toastr::error('Invalid URL!', 'Error');
+            return redirect()->back();
+        }
 
 
     }

@@ -149,6 +149,7 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::get('year-head', 'YearHeadController@index')->name('year-head.index');
     Route::get('year-head/{session_id}/{year_id}/course', 'YearHeadController@course')->name('year-head.course');
     Route::get('year-head/{session_id}/{course_id}/marks', 'YearHeadController@marks')->name('year-head.marks');
+    Route::put('year-head/{session_id}/{course_id}/approved', 'YearHeadController@approved')->name('year-head.approved');
 
 });
 
