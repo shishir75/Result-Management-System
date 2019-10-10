@@ -37,8 +37,16 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     {{ strtoupper('Result of '. $semester->name ) }}
-                                    <a target="_blank" href="{{ route('teacher.year-head.download', [$session->id, $year->id, $semester_id]) }}" class="btn btn-sm btn-info text-white ml-5 float-right">Download PDF</a>
+
                                     <span class="ml-5">SESSION : {{ $session->name }}</span>
+
+                                    @if(isset($check_approval) && $check_approval->status == 1)
+                                        <a target="_blank" href="{{ route('teacher.year-head.download', [$session->id, $year->id, $semester_id]) }}" class="btn btn-sm btn-info text-white ml-5 float-right">Download PDF</a>
+                                        <span class="btn btn-sm btn-success float-right">Approved</span>
+                                    @else
+                                        <span class="btn btn-sm btn-danger float-right">Not Approved</span>
+                                    @endif
+
                                 </h3>
                             </div>
                             <!-- /.card-header -->

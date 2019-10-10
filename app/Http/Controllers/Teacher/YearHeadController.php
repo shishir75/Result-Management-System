@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Models\Course;
 use App\Models\CourseTeacher;
+use App\Models\ExamControllerApproval;
 use App\Models\FinalMarks;
 use App\Models\IncourseMark;
 use App\Models\Semester;
@@ -196,6 +197,8 @@ class YearHeadController extends Controller
         $year = Year::find($year_id);
        // $semester = Semester::find($semester_id);
 
+        $teacher = Teacher::with('dept')->where('name', Auth::user()->name)->first();
+
         if (isset($semester_id))
         {
             $semester_code = $year->id .'-'. $semester_id;
@@ -203,8 +206,13 @@ class YearHeadController extends Controller
             $semester = Semester::where('code', $semester_code)->first();
         }
 
+        if ($teacher->dept->is_semester == 1)
+        {
+            $year_semester_id = $semester->id;
 
-        $teacher = Teacher::with('dept')->where('name', Auth::user()->name)->first();
+        } else {
+            $year_semester_id = $year->id;
+        }
 
         if (isset($session) && isset($year))
         {
@@ -215,7 +223,8 @@ class YearHeadController extends Controller
                 if ($teacher->dept->is_semester == 1)
                 {
                     $students = Student::with('dept')->where('dept_id', $teacher->dept->id)->get();
-                    return view('teacher.yearHead.result', compact('students', 'session', 'semester', 'year', 'semester', 'semester_id'));
+                    $check_approval = ExamControllerApproval::where('session_id', $session->id)->where('dept_id', $teacher->dept->id)->where('year_semester_id', $year_semester_id)->first();
+                    return view('teacher.yearHead.result', compact('students', 'session', 'semester', 'year', 'semester_id', 'check_approval'));
                 }
 
             } else {
@@ -237,6 +246,8 @@ class YearHeadController extends Controller
         $year = Year::find($year_id);
         // $semester = Semester::find($semester_id);
 
+        $teacher = Teacher::with('dept')->where('name', Auth::user()->name)->first();
+
         if (isset($semester_id))
         {
             $semester_code = $year->id .'-'. $semester_id;
@@ -244,8 +255,13 @@ class YearHeadController extends Controller
             $semester = Semester::where('code', $semester_code)->first();
         }
 
+        if ($teacher->dept->is_semester == 1)
+        {
+            $year_semester_id = $semester->id;
 
-        $teacher = Teacher::with('dept')->where('name', Auth::user()->name)->first();
+        } else {
+            $year_semester_id = $year->id;
+        }
 
         if (isset($session) && isset($year))
         {
@@ -256,7 +272,8 @@ class YearHeadController extends Controller
                 if ($teacher->dept->is_semester == 1)
                 {
                     $students = Student::with('dept')->where('dept_id', $teacher->dept->id)->get();
-                    return view('teacher.yearHead.download', compact('students', 'session', 'semester', 'year', 'semester', 'semester_id'));
+                    $check_approval = ExamControllerApproval::where('session_id', $session->id)->where('dept_id', $teacher->dept->id)->where('year_semester_id', $year_semester_id)->first();
+                    return view('teacher.yearHead.download', compact('students', 'session', 'semester', 'year', 'semester_id', 'check_approval'));
                 }
 
             } else {
