@@ -50,20 +50,11 @@
                                         <th>Course Code</th>
                                         <th>Course Title</th>
                                         <th>Is Lab / Viva</th>
-                                        <th>Status</th>
+                                        <th>In-course Status</th>
+                                        <th>Year Head Status</th>
                                         <th>Marks</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Serial</th>
-                                        <th>Course Code</th>
-                                        <th>Course Title</th>
-                                        <th>Is Lab / Viva</th>
-                                        <th>Status</th>
-                                        <th>Marks</th>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
                                     @foreach($courses as $key => $course)
                                         <tr>
@@ -88,6 +79,16 @@
                                                     <span class="badge badge-info">Submitted</span>
                                                 @else
                                                     <span class="badge badge-warning">Not Submitted</span>
+                                                @endif
+                                            </td>
+                                            @php
+                                                $check_approval = App\Models\YearHeadApproval::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->first();
+                                            @endphp
+                                            <td>
+                                                @if(isset($check_approval) && $check_approval->approved == 1)
+                                                    <span class="badge badge-success">Approved</span>
+                                                @else
+                                                    <span class="badge badge-danger">Not Approved</span>
                                                 @endif
                                             </td>
                                             <td>

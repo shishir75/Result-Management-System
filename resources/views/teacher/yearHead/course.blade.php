@@ -71,25 +71,11 @@
                                         <th>Lab / Viva</th>
                                         <th>In-course Marks</th>
                                         <th>Final Marks</th>
-                                        <th>In-Course Submitted</th>
-                                        <th>Approval</th>
+                                        <th>In-Course Status</th>
+                                        <th>Year Head Status</th>
                                         <th>Marks</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Serial</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>In-course Marks</th>
-                                        <th>Final Marks</th>
-                                        <th>In-Course Submitted</th>
-                                        <th>Approval</th>
-                                        <th>Marks</th>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
 
                                     @php
