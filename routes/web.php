@@ -152,6 +152,7 @@ Route::group(['as'=>'teacher.','prefix' => 'teacher', 'namespace' => 'Teacher', 
     Route::put('year-head/{session_id}/{course_id}/approved', 'YearHeadController@approved')->name('year-head.approved');
 
     Route::get('year-head/{session_id}/{year_id}/{semester_id?}/result', 'YearHeadController@result')->name('year-head.result');
+    Route::get('year-head/{session_id}/{year_id}/{semester_id?}/download', 'YearHeadController@download')->name('year-head.download');
 
 });
 

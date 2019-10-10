@@ -37,7 +37,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     {{ strtoupper('Result of '. $semester->name ) }}
-                                    <a href="#" class="btn btn-sm btn-info text-white ml-5 float-right">Download PDF</a>
+                                    <a target="_blank" href="{{ route('teacher.year-head.download', [$session->id, $year->id, $semester_id]) }}" class="btn btn-sm btn-info text-white ml-5 float-right">Download PDF</a>
                                     <span class="ml-5">SESSION : {{ $session->name }}</span>
                                 </h3>
                             </div>
@@ -47,33 +47,26 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Name</th>
-                                        <th>Reg No</th>
+                                        <th>Hall Name</th>
+                                        <th>Class Roll</th>
                                         <th>Exam Roll</th>
+                                        <th>Student Name</th>
                                         <th>GPA</th>
-                                        <th width="15%">View Details</th>
                                     </tr>
                                     </thead>
-
                                     <tbody>
-
-
-                                    @foreach($students as $key => $student)
-                                        <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $student->name }}</td>
-                                            <td>{{ $student->reg_no }}</td>
-                                            <td>{{ $student->exam_roll  }}</td>
-                                            <td>
-                                                {{ gpa_calculate($student->session, $semester->id , $student->reg_no, $student->exam_roll) }}
-                                            </td>
-                                            <td>
-                                                <a href="" class="btn btn-info">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                        @foreach($students as $key => $student)
+                                            <tr>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $student->hall }}</td>
+                                                <td>{{ $student->class_roll }}</td>
+                                                <td>{{ $student->exam_roll }}</td>
+                                                <td>{{ $student->name  }}</td>
+                                                <td>
+                                                    {{ gpa_calculate($student->session, $semester->id , $student->reg_no, $student->exam_roll) }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
 
                                 </table>
