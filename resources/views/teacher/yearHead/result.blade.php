@@ -36,9 +36,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    {{ strtoupper('Course list of ' ) }}
-                                    <a href="#" class="btn btn-sm btn-info text-white ml-5">Print</a>
-                                    <span class="float-right">SESSION : {{ $session->name }}</span>
+                                    {{ strtoupper('Result of '. $semester->name ) }}
+                                    <a href="#" class="btn btn-sm btn-info text-white ml-5 float-right">Download PDF</a>
+                                    <span class="ml-5">SESSION : {{ $session->name }}</span>
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -47,9 +47,11 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
+                                        <th>Name</th>
                                         <th>Reg No</th>
                                         <th>Exam Roll</th>
                                         <th>GPA</th>
+                                        <th width="15%">View Details</th>
                                     </tr>
                                     </thead>
 
@@ -59,10 +61,16 @@
                                     @foreach($students as $key => $student)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
+                                            <td>{{ $student->name }}</td>
                                             <td>{{ $student->reg_no }}</td>
                                             <td>{{ $student->exam_roll  }}</td>
                                             <td>
                                                 {{ gpa_calculate($student->session, $semester->id , $student->reg_no, $student->exam_roll) }}
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn btn-info">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -103,6 +103,57 @@ if (!function_exists('incourse_marks')) {
 }
 
 
+if (!function_exists('point')) {
+
+    function point($marks)
+    {
+        if ($marks >= 80)
+        {
+            $gpa = 4.00;
+
+        } elseif ($marks < 80 && $marks >= 75)
+        {
+            $gpa = 3.75;
+
+        } elseif ($marks < 75 && $marks >= 70)
+        {
+            $gpa = 3.50;
+
+        } elseif ($marks < 70 && $marks >= 65)
+        {
+            $gpa = 3.25;
+
+        } elseif ($marks < 65 && $marks >= 60)
+        {
+            $gpa = 3.00;
+
+        } elseif ($marks < 60 && $marks >= 55)
+        {
+            $gpa = 2.75;
+
+        } elseif ($marks < 55 && $marks >= 50)
+        {
+            $gpa = 2.50;
+
+        } elseif ($marks < 50 && $marks >= 45)
+        {
+            $gpa = 2.25;
+
+        } elseif ($marks < 45 && $marks >= 40)
+        {
+            $gpa = 2.00;
+
+        } elseif ($marks < 40)
+        {
+            $gpa = 0.00;
+        }
+
+        return $gpa;
+
+    }
+}
+
+
 
 if (!function_exists('gpa_calculate')) {
 
@@ -111,20 +162,12 @@ if (!function_exists('gpa_calculate')) {
         $session = Session::where('name', $session_name)->first();
         $student = Student::where('reg_no', $reg_no)->where('exam_roll', $exam_roll)->first();
 
-        $courses = Course::where('dept_id', $student->dept_id)->where('year_semester_id', $semseter_id)->get();
+        $total_credits = Course::where('dept_id', $student->dept_id)->where('year_semester_id', $semseter_id)->sum('credit_hour');
 
-        foreach ($courses as $course)
-        {
-            $marks = IncourseMark::where('session_id', $session->id)->where('dept_id', $student->dept_id)->where('course_id', $course->id)->where('reg_no', $student->reg_no)->where('exam_roll', $student->exam_roll)->get();
+        $total_grade_point = IncourseMark::where('session_id', $session->id)->where('dept_id', $student->dept_id)->where('reg_no', $student->reg_no)->where('exam_roll', $student->exam_roll)->sum('grade_point');;
 
-            foreach ($marks as $mark)
-            {
-                $total_marks = $mark->marks + $mark->theory_marks;
-                echo $total_marks . "<br>";
-            }
-        }
-
-
+        $gpa = number_format($total_grade_point / $total_credits, 2);
+        return $gpa;
 
     }
 }

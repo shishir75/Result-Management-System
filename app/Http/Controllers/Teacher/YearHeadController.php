@@ -122,7 +122,7 @@ class YearHeadController extends Controller
                     {
                         foreach ($students as $student)
                         {
-                            $marks = IncourseMark::where('session_id', $session->id)->where('dept_id', $teacher->dept_id)->where('course_id', $course->id)->where('reg_no', $student->reg_no)->where('exam_roll', $student->exam_roll)->first();
+                            $marks = IncourseMark::with('course')->where('session_id', $session->id)->where('dept_id', $teacher->dept_id)->where('course_id', $course->id)->where('reg_no', $student->reg_no)->where('exam_roll', $student->exam_roll)->first();
 
                             $final_mark = FinalMarks::where('session_id', $session->id)->where('dept_id', $teacher->dept_id)->where('course_id', $course->id)->where('reg_no', $student->reg_no)->where('exam_roll', $student->exam_roll)->first();
 
@@ -145,7 +145,13 @@ class YearHeadController extends Controller
 
                             if (isset($marks))
                             {
+                                $total_marks = round($marks->marks + $final_marks_average);
+
+                                $gpa = point($total_marks);
+                                $credit_hour = $marks->course->credit_hour;
+
                                 $marks->theory_marks = $final_marks_average;
+                                $marks->grade_point = $gpa * $credit_hour;
                                 $marks->save();
 
                             } else {
