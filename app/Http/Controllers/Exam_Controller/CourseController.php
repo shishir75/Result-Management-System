@@ -77,19 +77,23 @@ class CourseController extends Controller
     public function course($slug,$session_id, $year_semester_id)
     {
         $dept = Dept::where('slug', $slug)->first();
-        $session = Session::findOrFail($session_id);
+        $session = Session::find($session_id);
         if (isset($dept) && isset($year_semester_id) && isset($session))
         {
             $courses = Course::with('dept')->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->get();
 
             if (count($courses) >= 1)
             {
-                $semester = Semester::findOrFail($year_semester_id);
-                $year = Year::findOrFail($year_semester_id);
+                $semester = Semester::find($year_semester_id);
+
+                $code = explode('-', $semester->code);
+                $year_code = substr($code[0], 0, 1);
+
+                $year = Year::find($year_code);
 
                 $check_approval = ExamControllerApproval::where('session_id', $session->id)->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->first();
 
-                return view('exam_controller.course.index', compact('courses', 'semester', 'year', 'session', 'year_semester_id', 'check_approval'));
+                return view('exam_controller.course.index', compact('courses', 'semester', 'year', 'session', 'year_semester_id', 'check_approval', 'dept'));
 
             }  else {
                 Toastr::error('Unauthorized Access Denied!', 'Error');
@@ -112,8 +116,8 @@ class CourseController extends Controller
 
             if (count($marks) > 0) {
 
-                $semester = Semester::findOrFail($year_semester_id);
-                $year = Year::findOrFail($year_semester_id);
+                $semester = Semester::find($year_semester_id);
+                $year = Year::find($year_semester_id);
                 return view('exam_controller.marks.index', compact('marks', 'year', 'semester'));
 
             } else {
@@ -156,24 +160,25 @@ class CourseController extends Controller
     }
 
 
-    public function result($slug,$session_id, $year_id, $semester_id = null)
+    public function result($slug,$session_id, $year_semester_id)
     {
         $dept = Dept::where('slug', $slug)->first();
         $session = Session::find($session_id);
-        $year = Year::find($year_id);
-        // $semester = Semester::find($semester_id);
 
-        if (isset($semester_id))
-        {
-            $semester_code = $year->id .'-'. $semester_id;
+        $semester = Semester::find($year_semester_id);
 
-            $semester = Semester::where('code', $semester_code)->first();
-        }
+        $code = explode('-', $semester->code);
+        $year_code = substr($code[0], 0, 1);
+
+        $year = Year::find($year_code);
+
 
         if (isset($session) && isset($year))
         {
             $students = Student::with('dept')->where('dept_id', $dept->id)->get();
-            return view('exam_controller.result', compact('students', 'session', 'semester', 'year', 'semester_id'));
+            $check_approval = ExamControllerApproval::where('session_id', $session->id)->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->first();
+
+            return view('exam_controller.result', compact('students', 'session', 'semester', 'year', 'year_semester_id', 'check_approval'));
 
         } else {
             Toastr::error('Invalid URL!', 'Error');
@@ -183,35 +188,25 @@ class CourseController extends Controller
 
 
 
-    public function download($slug,$session_id, $year_id, $semester_id = null)
+    public function download($slug,$session_id, $year_semester_id)
     {
         $dept = Dept::where('slug', $slug)->first();
         $session = Session::find($session_id);
-        $year = Year::find($year_id);
-        // $semester = Semester::find($semester_id);
 
-        if (isset($semester_id))
-        {
-            $semester_code = $year->id .'-'. $semester_id;
+        $semester = Semester::find($year_semester_id);
 
-            $semester = Semester::where('code', $semester_code)->first();
-        }
+        $code = explode('-', $semester->code);
+        $year_code = substr($code[0], 0, 1);
 
-        if ($dept->is_semester == 1)
-        {
-            $year_semester_id = $semester->id;
+        $year = Year::find($year_code);
 
-        } else {
-            $year_semester_id = $year->id;
-        }
 
         if (isset($session) && isset($year))
         {
             $students = Student::with('dept')->where('dept_id', $dept->id)->get();
-
             $check_approval = ExamControllerApproval::where('session_id', $session->id)->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->first();
 
-            return view('exam_controller.download', compact('students', 'session', 'semester', 'year', 'semester_id', 'check_approval'));
+            return view('exam_controller.download', compact('students', 'session', 'semester', 'year', 'year_semester_id', 'check_approval'));
 
         } else {
             Toastr::error('Invalid URL!', 'Error');

@@ -56,8 +56,8 @@ Route::group(['as'=>'exam_controller.','prefix' => 'exam-controller', 'namespace
     Route::get('dept/{slug}/{session_id}/{year_semester_id}/{course_id}/marks', 'CourseController@marks')->name('marks.index');
     Route::put('dept/{slug}/{session_id}/{year_semester_id}/approved', 'CourseController@approved')->name('marks.approved');
 
-    Route::get('dept/{slug}/{session_id}/{year_id}/{semester_id?}/result', 'CourseController@result')->name('marks.result');
-    Route::get('dept/{slug}/{session_id}/{year_id}/{semester_id?}/download', 'CourseController@download')->name('marks.download');
+    Route::get('dept/{slug}/{session_id}/{year_semester_id}/result', 'CourseController@result')->name('marks.result');
+    Route::get('dept/{slug}/{session_id}/{year_semester_id}/download', 'CourseController@download')->name('marks.download');
 
 });
 
