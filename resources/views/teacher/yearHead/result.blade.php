@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Course')
+@section('title', 'Result')
 
 @push('css')
     <!-- DataTables -->
@@ -18,30 +18,13 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Course</li>
+                            <li class="breadcrumb-item active">Result</li>
                         </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
 
-
-        @php
-            foreach($courses as $course)
-            {
-                $code = explode('-', $course->course_code);
-                $year_id = substr($code[1], 0, 1);
-
-                if($year_id == $year->code)
-                {
-                    $year_id_final = $year_id;
-                    break;
-                } else {
-                    continue;
-                }
-            }
-
-        @endphp
 
         <!-- Main content -->
         <section class="content">

@@ -182,4 +182,10 @@ class YearHeadController extends Controller
 
     }
 
+
+    public function result($session_id, $year_id, $semester_id = null)
+    {
+        return $year_id;
+    }
+
 }
