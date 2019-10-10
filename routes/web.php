@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('register', 'CustomAuth\RegisterController@showRegistrationForm')->name('register')->middleware('web');
 Route::post('register', 'CustomAuth\RegisterController@register')->middleware('web');
