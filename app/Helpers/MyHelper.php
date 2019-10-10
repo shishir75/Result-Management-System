@@ -3,6 +3,7 @@
 use App\Models\Assignment;
 use App\Models\Attendance;
 use App\Models\Course;
+use App\Models\IncourseMark;
 use App\Models\Quiz;
 use App\Models\Report;
 use App\Models\Session;
@@ -100,3 +101,32 @@ if (!function_exists('incourse_marks')) {
         return $total_incourse_marks;
     }
 }
+
+
+
+if (!function_exists('gpa_calculate')) {
+
+    function gpa_calculate($session_name, $semseter_id, $reg_no, $exam_roll)
+    {
+        $session = Session::where('name', $session_name)->first();
+        $student = Student::where('reg_no', $reg_no)->where('exam_roll', $exam_roll)->first();
+
+        $courses = Course::where('dept_id', $student->dept_id)->where('year_semester_id', $semseter_id)->get();
+
+        foreach ($courses as $course)
+        {
+            $marks = IncourseMark::where('session_id', $session->id)->where('dept_id', $student->dept_id)->where('course_id', $course->id)->where('reg_no', $student->reg_no)->where('exam_roll', $student->exam_roll)->get();
+
+            foreach ($marks as $mark)
+            {
+                $total_marks = $mark->marks + $mark->theory_marks;
+                echo $total_marks . "<br>";
+            }
+        }
+
+
+
+    }
+}
+
+

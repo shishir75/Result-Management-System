@@ -36,9 +36,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    {{ strtoupper('Course list of '. $year->name ) }}
-                                    <a href="{{ route('teacher.year-head.result', [$session->id, $year_id_final, 1]) }}" class="btn btn-sm btn-info text-white ml-5">View 1st Semester Result</a>
-                                    <a href="{{ route('teacher.year-head.result', [$session->id, $year_id_final, 2]) }}" class="btn btn-sm btn-info text-white ml-5">View 2nd Semester Result</a>
+                                    {{ strtoupper('Course list of ' ) }}
+                                    <a href="#" class="btn btn-sm btn-info text-white ml-5">Print</a>
                                     <span class="float-right">SESSION : {{ $session->name }}</span>
                                 </h3>
                             </div>
@@ -48,98 +47,24 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>In-course Marks</th>
-                                        <th>Final Marks</th>
-                                        <th>In-Course Submitted</th>
-                                        <th>Approval</th>
-                                        <th>Marks</th>
+                                        <th>Reg No</th>
+                                        <th>Exam Roll</th>
+                                        <th>GPA</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Serial</th>
-                                        <th>Course Title</th>
-                                        <th>{{ $courses[0]->dept->is_semester == 1 ? 'Semester' : 'Year' }}</th>
-                                        <th>Credit Hour</th>
-                                        <th>Lab / Viva</th>
-                                        <th>In-course Marks</th>
-                                        <th>Final Marks</th>
-                                        <th>In-Course Submitted</th>
-                                        <th>Approval</th>
-                                        <th>Marks</th>
-                                    </tr>
-                                    </tfoot>
+
                                     <tbody>
 
-                                    @php
-                                        $i = 0;
-                                    @endphp
 
-                                    @foreach($courses as $key => $course)
-
-                                        @php
-                                            $code = explode('-', $course->course_code);
-                                            $year_id = substr($code[1], 0, 1);
-                                            $semester_id = substr($code[1], 1, 1);
-                                        @endphp
-
-                                        @if($year_id == $year->code)
-                                            @php
-                                                $i++;
-                                            @endphp
-
-                                            <tr>
-                                                <td>{{ $i }}</td>
-                                                <td>{{ $course->course_code .' - '. $course->course_title }}</td>
-                                                <td>{{ $courses[0]->dept->is_semester == 1 ? $year_id .' - '. $semester_id : $year_id }}</td>
-
-                                                <td>{{ number_format($course->credit_hour, 1) }}</td>
-                                                <td>
-                                                    @if($course->is_lab == true)
-                                                        <i class="fa fa-check text-success" aria-hidden="true"></i>
-                                                    @else
-                                                        <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                                                    @endif
-                                                </td>
-                                                <td>{{ $course->incourse_marks }}</td>
-                                                <td>{{ $course->final_marks  }}</td>
-
-                                                @php
-                                                    $course_teacher_approval = \App\Models\CourseTeacher::where('dept_id', $course->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->first();
-                                                    $second_examiner_approval = \App\Models\External::where('dept_id', $course->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->first();
-                                                @endphp
-
-                                                <td>
-                                                    @if(isset($course_teacher_approval) && $course_teacher_approval->status == 1 && isset($second_examiner_approval) && $second_examiner_approval->external_1_status == 1)
-                                                        <span class="badge badge-success">Submitted</span>
-                                                    @else
-                                                        <span class="badge badge-danger">Not Submitted</span>
-                                                    @endif
-                                                </td>
-                                                @php
-                                                    $check_approval = App\Models\YearHeadApproval::where('session_id', $session->id)->where('dept_id', $course->dept->id)->where('course_id', $course->id)->first();
-                                                @endphp
-                                                <td>
-                                                    @if(isset($check_approval) && $check_approval->approved == 1)
-                                                        <span class="badge badge-success">Approved</span>
-                                                    @else
-                                                        <span class="badge badge-danger">Not Approved</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <a href="{{ route('teacher.year-head.marks', [$session->id, $course->id]) }}" class="btn btn-info">
-                                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @else
-                                           @continue
-                                        @endif
-
+                                    @foreach($students as $key => $student)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $student->reg_no }}</td>
+                                            <td>{{ $student->exam_roll  }}</td>
+                                            <td>
+                                                {{ gpa_calculate($student->session, $semester->id , $student->reg_no, $student->exam_roll) }}
+                                            </td>
+                                        </tr>
                                     @endforeach
                                     </tbody>
 

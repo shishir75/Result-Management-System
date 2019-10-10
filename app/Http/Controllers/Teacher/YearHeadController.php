@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\CourseTeacher;
 use App\Models\FinalMarks;
 use App\Models\IncourseMark;
+use App\Models\Semester;
 use App\Models\Session;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -185,7 +186,83 @@ class YearHeadController extends Controller
 
     public function result($session_id, $year_id, $semester_id = null)
     {
-        return $year_id;
+        $session = Session::find($session_id);
+        $year = Year::find($year_id);
+       // $semester = Semester::find($semester_id);
+
+        if (isset($semester_id))
+        {
+            $semester_code = $year->id .'-'. $semester_id;
+
+            $semester = Semester::where('code', $semester_code)->first();
+        }
+
+
+        $teacher = Teacher::with('dept')->where('name', Auth::user()->name)->first();
+
+        if (isset($session) && isset($year))
+        {
+            $check_year_head = YearHead::where('dept_id', $teacher->dept->id)->where('session_id', $session->id)->where('year_id', $year->id)->where('teacher_id', $teacher->id)->get();
+
+            if (count($check_year_head) > 0)
+            {
+                if ($teacher->dept->is_semester == 1)
+                {
+                    $students = Student::with('dept')->where('dept_id', $teacher->dept->id)->get();
+                    return view('teacher.yearHead.result', compact('students', 'session', 'semester'));
+                }
+
+            } else {
+                Toastr::error('Unauthorized Access Denied!', 'Error');
+                return redirect()->back();
+            }
+
+        } else {
+            Toastr::error('Invalid URL!', 'Error');
+            return redirect()->back();
+        }
+    }
+
+
+    public function personal_result($session_id, $year_id, $semester_id = null)
+    {
+        $session = Session::find($session_id);
+        $year = Year::find($year_id);
+        // $semester = Semester::find($semester_id);
+
+        if (isset($semester_id))
+        {
+            $semester_code = $year->id .'-'. $semester_id;
+
+            $semester = Semester::where('code', $semester_code)->first();
+        }
+
+
+        $teacher = Teacher::with('dept')->where('name', Auth::user()->name)->first();
+
+        if (isset($session) && isset($year))
+        {
+            $check_year_head = YearHead::where('dept_id', $teacher->dept->id)->where('session_id', $session->id)->where('year_id', $year->id)->where('teacher_id', $teacher->id)->get();
+
+            if (count($check_year_head) > 0)
+            {
+                if ($teacher->dept->is_semester == 1)
+                {
+                    $courses = Course::with('dept')->where('dept_id', $teacher->dept->id)->where('year_semester_id', $semester->id)->get();
+                    return view('teacher.yearHead.result', compact('courses'));
+                }
+
+
+
+            } else {
+                Toastr::error('Unauthorized Access Denied!', 'Error');
+                return redirect()->back();
+            }
+
+        } else {
+            Toastr::error('Invalid URL!', 'Error');
+            return redirect()->back();
+        }
     }
 
 }
