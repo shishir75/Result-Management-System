@@ -37,7 +37,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     {{ strtoupper('Result of '. $semester->name ) }}
-                                    <a target="_blank" href="{{ route('teacher.year-head.download', [$session->id, $year->id, $semester_id]) }}" class="btn btn-sm btn-info text-white ml-5 float-right">Download PDF</a>
+                                    <a target="_blank" href="{{ route('exam_controller.marks.download', [$students[0]->dept->slug ,$session->id, $year->id, $semester->id]) }}" class="btn btn-sm btn-info text-white ml-5 float-right">Download PDF</a>
                                     <span class="ml-5">SESSION : {{ $session->name }}</span>
                                 </h3>
                             </div>

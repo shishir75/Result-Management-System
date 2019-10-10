@@ -197,25 +197,10 @@ class CourseController extends Controller
             $semester = Semester::where('code', $semester_code)->first();
         }
 
-
-        $teacher = Teacher::with('dept')->where('name', Auth::user()->name)->first();
-
         if (isset($session) && isset($year))
         {
-            $check_year_head = YearHead::where('dept_id', $teacher->dept->id)->where('session_id', $session->id)->where('year_id', $year->id)->where('teacher_id', $teacher->id)->get();
-
-            if (count($check_year_head) > 0)
-            {
-                if ($teacher->dept->is_semester == 1)
-                {
-                    $students = Student::with('dept')->where('dept_id', $teacher->dept->id)->get();
-                    return view('exam_controller.download', compact('students', 'session', 'semester', 'year', 'semester', 'semester_id'));
-                }
-
-            } else {
-                Toastr::error('Unauthorized Access Denied!', 'Error');
-                return redirect()->back();
-            }
+            $students = Student::with('dept')->where('dept_id', $dept->id)->get();
+            return view('exam_controller.download', compact('students', 'session', 'semester', 'year', 'semester_id'));
 
         } else {
             Toastr::error('Invalid URL!', 'Error');
