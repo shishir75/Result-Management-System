@@ -96,7 +96,7 @@ class CourseController extends Controller
                 return view('exam_controller.course.index', compact('courses', 'semester', 'year', 'session', 'year_semester_id', 'check_approval', 'dept'));
 
             }  else {
-                Toastr::error('Unauthorized Access Denied!', 'Error');
+                Toastr::error('No Course Data Found!', 'Error');
                 return redirect()->back();
             }
 
