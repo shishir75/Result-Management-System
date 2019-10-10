@@ -197,10 +197,21 @@ class CourseController extends Controller
             $semester = Semester::where('code', $semester_code)->first();
         }
 
+        if ($dept->is_semester == 1)
+        {
+            $year_semester_id = $semester->id;
+
+        } else {
+            $year_semester_id = $year->id;
+        }
+
         if (isset($session) && isset($year))
         {
             $students = Student::with('dept')->where('dept_id', $dept->id)->get();
-            return view('exam_controller.download', compact('students', 'session', 'semester', 'year', 'semester_id'));
+
+            $check_approval = ExamControllerApproval::where('session_id', $session->id)->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->first();
+
+            return view('exam_controller.download', compact('students', 'session', 'semester', 'year', 'semester_id', 'check_approval'));
 
         } else {
             Toastr::error('Invalid URL!', 'Error');

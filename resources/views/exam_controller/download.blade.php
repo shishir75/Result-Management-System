@@ -98,9 +98,17 @@
             </div>
             <!--/.col (left) -->
 
-            <div class="col-4 offset-8 text-right" style="margin-top: 100px;">
+            <div class="col-4 offset-8 text-right" style="margin-top: 60px;">
+                @if(isset($check_approval) && $check_approval->status == 1)
+                    <img class="text-center" width="100" height="60" src="{{ asset('assets/backend/img/sign.png') }}" alt="Exam Controller Sign">
+                @endif
                 <p>Examination Controller, JU</p>
-                <p>Date : {{ \Illuminate\Support\Carbon::now()->format('F d, Y') }}</p>
+                <p>
+                    Date :
+                    @if(isset($check_approval) && $check_approval->status == 1)
+                        {{ $check_approval->created_at->format('F d, Y') }}
+                    @endif
+                </p>
             </div>
 
         </div>

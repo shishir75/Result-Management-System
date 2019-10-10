@@ -40,6 +40,8 @@
 
                                     @if(isset($check_approval) && $check_approval->status == 1)
                                         <a href="{{ route('exam_controller.marks.result', [$courses[0]->dept->slug ,$session->id, $year->id, $semester->id]) }}" class="btn btn-sm btn-info text-white ml-5 float-right">View Result</a>
+                                        <a target="_blank" href="{{ route('exam_controller.marks.download', [$courses[0]->dept->slug ,$session->id, $year->id, $semester->id]) }}" class="btn btn-sm btn-primary text-white ml-5 float-right">Download</a>
+                                        <span class="btn btn-sm btn-outline-success float-right">Approved</span>
                                     @else
                                         <button class="btn btn-sm btn-warning text-bold float-right ml-5" type="button" onclick="approvedItem({{ $year_semester_id }})">
                                             Approve Me
