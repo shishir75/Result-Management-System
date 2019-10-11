@@ -37,6 +37,13 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     {{ strtoupper('Personal Details Result of '. $student->name ) }}
+                                    @if(isset($check_approval) && $check_approval->status == 1)
+                                        <a target="_blank" href="{{ route('exam_controller.marks.marks_sheet_download', [$student->dept->slug, $session->id, $year_semester_id, $student->exam_roll]) }}" class="btn btn-sm btn-info text-white ml-5 float-right">Download PDF</a>
+                                        <span class="btn btn-sm btn-success float-right">Approved</span>
+                                    @else
+                                        <span class="btn btn-sm btn-danger float-right">Not Approved</span>
+                                    @endif
+
                                     <span class="ml-5">SESSION : {{ $session->name }}</span>
                                 </h3>
                             </div>
@@ -50,6 +57,7 @@
                                         <th>Course Title</th>
                                         <th>Credit Hour</th>
                                         <th>Letter Grade</th>
+                                        <th>Grade Point</th>
                                         <th>GPA</th>
                                         <th>Remarks</th>
                                     </tr>
@@ -81,6 +89,7 @@
                                                 @endphp
 
                                                 <td>{{ $latter_grade }}</td>
+                                                <td>{{ number_format($gpa, 2) }}</td>
                                                 @if($key == 0)
                                                     <td rowspan="{{ count($courses) }}" style="padding-top: 170px">{{ $cgpa }}</td>
                                                     <td rowspan="{{ count($courses) }}" style="padding-top: 170px">{{ $remarks }}</td>

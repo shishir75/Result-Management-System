@@ -230,7 +230,7 @@ class CourseController extends Controller
         $courses = Course::with( 'dept')->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->get();
         $total_credit = Course::where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->sum('credit_hour');
 
-        //$marks = IncourseMark::where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->get();
+        $check_approval = ExamControllerApproval::where('session_id', $session->id)->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->first();
 
         $grade_point = 0;
         foreach ($courses as $course)
@@ -242,7 +242,38 @@ class CourseController extends Controller
 
         $cgpa = number_format(round($grade_point / $total_credit, 2), 2);
 
-        return view('exam_controller.personal_result', compact('courses', 'year', 'student', 'year_semester_id', 'session', 'dept', 'cgpa'));
+        return view('exam_controller.personal_result', compact('courses', 'year', 'student', 'year_semester_id', 'session', 'dept', 'cgpa', 'check_approval'));
+
+    }
+
+
+    public function marks_sheet_download($slug, $session_id, $year_semester_id, $exam_roll)
+    {
+        $dept = Dept::where('slug', $slug)->first();
+        $session = Session::find($session_id);
+        $student = Student::where('exam_roll', $exam_roll)->first();
+        $semester = Semester::find($year_semester_id);
+
+        $code = explode('-', $semester->code);
+        $year_code = substr($code[0], 0, 1);
+        $year = Year::find($year_code);
+
+        $courses = Course::with( 'dept')->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->get();
+        $total_credit = Course::where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->sum('credit_hour');
+
+        $check_approval = ExamControllerApproval::where('session_id', $session->id)->where('dept_id', $dept->id)->where('year_semester_id', $year_semester_id)->first();
+
+        $grade_point = 0;
+        foreach ($courses as $course)
+        {
+            $marks = IncourseMark::where('dept_id', $dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->where('exam_roll', $student->exam_roll)->first();
+
+            $grade_point += $marks->grade_point;
+        }
+
+        $cgpa = number_format(round($grade_point / $total_credit, 2), 2);
+
+        return view('exam_controller.personal_result_download', compact('courses', 'year', 'student', 'year_semester_id', 'session', 'dept', 'cgpa', 'check_approval', 'semester'));
 
     }
 
