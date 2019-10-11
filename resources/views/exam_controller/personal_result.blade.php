@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Result')
+@section('title', 'Personal Details Result')
 
 @push('css')
     <!-- DataTables -->
@@ -18,7 +18,7 @@
                     <div class="col-sm-6 offset-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Result</li>
+                            <li class="breadcrumb-item active">Personal Details Result</li>
                         </ol>
                     </div>
                 </div>
@@ -36,13 +36,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    {{ strtoupper('Result of '. $semester->name ) }}
-                                    @if(isset($check_approval) && $check_approval->status == 1)
-                                        <a target="_blank" href="{{ route('exam_controller.marks.download', [$students[0]->dept->slug ,$session->id, $year->id, $semester->id]) }}" class="btn btn-sm btn-info text-white ml-5 float-right">Download PDF</a>
-                                        <span class="btn btn-sm btn-success float-right">Approved</span>
-                                    @else
-                                        <span class="btn btn-sm btn-danger float-right">Not Approved</span>
-                                    @endif
+                                    {{ strtoupper('Personal Details Result of '. $student->name ) }}
                                     <span class="ml-5">SESSION : {{ $session->name }}</span>
                                 </h3>
                             </div>
@@ -52,30 +46,46 @@
                                     <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Hall Name</th>
-                                        <th>Class Roll</th>
-                                        <th>Exam Roll</th>
-                                        <th>Student Name</th>
+                                        <th>Course Code</th>
+                                        <th>Course Title</th>
+                                        <th>Credit Hour</th>
+                                        <th>Letter Grade</th>
                                         <th>GPA</th>
-                                        <th width="10%">Details Results</th>
+                                        <th>Remarks</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($students as $key => $student)
+
+                                        @foreach($courses as $key => $course)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $student->hall }}</td>
-                                                <td>{{ $student->class_roll }}</td>
-                                                <td>{{ $student->exam_roll }}</td>
-                                                <td>{{ $student->name  }}</td>
-                                                <td>
-                                                    {{ gpa_calculate($student->session, $semester->id , $student->reg_no, $student->exam_roll) }}
-                                                </td>
-                                                <td>
-                                                    <a href="{{ route('exam_controller.marks.marks_sheet', [$student->dept->slug, $session->id, $year_semester_id, $student->exam_roll]) }}" class="btn btn-sm btn-info">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                </td>
+                                                <td>{{ $course->course_code }}</td>
+                                                <td>{{ $course->course_title }}</td>
+                                                <td>{{ number_format($course->credit_hour, 1) }}</td>
+
+
+                                                @php
+                                                    $marks = \App\Models\IncourseMark::where('dept_id', $course->dept_id)->where('session_id', $session->id)->where('course_id', $course->id)->where('exam_roll', $student->exam_roll)->first();
+                                                    if (isset($marks))
+                                                    {
+                                                        $gpa = $marks->grade_point / $course->credit_hour;
+                                                        $latter_grade = latter_grade($gpa);
+
+                                                        if ($latter_grade == 'F')
+                                                        {
+                                                            $remarks = 'FAIL';
+                                                        } else {
+                                                            $remarks = 'PASS';
+                                                        }
+                                                    }
+                                                @endphp
+
+                                                <td>{{ $latter_grade }}</td>
+                                                @if($key == 0)
+                                                    <td rowspan="{{ count($courses) }}" style="padding-top: 170px">{{ $cgpa }}</td>
+                                                    <td rowspan="{{ count($courses) }}" style="padding-top: 170px">{{ $remarks }}</td>
+                                                @endif
+
                                             </tr>
                                         @endforeach
                                     </tbody>

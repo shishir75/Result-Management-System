@@ -59,6 +59,8 @@ Route::group(['as'=>'exam_controller.','prefix' => 'exam-controller', 'namespace
     Route::get('dept/{slug}/{session_id}/{year_semester_id}/result', 'CourseController@result')->name('marks.result');
     Route::get('dept/{slug}/{session_id}/{year_semester_id}/download', 'CourseController@download')->name('marks.download');
 
+    Route::get('dept/{slug}/{session_id}/{year_semester_id}/{exam_roll}/marks-sheet', 'CourseController@marks_sheet')->name('marks.marks_sheet');
+
 });
 
 

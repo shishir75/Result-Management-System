@@ -181,3 +181,46 @@ if (!function_exists('gpa_calculate')) {
 }
 
 
+if (!function_exists('latter_grade')) {
+
+    function latter_grade($gpa)
+    {
+        if ($gpa == 4.00)
+        {
+            $grade = 'A+';
+
+        } elseif ($gpa < 4.00 && $gpa >= 3.75)
+        {
+            $grade = 'A';
+        } elseif ($gpa < 3.75 && $gpa >= 3.50)
+        {
+            $grade = 'A-';
+        } elseif ($gpa < 3.50 && $gpa >= 3.25)
+        {
+            $grade = 'B+';
+        } elseif ($gpa < 3.25 && $gpa >= 3.00)
+        {
+            $grade = 'B';
+        } elseif ($gpa < 3.00 && $gpa >= 2.75)
+        {
+            $grade = 'B-';
+        } elseif ($gpa < 2.75 && $gpa >= 2.50)
+        {
+            $grade = 'C+';
+        } elseif ($gpa < 2.50 && $gpa >= 2.25)
+        {
+            $grade = 'C';
+        } elseif ($gpa < 2.25 && $gpa >= 2.00)
+        {
+            $grade = 'D';
+        } else
+        {
+            $grade = 'F';
+        }
+
+        return $grade;
+
+    }
+}
+
+
