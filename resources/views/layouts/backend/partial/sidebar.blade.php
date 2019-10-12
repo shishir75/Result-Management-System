@@ -147,7 +147,7 @@
 
                     <li class="nav-item has-treeview">
                         <a href="{{ route('exam_controller.dept.index') }}" class="nav-link {{ Request::is('exam-controller/dept*') ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-dashboard"></i>
+                            <i class="nav-icon fa fa-sliders"></i>
                             <p>
                                 Departments
                             </p>
