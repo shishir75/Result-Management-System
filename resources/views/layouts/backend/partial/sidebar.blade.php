@@ -156,9 +156,18 @@
 
 				@elseif(Request::is('dept-office*')))
 
+                    <li class="nav-item has-treeview">
+                        <a href="{{ route('dept_office.dashboard') }}" class="nav-link {{ Request::is('dept-office/dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-dashboard"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+
 					<li class="nav-item has-treeview {{ Request::is('dept-office/teacher*') ? 'menu-open' : '' }}">
 						<a href="#" class="nav-link {{ Request::is('dept-office/teacher*') ? 'active' : '' }}">
-							<i class="nav-icon fa fa-pie-chart"></i>
+							<i class="nav-icon fa fa-users"></i>
 							<p>
 								Teacher
 								<i class="right fa fa-angle-left"></i>
@@ -182,7 +191,7 @@
 
 					<li class="nav-item has-treeview {{ Request::is('dept-office/year-head*') ? 'menu-open' : '' }}">
 						<a href="#" class="nav-link {{ Request::is('dept-office/year-head*') ? 'active' : '' }}">
-							<i class="nav-icon fa fa-pie-chart"></i>
+							<i class="nav-icon fa fa-header"></i>
 							<p>
 								Year Head
 								<i class="right fa fa-angle-left"></i>
@@ -206,7 +215,7 @@
 
 					<li class="nav-item has-treeview {{ Request::is('dept-office/course*') ? 'menu-open' : '' }}">
 					<a href="#" class="nav-link {{ Request::is('dept-office/course*') ? 'active' : '' }}">
-						<i class="nav-icon fa fa-pie-chart"></i>
+						<i class="nav-icon fa fa-book"></i>
 						<p>
 							Courses
 							<i class="right fa fa-angle-left"></i>
@@ -230,7 +239,7 @@
 
 				<li class="nav-item has-treeview {{ Request::is('dept-office/teacher-course*') ? 'menu-open' : '' }}">
 					<a href="#" class="nav-link {{ Request::is('dept-office/teacher-course*') ? 'active' : '' }}">
-						<i class="nav-icon fa fa-pie-chart"></i>
+						<i class="nav-icon fa fa-user"></i>
 						<p>
 							Course Teacher
 							<i class="right fa fa-angle-left"></i>
@@ -254,7 +263,7 @@
 
                 <li class="nav-item has-treeview {{ Request::is('dept-office/external*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ Request::is('dept-office/external*') ? 'active' : '' }}">
-                        <i class="nav-icon fa fa-pie-chart"></i>
+                        <i class="nav-icon fa fa-user-plus"></i>
                         <p>
                             Externals
                             <i class="right fa fa-angle-left"></i>
@@ -278,7 +287,7 @@
 
 				<li class="nav-item has-treeview {{ Request::is('dept-office/student*') ? 'menu-open' : '' }}">
 					<a href="#" class="nav-link {{ Request::is('dept-office/student*') ? 'active' : '' }}">
-						<i class="nav-icon fa fa-pie-chart"></i>
+						<i class="nav-icon fa fa-graduation-cap"></i>
 						<p>
 							Students
 							<i class="right fa fa-angle-left"></i>

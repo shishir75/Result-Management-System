@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="66bbd06c-45ad-4a85-b9e0-7cc05f24915c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Exam_Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Exam_Controller/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/exam_controller/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exam_controller/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dept_Office/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dept_office/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dept_office/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend/partial/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend/partial/sidebar.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -238,7 +238,7 @@
       <workItem from="1570788772390" duration="2466000" />
       <workItem from="1570770168128" duration="9164000" />
       <workItem from="1570808821480" duration="1108000" />
-      <workItem from="1570892239452" duration="8878000" />
+      <workItem from="1570892239452" duration="9945000" />
     </task>
     <servers />
   </component>
