@@ -40,7 +40,7 @@
 					</li>
 					<li class="nav-item has-treeview {{ Request::is('register/dept*') ? 'menu-open' : '' }}">
 						<a href="#" class="nav-link {{ Request::is('register/dept*') ? 'active' : '' }}">
-							<i class="nav-icon fa fa-pie-chart"></i>
+							<i class="nav-icon fa fa-sliders"></i>
 							<p>
 								Departments
 								<i class="right fa fa-angle-left"></i>
@@ -62,33 +62,10 @@
 						</ul>
 					</li>
 
-				<li class="nav-item has-treeview {{ Request::is('register/hall*') ? 'menu-open' : '' }}">
-					<a href="#" class="nav-link {{ Request::is('register/hall*') ? 'active' : '' }}">
-						<i class="nav-icon fa fa-pie-chart"></i>
-						<p>
-							Halls
-							<i class="right fa fa-angle-left"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="{{ route('register.hall.create') }}" class="nav-link {{ Request::is('register/hall/create') ? 'active' : '' }}">
-								<i class="fa fa-circle-o nav-icon"></i>
-								<p>Add Hall</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="{{ route('register.hall.index') }}" class="nav-link {{ Request::is('register/hall') ? 'active' : '' }}">
-								<i class="fa fa-circle-o nav-icon"></i>
-								<p>All Halls</p>
-							</a>
-						</li>
-					</ul>
-				</li>
 
 				<li class="nav-item has-treeview {{ Request::is('register/session*') ? 'menu-open' : '' }}">
 					<a href="#" class="nav-link {{ Request::is('register/session*') ? 'active' : '' }}">
-						<i class="nav-icon fa fa-pie-chart"></i>
+						<i class="nav-icon fa fa-clock-o"></i>
 						<p>
 							Sessions
 							<i class="right fa fa-angle-left"></i>
@@ -110,9 +87,33 @@
 					</ul>
 				</li>
 
+                <li class="nav-item has-treeview {{ Request::is('register/hall*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('register/hall*') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-dashcube"></i>
+                        <p>
+                            Halls
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('register.hall.create') }}" class="nav-link {{ Request::is('register/hall/create') ? 'active' : '' }}">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>Add Hall</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('register.hall.index') }}" class="nav-link {{ Request::is('register/hall') ? 'active' : '' }}">
+                                <i class="fa fa-circle-o nav-icon"></i>
+                                <p>All Halls</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 				<li class="nav-item has-treeview {{ Request::is('register/designation*') ? 'menu-open' : '' }}">
 					<a href="#" class="nav-link {{ Request::is('register/designation*') ? 'active' : '' }}">
-						<i class="nav-icon fa fa-pie-chart"></i>
+						<i class="nav-icon fa fa-long-arrow-up"></i>
 						<p>
 							Designation
 							<i class="right fa fa-angle-left"></i>
