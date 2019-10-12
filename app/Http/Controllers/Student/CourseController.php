@@ -31,7 +31,7 @@ class CourseController extends Controller
     public function show($course_id)
     {
         $name = Auth::user()->name;
-        $student = Student::where('name', $name)->first();
+        $student = Student::with('dept')->where('name', $name)->first();
         $session = Session::where('name', $student->session)->first();
         $course = Course::findOrFail($course_id);
 
@@ -88,9 +88,10 @@ class CourseController extends Controller
             }
         }
 
+        $check_submit = CourseTeacher::where('dept_id', $student->dept->id)->where('session_id', $session->id)->where('course_id', $course->id)->first();
 
 
-        return view('student.details', compact('course','attendance','tutorials', 'assignments', 'present_count', 'total_count', 'reports', 'quizzes', 'tutorial_marks', 'assignment_marks', 'report_marks', 'quiz_marks'));
+        return view('student.details', compact('course','attendance','tutorials', 'assignments', 'present_count', 'total_count', 'reports', 'quizzes', 'tutorial_marks', 'assignment_marks', 'report_marks', 'quiz_marks', 'check_submit'));
 
     }
 

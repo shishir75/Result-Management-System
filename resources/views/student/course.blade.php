@@ -65,7 +65,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $course->course->course_code }}</td>
                                             <td>{{ $course->course->course_title }}</td>
-                                            <td>{{ $course->course->credit_hour }}</td>
+                                            <td>{{ number_format($course->course->credit_hour, 1) }}</td>
                                             <td>{{ $course->teacher->name }}</td>
                                             <td>
                                                 <a href="{{ route('student.course.show', $course->course->id) }}" class="btn btn-info">Details</a>

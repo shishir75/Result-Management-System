@@ -31,7 +31,14 @@
                         <!-- general form elements -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">{{ strtoupper('In-Course Marks of '.$course->course_code .' - '.$course->course_title ) }}</h3>
+                                <h3 class="card-title">
+                                    {{ strtoupper('In-Course Marks of '.$course->course_code .' - '.$course->course_title ) }}
+                                    @if($check_submit->incourse_submit == 1)
+                                        <span class="badge badge-success float-right">Submitted</span>
+                                    @else
+                                        <span class="badge badge-info float-right">Not Submitted</span>
+                                    @endif
+                                </h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -234,7 +241,7 @@
 
                                             @else
                                                 <td>
-                                                    {{ (isset($attendance) ? $attendance : 0) + (isset($tutorial_marks) ? $tutorial_marks : 0) + (isset($assignment_marks) ? $assignment_marks : 0)  }}
+                                                    {{ number_format((isset($attendance) ? $attendance : 0) + (isset($tutorial_marks) ? $tutorial_marks : 0) + (isset($assignment_marks) ? $assignment_marks : 0), 2)  }}
                                                 </td>
                                             @endif
 
