@@ -312,9 +312,18 @@
 
 			@elseif(Request::is('teacher*')))
 
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('teacher.dashboard') }}" class="nav-link {{ Request::is('teacher/dashboard') ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-dashboard"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+
 				<li class="nav-item has-treeview">
 					<a href="{{ route('teacher.course.index') }}" class="nav-link {{ Request::is('teacher/course*') ? 'active' : '' }}">
-						<i class="nav-icon fa fa-dashboard"></i>
+						<i class="nav-icon fa fa-book"></i>
 						<p>
 							In-Courses
 						</p>
@@ -323,7 +332,7 @@
 
                 <li class="nav-item has-treeview">
                     <a href="{{ route('teacher.final-marks.index') }}" class="nav-link {{ Request::is('teacher/final-marks*') ? 'active' : '' }}">
-                        <i class="nav-icon fa fa-dashboard"></i>
+                        <i class="nav-icon fa fa-map-marker"></i>
                         <p>
                             Final Marks
                         </p>
@@ -331,7 +340,7 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="{{ route('teacher.second-examiner.index') }}" class="nav-link {{ Request::is('teacher/second-examiner*') ? 'active' : '' }}">
-                        <i class="nav-icon fa fa-dashboard"></i>
+                        <i class="nav-icon fa fa-user-md"></i>
                         <p>
                             Second Examiner Marks
                         </p>
@@ -340,7 +349,7 @@
 
                 <li class="nav-item has-treeview">
                     <a href="{{ route('teacher.third-examiner.index') }}" class="nav-link {{ Request::is('teacher/third-examiner*') ? 'active' : '' }}">
-                        <i class="nav-icon fa fa-dashboard"></i>
+                        <i class="nav-icon fa fa-user-secret"></i>
                         <p>
                             Third Examiner Marks
                         </p>
@@ -349,7 +358,7 @@
 
                 <li class="nav-item has-treeview">
                     <a href="{{ route('teacher.year-head.index') }}" class="nav-link {{ Request::is('teacher/year-head*') ? 'active' : '' }}">
-                        <i class="nav-icon fa fa-dashboard"></i>
+                        <i class="nav-icon fa fa-header"></i>
                         <p>
                             Year Head
                         </p>
