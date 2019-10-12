@@ -20,6 +20,16 @@
                 margin: 0;
             }
 
+            .bg {
+                position: relative;
+                background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/assets/backend/img/bg.jpg');
+                -webkit-background-size: cover;
+                background-size: cover;
+                background-position: center;
+                min-height: 100vh;
+                background-attachment: fixed;
+            }
+
             .full-height {
                 height: 100vh;
             }
@@ -64,25 +74,25 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref full-height bg">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('password.request') }}" style="color: white !important;">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}" style="color: white !important;">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}" style="color: white !important;">Register</a>
                         @endif
                     @endauth
                 </div>
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Result Management System
-                    <h6>Developed By : Group - I</h6>
+                <div class="title m-b-md" style="color: white !important;">
+                    <span class="h6">Result Management System</span>
+                    <h6 style="color: white !important;">Developed By : Group - I</h6>
                 </div>
             </div>
         </div>
